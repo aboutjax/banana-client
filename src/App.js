@@ -22,9 +22,12 @@ class App extends Component {
     return(
       <div className="App">
         <ul className='c-top-nav'>
-          <li className='c-top-nav__link'><Link to="/">Home</Link></li>
-          <li className='c-top-nav__link'><Link to="/activities">Activities</Link></li>
-          <li className='c-top-nav__link'><Link to="/clubs">Clubs</Link></li>
+          <div className='c-top-nav__links'>
+            <li className='c-top-nav__link'><Link to="/">Home</Link></li>
+            <li className='c-top-nav__link'><Link to="/activities">Activities</Link></li>
+            <li className='c-top-nav__link'><Link to="/clubs">Clubs</Link></li>
+          </div>
+            <li className='c-top-nav__link'><a href="https://strava-auth.herokuapp.com">Log In</a></li>
         </ul>
 
         <div className='o-section'>
