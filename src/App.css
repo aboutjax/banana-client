@@ -1,0 +1,29 @@
+.App {
+  text-align: left;
+  padding: 4rem;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.club-image {
+  width: 3rem;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  line-height: 2;
+}
+
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
