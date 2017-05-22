@@ -5,7 +5,7 @@ import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
-  <Router basename="/strava-dashboard" >
+  <Router basename="/strava-dashboard/" >
     <App/>
   </Router>,
   document.getElementById('root')

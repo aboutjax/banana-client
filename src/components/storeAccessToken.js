@@ -11,7 +11,7 @@ class StoreAccessToken extends Component {
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
     let userAccessToken;
 
     if(localStorage.getItem('access_token')) {
