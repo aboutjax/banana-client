@@ -1,7 +1,7 @@
 {
   "name": "strava-react-client",
   "version": "0.1.0",
-  "homepage": "http://aboutjax.github.io/strava-dashboard",
+  "homepage": "http://aboutjax.github.io/strava-dashboard/",
   "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
