@@ -27,7 +27,7 @@ class App extends Component {
             <li className='c-top-nav__link'><Link to="/activities">Activities</Link></li>
             <li className='c-top-nav__link'><Link to="/clubs">Clubs</Link></li>
           </div>
-            <li className='c-top-nav__link'><a href="https://strava-auth.herokuapp.com">Log In</a></li>
+            <li className='c-top-nav__link'><a href="https://strava-auth.herokuapp.com">Log In With Strava</a></li>
         </ul>
 
         <div className='o-section'>

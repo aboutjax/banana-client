@@ -7,7 +7,11 @@ class StoreAccessToken extends Component {
 
     this.state = {
       data: [],
-      clubs: [{}]
+      clubs: [{}],
+      bikes: [{}],
+      followers: [{}],
+      friends: [{}],
+      city: 'somewhere',
     }
   }
 
@@ -43,7 +47,11 @@ class StoreAccessToken extends Component {
       console.log(json);
       this.setState({
         data: json,
-        clubs: _.sortBy(json.clubs, ['name'])
+        clubs: _.sortBy(json.clubs, ['name']),
+        bikes: _.sortBy(json.bikes, ['name']),
+        city: json.city,
+        following: json.follower_count,
+        friends: json.follower_count,
       })
     })
   }
@@ -51,7 +59,7 @@ class StoreAccessToken extends Component {
   render() {
     return(
       <div>
-        <h2>Hello {this.state.data.firstname} {this.state.data.lastname}, You are from {this.state.data.city}. You have {this.state.data.follower_count} followers.</h2>
+        <h2>Hello {this.state.data.firstname} {this.state.data.lastname}, You are from {this.state.data.city}. You have {this.state.data.follower_count} followers. You are following {this.state.data.friend_count} people. You have {this.state.bikes.length} bikes.</h2>
       </div>
     )
   }
