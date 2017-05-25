@@ -1,38 +1,29 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Redirect, Link } from 'react-router-dom';
-import StoreAccessToken from './components/storeAccessToken';
+import { Route } from 'react-router-dom';
 import Activities from './components/activities';
 import Clubs from './components/clubs';
-
-class Home extends Component {
-  render(){
-    return(
-      <div>
-        <StoreAccessToken />
-        <Redirect to='/' />
-      </div>
-    )
-  }
-}
+import Sidebar from './components/sidebar';
+import Home from './components/home';
+import HandleRedirect from './components/handleRedirect';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userIsLoggedIn: false,
+    }
+  }
 
   render(){
     return(
-      <div className="App">
-        <ul className='c-top-nav'>
-          <div className='c-top-nav__links'>
-            <li className='c-top-nav__link'><Link to="/">Home</Link></li>
-            <li className='c-top-nav__link'><Link to="/activities">Activities</Link></li>
-            <li className='c-top-nav__link'><Link to="/clubs">Clubs</Link></li>
-          </div>
-            <li className='c-top-nav__link'><a href="https://strava-auth.herokuapp.com">Log In With Strava</a></li>
-        </ul>
+      <div className="App o-app">
+        <Sidebar />
 
-        <div className='o-section'>
+        <div className='o-content'>
+          <Route path="/handle_redirect" component={HandleRedirect}/>
           <Route path="/" exact component={Home}/>
-          <Route path="/?access_token" component={StoreAccessToken}/>
           <Route path="/activities" component={Activities}/>
           <Route path="/clubs" component={Clubs}/>
         </div>

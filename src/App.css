@@ -1,6 +1,24 @@
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 .App {
   text-align: left;
-  padding: 4rem;
 }
 
 .App-intro {
@@ -10,6 +28,13 @@
 .club-image {
   width: 3rem;
   height: auto;
+}
+
+.o-app {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 24rem 1fr;
 }
 
 ul {
@@ -35,7 +60,21 @@ li {
   display: flex;
 }
 
-.o-section {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+.o-content {
+  padding: 2rem;
+  overflow: auto;
+}
+
+.c-sidebar {
+  padding: 2rem;
+  background-color: #F5F6F7;
+}
+
+.c-sidebar__nav-item {
+  text-decoration: none;
+  color: #b5b5b5;
+}
+
+.c-sidebar__nav-item a.active {
+  color: #333333;
 }

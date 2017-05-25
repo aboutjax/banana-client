@@ -11,6 +11,7 @@ class Activities extends Component{
   }
 
   componentWillMount(){
+    console.log('activities.js');
     let userAccessToken = localStorage.getItem('access_token')
 
     fetch('https://www.strava.com/api/v3/athlete/activities', {
