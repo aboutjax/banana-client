@@ -8,22 +8,16 @@ import Home from './components/home';
 import HandleRedirect from './components/handleRedirect';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      userIsLoggedIn: false,
-    }
-  }
 
   render(){
+
     return(
       <div className="App o-app">
         <Sidebar />
 
         <div className='o-content'>
-          <Route path="/handle_redirect" component={HandleRedirect}/>
-          <Route path="/" exact component={Home}/>
+          <Route path="/handle_redirect" exact component={HandleRedirect}/>
+          <Route path="/" exact component={Home} />
           <Route path="/activities" component={Activities}/>
           <Route path="/clubs" component={Clubs}/>
         </div>
