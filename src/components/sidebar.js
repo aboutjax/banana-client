@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 class Sidebar extends Component {
   render(){
-    let authUrl = process.env.REACT_APP_SERVER_URL || "https://strava-auth.herokuapp.com"
+    let authUrl = (process.env.REACT_APP_SERVER_URL || "https://strava-auth.herokuapp.com")
 
     return(
       <ul className="c-sidebar">
