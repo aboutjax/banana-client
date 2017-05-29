@@ -7,10 +7,8 @@ class Sidebar extends Component {
     let authUrl;
     if(process.env.REACT_APP_SERVER_URL){
       authUrl = process.env.REACT_APP_SERVER_URL;
-      console.log('development mode');
     } else {
       authUrl = "https://strava-auth.herokuapp.com";
-      console.log('production mode');
     }
 
     return(
