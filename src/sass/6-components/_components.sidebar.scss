@@ -1,0 +1,15 @@
+.c-sidebar {
+  position: fixed;
+  top: 60px;
+}
+
+.c-sidebar__nav-item {
+  text-decoration: none;
+  color: #b5b5b5;
+  line-height: 2;
+  font-size: 18px;
+}
+
+.c-sidebar__nav-item a.active {
+  color: #000000;
+}

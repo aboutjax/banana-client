@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-class Clubs extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -11,10 +11,10 @@ class Clubs extends Component {
   }
 
   componentWillMount(){
-    console.log('clubs.js');
+
     let userAccessToken = localStorage.getItem('access_token')
 
-    fetch('https://www.strava.com/api/v3/athlete/clubs', {
+    fetch('https://www.strava.com/api/v3/athlete', {
       method: 'get',
       headers: {
         "content-type": "application/json",
@@ -23,9 +23,14 @@ class Clubs extends Component {
     }).then(function(response){
       return response.json();
     }).then( json => {
-      // console.log(json);
+      console.log(json);
       this.setState({
-        data: json
+        data: json,
+        clubs: _.sortBy(json.clubs, ['name']),
+        bikes: _.sortBy(json.bikes, ['name']),
+        city: json.city,
+        following: json.follower_count,
+        friends: json.follower_count,
       })
     })
   }
@@ -33,14 +38,10 @@ class Clubs extends Component {
   render(){
     return (
       <div>
-      {this.state.data.map((club, index) =>
-        <li key={index}>
-          <span>{club.name}</span>
-        </li>
-      )}
+        <h1>Hello {this.state.data.firstname} {this.state.data.lastname}</h1>
       </div>
     )
   }
 }
 
-export default Clubs;
+export default Home;

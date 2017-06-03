@@ -4,19 +4,12 @@ import { NavLink } from 'react-router-dom';
 
 class Sidebar extends Component {
   render(){
-    let authUrl;
-    if(process.env.REACT_APP_SERVER_URL){
-      authUrl = process.env.REACT_APP_SERVER_URL;
-    } else {
-      authUrl = "https://strava-auth.herokuapp.com";
-    }
 
     return(
       <ul className="c-sidebar">
         <Navitem label="Home" link="/" />
-        <Navitem label="Clubs" link="/clubs" />
         <Navitem label="Activities" link="/activities" />
-        <li className='c-sidebar__nav-item'><a href={authUrl}>Log In With Strava</a></li>
+        <Navitem label="Clubs" link="/clubs" />
       </ul>
     )
   }

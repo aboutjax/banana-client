@@ -1,0 +1,19 @@
+h1 {
+  font-weight: 900;
+  font-size: 4.8rem;
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 3.6rem;
+}
+
+h1, h2, h3, p, span {
+  margin-top: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+span, p {
+  font-size: 2rem;
+  font-weight: 400;
+}

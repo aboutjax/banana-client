@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-class Home extends Component {
+class Stream extends Component{
   constructor(props) {
     super(props);
 
@@ -11,12 +11,9 @@ class Home extends Component {
   }
 
   componentWillMount(){
-
-    console.log('home.js');
-
     let userAccessToken = localStorage.getItem('access_token')
 
-    fetch('https://www.strava.com/api/v3/athlete', {
+    fetch('https://www.strava.com/api/v3/activities/1011982769', {
       method: 'get',
       headers: {
         "content-type": "application/json",
@@ -25,13 +22,9 @@ class Home extends Component {
     }).then(function(response){
       return response.json();
     }).then( json => {
+      console.log(json);
       this.setState({
-        data: json,
-        clubs: _.sortBy(json.clubs, ['name']),
-        bikes: _.sortBy(json.bikes, ['name']),
-        city: json.city,
-        following: json.follower_count,
-        friends: json.follower_count,
+        data: json
       })
     })
   }
@@ -39,10 +32,11 @@ class Home extends Component {
   render(){
     return (
       <div>
-        <h1>Hello {this.state.data.firstname} {this.state.data.lastname}</h1>
+        {this.state.data.length}
       </div>
     )
   }
 }
 
-export default Home;
+
+export default Stream;

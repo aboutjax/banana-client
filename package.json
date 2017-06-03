@@ -5,9 +5,18 @@
   "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
+    "google-maps": "^3.2.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-sass": "^3.1.0",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
+    "normalize.css": "^7.0.0",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-moment": "^0.2.2",
     "react-router-dom": "^4.1.1"
   },
   "devDependencies": {

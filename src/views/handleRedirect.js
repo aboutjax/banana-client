@@ -33,9 +33,13 @@ class HandleRedirect extends Component {
 
   }
 
+  componentDidMount() {
+    window.location.reload()
+  }
+
   render(){
     return(
-      <Redirect to="/" />
+      <Redirect to="/activities" />
     )
   }
 }
