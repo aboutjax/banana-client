@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
 
 const googleApiKey = 'AIzaSyAsyxYCjxLqi49yGUuqUJRa4cYN8V4VyLE'
 let pathWeight = 4;
@@ -53,22 +54,18 @@ function ActivityStat(props){
 }
 
 function ActivityName(props){
-  let activityDistance = Math.floor(props.data.distance/1000)
-  let activityTotalElevationGain = Math.floor(props.data.total_elevation_gain)
   return(
     <div>
       <div className="c-activity__header">
         <div>
-          <h3 className="c-activity__title">{props.title}</h3>
+          <h3 className="c-activity__title">
+            <Link to={"/activities/" + props.data.id}>{props.title}</Link>
+          </h3>
           <span className='c-activity__time'>
-            <Moment format="MMM DD, YYYY">{props.date}</Moment> at <Moment format="hh:mm a">{props.date}</Moment>
+            <Moment format="MMM DD, YYYY">{props.date}</Moment> • <Moment format="hh:mm a">{props.date}</Moment>
           </span>
         </div>
         <ActivityIsCommute commute={props.commute} />
-      </div>
-      <div className="c-activity__stats">
-        <ActivityStat label="distance" value={activityDistance} unit="km"/>
-        <ActivityStat label="climb" value={activityTotalElevationGain} unit="m"/>
       </div>
     </div>
   )
@@ -77,11 +74,17 @@ function ActivityName(props){
 class Activity extends Component {
 
   render(){
+    let activityDistance = Math.floor(this.props.data.distance/1000)
+    let activityTotalElevationGain = Math.floor(this.props.data.total_elevation_gain)
     return(
       <div className="c-activity">
         <ActivityMap className="c-activity__map" mapPolyline={this.props.map}/>
         <div className="c-activity__meta">
           <ActivityName title={this.props.name} date={this.props.startdate} commute={this.props.commute} data={this.props.data}/>
+          <div className="c-activity__stats">
+            <ActivityStat label="distance" value={activityDistance} unit="km"/>
+            <ActivityStat label="climb" value={activityTotalElevationGain} unit="m"/>
+          </div>
         </div>
       </div>
     )

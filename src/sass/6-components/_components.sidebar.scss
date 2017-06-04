@@ -3,13 +3,32 @@
   top: 60px;
 }
 
+.c-sidebar__nav {
+  margin-top: 10rem;
+}
+
 .c-sidebar__nav-item {
   text-decoration: none;
-  color: #b5b5b5;
+  color: $colour-supplementary;
   line-height: 2;
   font-size: 18px;
 }
 
 .c-sidebar__nav-item a.active {
   color: #000000;
+}
+
+.c-sidebar__photo {
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+}
+
+.c-sidebar__name {
+  margin-bottom: 0;
+}
+
+.c-sidebar__location {
+  font-size: 1.4rem;
+  color: $colour-supplementary;
 }

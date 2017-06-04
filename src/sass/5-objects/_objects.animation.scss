@@ -1,0 +1,19 @@
+.o-transition-enter {
+  opacity: 0;
+  top: 1em;
+}
+
+.o-transition-enter.o-transition-enter-active {
+  opacity: 1;
+  top: 0;
+  transition: all 250ms ease-in;
+}
+
+.o-transition-leave {
+  opacity: 1;
+}
+
+.o-transition-leave.o-transition-leave-active {
+  opacity: 0;
+  transition: all 900ms ease-in;
+}

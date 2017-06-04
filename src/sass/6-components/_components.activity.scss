@@ -5,6 +5,7 @@
   background: $colour-white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   border: 1px solid $colour-framing;
+  position: relative;
 
   & + & {
     margin-top: 2rem;
@@ -41,6 +42,10 @@
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 6px;
+
+  a {
+    border-bottom: 1px solid lighten($colour-supplementary, 30);
+  }
 }
 
 .c-activity__header {
@@ -61,6 +66,7 @@
 }
 
 .c-activity__stat-label {
+  text-transform: capitalize;
   font-size: 1.2rem;
   margin-bottom: $spacing-s;
   color: $colour-supplementary;
