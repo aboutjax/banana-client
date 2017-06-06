@@ -54,7 +54,6 @@ class Home extends Component {
 
 
   render(){
-    let firstname = this.state.data.firstname
     let ytdRideCount = this.state.ytdRideTotals.count
     let ytdRideDistance = _.round(this.state.ytdRideTotals.distance / 1000 , 1)
     let ytdRideElevationGain = _.round(this.state.ytdRideTotals.elevation_gain, 1)
