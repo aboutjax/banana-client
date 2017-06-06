@@ -63,7 +63,7 @@ class Home extends Component {
 
     return (
       <div>
-        <p className="c-year-to-date-stats">This year you rode <strong>{ytdRideCount ? ytdRideCount : 0}</strong> times, clocked <strong>{ytdRideDistance ? ytdRideDistance : 0}</strong> kilometers, spent <strong>{ ytdMovingTime ? ytdMovingTime : 0}</strong> hours on the saddle, climbed <strong>{ytdRideElevationGain ? ytdRideElevationGain : 0}</strong> meters - that's <strong>{everestUnit ? everestUnit : 0}</strong> times of  Mt Everest.</p>
+        <p className="c-year-to-date-stats">This year you rode <strong>{ytdRideCount ? ytdRideCount : 0}</strong> times, clocked <strong>{ytdRideDistance ? ytdRideDistance : 0}</strong> kilometers, spent <strong>{ ytdMovingTime ? ytdMovingTime : 0}</strong> hours in the saddle, climbed <strong>{ytdRideElevationGain ? ytdRideElevationGain : 0}</strong> meters - that's <strong>{everestUnit ? everestUnit : 0}</strong> times of  Mt Everest.</p>
       </div>
     )
   }
