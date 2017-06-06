@@ -3,5 +3,9 @@
   height: 100%;
   display: grid;
   padding-top: 60px;
-  grid-template-columns: 24rem 1fr;
+  grid-template-columns: 1fr;
+
+  @include medium {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }

@@ -1,0 +1,11 @@
+.c-year-to-date-stats {
+  font-size: 2.2em;
+  color: $colour-white;
+  line-height: 1.4;
+  font-weight: 300;
+
+  strong {
+    color: $colour-text;
+    font-weight: 700;
+  }
+}

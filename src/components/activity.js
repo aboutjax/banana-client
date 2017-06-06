@@ -3,33 +3,28 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 
 const googleApiKey = 'AIzaSyAsyxYCjxLqi49yGUuqUJRa4cYN8V4VyLE'
-let pathWeight = 4;
-let pathColor = '0x3B8BFFff';
-let mapDimension = '400x400';
-let mapStyle = "&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0xf5f5f5&style=element:labels.icon%7Cvisibility:off&style=element:labels.text.fill%7Ccolor:0x616161&style=element:labels.text.stroke%7Ccolor:0xf5f5f5&style=feature:administrative%7Celement:geometry%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.land_parcel%7Celement:labels.text.fill%7Ccolor:0xbdbdbd&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Cvisibility:off&style=feature:poi%7Celement:geometry%7Ccolor:0xeeeeee&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:poi.park%7Celement:geometry%7Ccolor:0xe5e5e5&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&style=feature:road%7Celement:geometry%7Ccolor:0xffffff&style=feature:road%7Celement:labels%7Cvisibility:off&style=feature:road%7Celement:labels.icon%7Cvisibility:off&style=feature:road.arterial%7Cvisibility:off&style=feature:road.arterial%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:road.highway%7Celement:geometry%7Ccolor:0xdadada&style=feature:road.highway%7Celement:labels%7Cvisibility:off&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:road.local%7Cvisibility:off&style=feature:road.local%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&style=feature:transit%7Cvisibility:off&style=feature:transit.line%7Celement:geometry%7Ccolor:0xe5e5e5&style=feature:transit.station%7Celement:geometry%7Ccolor:0xeeeeee&style=feature:water%7Celement:geometry%7Ccolor:0xc9c9c9&style=feature:water%7Celement:labels.text%7Cvisibility:off&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&size=";
 
 
+function ActivityMap(props) {
+  let pathWeight = 4;
+  let pathColor = '0x3B8BFFff';
+  let mapDimension = props.mapDimension || '400x400';
+  let mapStyle = "&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x212121&style=element:labels.icon%7Cvisibility:off&style=element:labels.text.fill%7Ccolor:0x757575&style=element:labels.text.stroke%7Ccolor:0x212121&style=feature:administrative%7Celement:geometry%7Ccolor:0x757575%7Cvisibility:off&style=feature:administrative.country%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.locality%7Celement:labels.text.fill%7Ccolor:0xbdbdbd&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Cvisibility:off&style=feature:poi%7Celement:labels.text%7Cvisibility:off&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:poi.park%7Celement:geometry%7Ccolor:0x181818&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:poi.park%7Celement:labels.text.stroke%7Ccolor:0x1b1b1b&style=feature:road%7Celement:geometry.fill%7Ccolor:0x2c2c2c&style=feature:road%7Celement:labels%7Cvisibility:off&style=feature:road%7Celement:labels.icon%7Cvisibility:off&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x8a8a8a&style=feature:road.arterial%7Cvisibility:off&style=feature:road.arterial%7Celement:geometry%7Ccolor:0x373737&style=feature:road.highway%7Celement:geometry%7Ccolor:0x3c3c3c&style=feature:road.highway%7Celement:labels%7Cvisibility:off&style=feature:road.highway.controlled_access%7Celement:geometry%7Ccolor:0x4e4e4e&style=feature:road.local%7Cvisibility:off&style=feature:road.local%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:transit%7Cvisibility:off&style=feature:transit%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:water%7Celement:geometry%7Ccolor:0x000000&style=feature:water%7Celement:labels.text%7Cvisibility:off&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x3d3d3d&size=";
 
-class ActivityMap extends Component {
+  let imageUrl = "https://maps.googleapis.com/maps/api/staticmap?key="+ googleApiKey + "&path=weight:"+ pathWeight +"%7Ccolor:"+ pathColor + "%7Cenc:" + props.mapPolyline +  mapStyle + mapDimension;
 
-  render(){
-
-    let imageUrl = "https://maps.googleapis.com/maps/api/staticmap?key="+ googleApiKey + "&path=weight:"+ pathWeight +"%7Ccolor:"+ pathColor + "%7Cenc:" + this.props.mapPolyline +  mapStyle + mapDimension;
-
-    if(this.props.mapPolyline) {
-      return(
-        <div className="c-activity-map">
-          <img className="c-activity-map__image" src={ imageUrl } alt=""/>
-        </div>
-      )
-    } else {
-      return(
-        <div className="c-activity-map">
-          <img className="c-activity-map__image" src='http://placehold.it/250' alt=""/>
-        </div>
-      )
-    }
+  if(props.mapPolyline) {
+    return(
+      <div className="c-activity-map">
+        <img className="c-activity-map__image" src={ imageUrl } alt=""/>
+      </div>
+    )
+  } else {
+    return(
+      <div className="c-activity-map"></div>
+    )
   }
+
 }
 
 function ActivityIsCommute(props){
@@ -59,13 +54,13 @@ function ActivityName(props){
       <div className="c-activity__header">
         <div>
           <h3 className="c-activity__title">
-            <Link to={"/activities/" + props.data.id}>{props.title}</Link>
+            <Link to={"/activities/" + props.data.id}>{props.data.name}</Link>
           </h3>
           <span className='c-activity__time'>
-            <Moment format="MMM DD, YYYY">{props.date}</Moment> • <Moment format="hh:mm a">{props.date}</Moment>
+            <Moment format="MMM DD, YYYY">{props.data.date}</Moment> • <Moment format="hh:mm a">{props.data.date}</Moment>
           </span>
         </div>
-        <ActivityIsCommute commute={props.commute} />
+        <ActivityIsCommute commute={props.data.commute} />
       </div>
     </div>
   )
@@ -78,9 +73,9 @@ class Activity extends Component {
     let activityTotalElevationGain = Math.floor(this.props.data.total_elevation_gain)
     return(
       <div className="c-activity">
-        <ActivityMap className="c-activity__map" mapPolyline={this.props.map}/>
+        <ActivityMap className="c-activity__map" mapPolyline={this.props.data.map.summary_polyline}/>
         <div className="c-activity__meta">
-          <ActivityName title={this.props.name} date={this.props.startdate} commute={this.props.commute} data={this.props.data}/>
+          <ActivityName data={this.props.data}/>
           <div className="c-activity__stats">
             <ActivityStat label="distance" value={activityDistance} unit="km"/>
             <ActivityStat label="climb" value={activityTotalElevationGain} unit="m"/>
@@ -92,3 +87,4 @@ class Activity extends Component {
 }
 
 export default Activity
+exports.ActivityMap = ActivityMap

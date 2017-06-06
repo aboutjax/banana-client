@@ -1,10 +1,16 @@
 .c-sidebar {
-  position: fixed;
-  top: 60px;
+  padding: $spacing-xl;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: none;
+
+  @include medium {
+    display: block;
+  }
 }
 
 .c-sidebar__nav {
-  margin-top: 10rem;
+  margin-top: 5rem;
 }
 
 .c-sidebar__nav-item {
@@ -15,13 +21,14 @@
 }
 
 .c-sidebar__nav-item a.active {
-  color: #000000;
+  color: $colour-white;
 }
 
 .c-sidebar__photo {
-  border-radius: 50%;
-  width: 8rem;
-  height: 8rem;
+  border-radius: 5rem;
+  border: 0;
+  width: 4rem;
+  height: 4rem;
 }
 
 .c-sidebar__name {

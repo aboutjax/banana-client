@@ -24,7 +24,7 @@ class Activities extends Component{
     }).then(function(response){
       return response.json();
     }).then( json => {
-      console.log(json);
+      // console.log(json);
       this.setState({
         data: json
       })
@@ -33,7 +33,7 @@ class Activities extends Component{
 
   render(){
     const activities = this.state.data.map((activity, index) => (
-      <Activity key={index} name={activity.name} startdate={activity.start_date} map={activity.map.summary_polyline} commute={activity.commute} data={activity}/>
+      <Activity key={index} data={activity} mapDimension='400x400'/>
     ))
     return (
       <div>

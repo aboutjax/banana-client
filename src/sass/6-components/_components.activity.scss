@@ -1,14 +1,18 @@
 .c-activity {
   display: flex;
+  flex-direction: column;
   border-radius: 2px;
   color: $colour-text;
-  background: $colour-white;
+  background: $shark;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  border: 1px solid $colour-framing;
   position: relative;
 
   & + & {
     margin-top: 2rem;
+  }
+
+  @include smallish {
+    flex-direction: row;
   }
 }
 
@@ -22,19 +26,33 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 30px;
+  padding: 20px;
+
+  @include medium {
+    padding: 30px;
+  }
 }
 
 .c-activity-map {
   overflow: hidden;
-  width: 200px;
-  height: 200px;
+  flex-shrink: 0;
+  width: 100%;
+  height: 300px;
+
+  @include smallish {
+    width: 200px;
+    height: 200px;
+  };
 }
 
 .c-activity-map__image {
   transform: scale(1.12);
-  width: 200px;
-  height: 200px;
+  width: 100%;
+
+  @include medium {
+    width: 200px;
+    height: 200px;
+  };
 }
 
 .c-activity__title {
@@ -57,12 +75,17 @@
 
 .c-activity__stats {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .c-activity__stat {
-  flex-basis: 25%;
+  flex-basis: 50%;
   display: flex;
   flex-direction: column;
+
+  @include medium {
+    flex-basis: 25%;
+  };
 }
 
 .c-activity__stat-label {
