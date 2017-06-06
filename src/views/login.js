@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
-let authUrl;
-if(process.env.REACT_APP_SERVER_URL){
-  authUrl = process.env.REACT_APP_SERVER_URL;
-  console.log('developement mode');
-} else {
-  authUrl = "https://strava-auth.herokuapp.com";
-  console.log('production mode');
-}
+let authUrl = 'https://strava-auth.herokuapp.com';
 
+if(process.env.NODE_ENV === 'development'){
+  authUrl = 'http://localhost:3000';
+} else {
+  authUrl = 'https://strava-auth.herokuapp.com';
+}
 class Login extends Component {
-  render(){
+  render() {
+
     return(
       <a className="c-btn" href={authUrl}>Log In With Strava</a>
     )
