@@ -4,7 +4,10 @@
 }
 
 html {
-  font-size: 10px;
+  font-size: 8px;
+  @include smallish {
+    font-size: 10px;
+  }
 }
 
 body,
