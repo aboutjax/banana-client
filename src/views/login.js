@@ -12,7 +12,7 @@ if(process.env.REACT_APP_SERVER_URL){
 class Login extends Component {
   render(){
     return(
-      <a href={authUrl}>Log In With Strava</a>
+      <a className="c-btn" href={authUrl}>Log In With Strava</a>
     )
   }
 }

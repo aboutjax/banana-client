@@ -1,0 +1,10 @@
+.c-btn {
+ font-size: 1.4rem;
+ text-transform: uppercase;
+ padding: 1.2rem 2rem;
+ background: $colour-primary;
+ display: inline-block;
+ font-weight: 600;
+ border-radius: .2rem;
+ box-shadow: 0 .2rem 0 0 darken($colour-primary, 10);
+}

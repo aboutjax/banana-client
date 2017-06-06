@@ -54,7 +54,7 @@ function ActivityName(props){
       <div className="c-activity__header">
         <div>
           <h3 className="c-activity__title">
-            <Link to={"/activities/" + props.data.id}>{props.data.name}</Link>
+            {props.data.name}
           </h3>
           <span className='c-activity__time'>
             <Moment format="MMM DD, YYYY">{props.data.date}</Moment> • <Moment format="hh:mm a">{props.data.date}</Moment>

@@ -35,7 +35,7 @@ class App extends Component {
       )
     } else {
       return(
-        <div>
+        <div className="c-login">
           <Route path="/handle_redirect" exact component={HandleRedirect}/>
           <Login />
         </div>
