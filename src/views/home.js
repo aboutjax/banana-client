@@ -61,10 +61,10 @@ class Home extends Component {
     let ytdRideElevationGain = _.round(this.state.ytdRideTotals.elevation_gain, 1)
     let ytdRideMovingTime = _.round(this.state.ytdRideTotals.moving_time / 60 / 60, 1)
 
-    let ytdRunCount = this.state.ytdRunTotals.count
-    let ytdRunDistance = _.round(this.state.ytdRunTotals.distance / 1000 , 1)
-    let ytdRunElevationGain = _.round(this.state.ytdRunTotals.elevation_gain, 1)
-    let ytdRunMovingTime = _.round(this.state.ytdRunTotals.moving_time / 60 / 60, 1)
+    // let ytdRunCount = this.state.ytdRunTotals.count
+    // let ytdRunDistance = _.round(this.state.ytdRunTotals.distance / 1000 , 1)
+    // let ytdRunElevationGain = _.round(this.state.ytdRunTotals.elevation_gain, 1)
+    // let ytdRunMovingTime = _.round(this.state.ytdRunTotals.moving_time / 60 / 60, 1)
 
     let mountEverestUnit = _.round(this.state.ytdRideTotals.elevation_gain / 8848, 2)
 

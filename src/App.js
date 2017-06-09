@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './index.css';
 import { Route } from 'react-router-dom';
+
+// Views
 import Activities from './views/activities';
 import Clubs from './views/clubs';
 import Sidebar from './components/sidebar';
@@ -25,10 +27,11 @@ class App extends Component {
               <Route path="/handle_redirect" exact component={HandleRedirect}/>
               <Route path="/" exact component={Home} />
               <Route path="/activities" exact component={Activities}/>
+              <Route path="/activities/page/:page" component={Activities}/>
               <Route path="/clubs" component={Clubs}/>
               <Route path="/streams" component={Streams}/>
               <Route path="/streams" component={Streams}/>
-              <Route path="/activities/:id" component={ActivityDetail}/>
+              <Route path="/activities/:id" exact component={ActivityDetail}/>
 
           </div>
         </div>

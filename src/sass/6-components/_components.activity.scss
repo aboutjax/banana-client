@@ -1,10 +1,11 @@
 .c-activity {
   display: flex;
   flex-direction: column;
-  border-radius: 2px;
+  border-radius: $border-radius;
   color: $colour-text;
+  overflow: hidden;
   background: $shark;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
   position: relative;
 
   & + & {

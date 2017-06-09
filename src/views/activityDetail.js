@@ -36,15 +36,11 @@ class ActivityDetail extends Component {
     })
   }
 
-  componentDidMount() {
-    console.log(this.state.data.location_state);
-  }
-
   render() {
     return(
-      <div>
+      <div className="o-activity-detail">
         <h1>{this.state.data.name}</h1>
-        <ActivityMap mapPolyline={this.state.map.summary_polyline} mapDimension="1200x1200"/>
+        <ActivityMap mapPolyline={this.state.map.summary_polyline} mapDimension="640x300"/>
       </div>
     )
   }
