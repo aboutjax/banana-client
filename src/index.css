@@ -502,7 +502,7 @@ body {
   padding: 0;
   font-size: 1.6rem;
   font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  background: #323940;
+  background: #1F2428;
   color: #FFFFFF;
   -webkit-font-smoothing: antialiased; }
 
@@ -634,18 +634,22 @@ ul {
   transition: all 900ms ease-in; }
 
 .o-activity-detail .c-activity-map {
-  width: auto;
-  height: auto;
-  overflow: visible; }
+  overflow: hidden;
+  width: 100%;
+  display: block;
+  height: auto; }
 
 .o-activity-detail .c-activity-map__image {
-  -webkit-box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 10px 50px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 10px 50px rgba(0, 0, 0, 0.2);
-  border-radius: 0.5rem;
+  border-radius: 0;
+  height: auto;
   width: 100%;
-  height: 100%;
-  -webkit-transform: none;
-  transform: none; }
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2); }
+
+.o-activity-detail-header {
+  margin-bottom: 3rem; }
+  .o-activity-detail-header h2 {
+    margin-bottom: 1rem; }
 
 .c-sidebar {
   padding: 3rem;
@@ -692,7 +696,7 @@ ul {
   border-radius: 0.5rem;
   color: #FFFFFF;
   overflow: hidden;
-  background: #1F2428;
+  background: #101010;
   -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   position: relative; }
@@ -721,7 +725,10 @@ ul {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  padding: 20px; }
+  padding: 20px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
   @media only screen and (min-width: 768px) {
     .c-activity__meta {
       padding: 30px; } }
@@ -731,11 +738,12 @@ ul {
   -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 100%;
-  height: 300px; }
+  height: 100%; }
   @media only screen and (min-width: 480px) {
     .c-activity-map {
       width: 200px;
-      height: 200px; } }
+      height: 200px;
+      display: block; } }
 
 .c-activity-map__image {
   -webkit-transform: scale(1.12);
@@ -774,19 +782,17 @@ ul {
   flex-wrap: wrap; }
 
 .c-activity__stat {
-  -ms-flex-preferred-size: 50%;
-  flex-basis: 50%;
+  -ms-flex-preferred-size: auto;
+  flex-basis: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column; }
-  @media only screen and (min-width: 768px) {
-    .c-activity__stat {
-      -ms-flex-preferred-size: 25%;
-      flex-basis: 25%; } }
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-right: 3rem; }
 
 .c-activity__stat-label {
   text-transform: capitalize;
@@ -795,7 +801,37 @@ ul {
   color: #7e898a; }
 
 .c-activity__stat-value {
-  font-size: 2.4rem; }
+  font-size: 2rem; }
+  @media only screen and (min-width: 768px) {
+    .c-activity__stat-value {
+      font-size: 1.3rem; } }
+
+.c-activity__stat-value--large {
+  font-size: 3.2rem; }
+
+.c-activity__stat-unit {
+  font-size: 1.1rem;
+  opacity: 0.5;
+  margin-left: 0.33333rem; }
+
+.c-activity-interactive-map-container {
+  position: relative;
+  width: 100%;
+  height: 45rem; }
+
+.c-activity-interactive-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%; }
+  .c-activity-interactive-map .mapboxgl-popup-content {
+    color: #FFFFFF;
+    font-size: 1.3rem;
+    background-color: #1F2428;
+    padding: 1rem;
+    font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
+  .c-activity-interactive-map .mapboxgl-popup-tip {
+    border-top-color: #1F2428; }
 
 .c-label {
   border-radius: 20px;
@@ -902,3 +938,33 @@ ul {
     opacity: 0;
     -webkit-transform: translateY(0);
     transform: translateY(0); } }
+
+.c-activity-summary {
+  padding: 2rem;
+  background: #101010; }
+  .c-activity-summary .c-activity__stat {
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    margin-right: 3rem;
+    margin-top: 0; }
+  .c-activity-summary .c-activity__stat-value {
+    font-size: 1.6rem; }
+    @media only screen and (min-width: 768px) {
+      .c-activity-summary .c-activity__stat-value {
+        font-size: 2rem; } }
+  @media only screen and (min-width: 768px) {
+    .c-activity-summary .c-activity__stat-value--large {
+      font-size: 3.2rem; } }
+
+.c-activity-summary--average .c-activity__stat {
+  -ms-flex-preferred-size: auto;
+  flex-basis: auto;
+  margin-right: 3rem; }
+
+.c-activity-summary-header {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0.3; }

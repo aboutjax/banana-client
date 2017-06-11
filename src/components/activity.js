@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import MomentJS from 'moment'
+import _ from 'lodash';
 
 const googleApiKey = 'AIzaSyAsyxYCjxLqi49yGUuqUJRa4cYN8V4VyLE'
 
@@ -43,7 +45,13 @@ function ActivityStat(props){
   return(
     <div className="c-activity__stat">
       <label className="c-activity__stat-label">{props.label}</label>
-      <span className="c-activity__stat-value">{props.value}{props.unit}</span>
+      <span className={`
+        c-activity__stat-value
+        ${props.type ? 'c-activity__stat-value--' + props.type: ''}
+        `}
+        >
+        {props.value}
+      <span className="c-activity__stat-unit">{props.unit}</span></span>
     </div>
   )
 }
@@ -68,11 +76,33 @@ function ActivityName(props){
   )
 }
 
+let activityDistance;
+let activityAverageSpeed;
+let activityTotalElevationGain;
+let activityMovingTime;
+let activityMovingTimeHour;
+let activityMovingTimeMinutes;
+let activityMovingTimeSeconds;
+let activityMovingTimeHHMMSS;
+
 class Activity extends Component {
 
+  componentWillMount(){
+    activityDistance = Math.floor(this.props.data.distance/1000)
+    activityAverageSpeed = _.round((this.props.data.average_speed * 60 * 60) / 1000, 1)
+    activityTotalElevationGain = Math.floor(this.props.data.total_elevation_gain)
+
+    activityMovingTime = MomentJS.duration(this.props.data.moving_time, 'seconds')
+
+    activityMovingTimeHour = activityMovingTime._data.hours
+    activityMovingTimeMinutes = activityMovingTime._data.minutes
+    activityMovingTimeSeconds = activityMovingTime._data.seconds
+
+    activityMovingTimeHHMMSS = activityMovingTimeHour + ':' + activityMovingTimeMinutes + ':' + activityMovingTimeSeconds
+  }
+
   render(){
-    let activityDistance = Math.floor(this.props.data.distance/1000)
-    let activityTotalElevationGain = Math.floor(this.props.data.total_elevation_gain)
+
     return(
       <div className="c-activity">
         <ActivityMap className="c-activity__map" mapPolyline={this.props.data.map.summary_polyline}/>
@@ -81,6 +111,8 @@ class Activity extends Component {
           <div className="c-activity__stats">
             <ActivityStat label="distance" value={activityDistance} unit="km"/>
             <ActivityStat label="climb" value={activityTotalElevationGain} unit="m"/>
+            <ActivityStat label="duration" value={activityMovingTimeHHMMSS}/>
+            <ActivityStat label="average speed" value={activityAverageSpeed} unit="km/h"/>
           </div>
         </div>
       </div>
@@ -90,3 +122,4 @@ class Activity extends Component {
 
 export default Activity
 exports.ActivityMap = ActivityMap
+exports.ActivityStat = ActivityStat

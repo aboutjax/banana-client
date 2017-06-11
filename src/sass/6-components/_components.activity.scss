@@ -4,7 +4,7 @@
   border-radius: $border-radius;
   color: $colour-text;
   overflow: hidden;
-  background: $shark;
+  background: $woodsmoke;
   box-shadow: 0 2px 20px rgba(0,0,0,0.3);
   position: relative;
 
@@ -28,6 +28,7 @@
   flex-direction: column;
   flex-grow: 1;
   padding: 20px;
+  justify-content: space-between;
 
   @include medium {
     padding: 30px;
@@ -38,11 +39,12 @@
   overflow: hidden;
   flex-shrink: 0;
   width: 100%;
-  height: 300px;
+  height: 100%;
 
   @include smallish {
     width: 200px;
     height: 200px;
+    display: block;
   };
 }
 
@@ -80,12 +82,14 @@
 }
 
 .c-activity__stat {
-  flex-basis: 50%;
+  flex-basis: auto;
   display: flex;
   flex-direction: column;
+  margin-top: $spacing-l;
+  margin-right: $spacing-xl;
 
-  @include medium {
-    flex-basis: 25%;
+  @include small {
+
   };
 }
 
@@ -97,5 +101,44 @@
 }
 
 .c-activity__stat-value {
-  font-size: 2.4rem;
+  font-size: 2rem;
+
+  @include medium {
+    font-size: 1.3rem;
+  };
+}
+
+.c-activity__stat-value--large {
+  font-size: 3.2rem;
+}
+
+.c-activity__stat-unit {
+  font-size: 1.1rem;
+  opacity: 0.5;
+  margin-left: $spacing-xs;
+}
+
+.c-activity-interactive-map-container {
+  position: relative;
+  width: 100%;
+  height: 45rem;
+}
+
+.c-activity-interactive-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+
+  .mapboxgl-popup-content {
+    color: $colour-text;
+    font-size: 1.3rem;
+    background-color: $colour-background;
+    padding: $spacing;
+    font-family: $default-font-family;
+  }
+
+  .mapboxgl-popup-tip {
+    border-top-color: $colour-background;
+  }
 }
