@@ -13,11 +13,10 @@ class Activities extends Component{
       pager: {},
       loading: false
     }
-
-    this.setPager = this.setPager.bind(this)
   }
 
   componentWillMount(){
+    console.log('mounting');
     this.setState({
       loading: true
     })
@@ -39,21 +38,44 @@ class Activities extends Component{
     }).then(function(response){
       return response.json();
     }).then( json => {
-      console.log(json);
-      this.setState({
-        data: json,
-        loading: false
-      })
+      if(json.length < 30){
+        this.setState({
+          data: json,
+          loading: false,
+          pager: {
+            isLastPage: true,
+            isFirstPage: false,
+            nextPage: null,
+            currentPage: Number(this.props.match.params.page),
+            previousPage: Number(this.props.match.params.page) - 1
+          }
+        })
+      } else if(json.length === 30 && this.props.match.params.page){
+        this.setState({
+          data: json,
+          loading: false,
+          pager: {
+            isLastPage: false,
+            isFirstPage: false,
+            nextPage: Number(this.props.match.params.page) + 1,
+            currentPage: Number(this.props.match.params.page),
+            previousPage: Number(this.props.match.params.page) - 1
+          }
+        })
+      } else {
+        this.setState({
+          data: json,
+          loading: false,
+          pager: {
+            isLastPage: false,
+            isFirstPage: true,
+            nextPage: 2,
+            currentPage: 1,
+            previousPage: null
+          }
+        })
+      }
     })
-  }
-
-  setPager() {
-    let itemsOnPage = this.state.data.length
-    if(itemsOnPage < 30) {
-      console.log('last page');
-    } else {
-      console.log('not last page');
-    }
   }
 
   render(){
@@ -81,16 +103,20 @@ class Activities extends Component{
               transitionLeaveTimeout={300}>
               { activities }
             </CSSTransitionGroup>
+            <ul className="c-paginator">
+              <li className="c-paginator__link">
+                <a className={ this.state.pager.currentPage === 1 ? 'disabled c-btn' : 'c-btn' } href={'/strava-dashboard/activities/page/' + this.state.pager.previousPage}>Previous</a>
+              </li>
+              <li className="c-paginator__link">
+                <a className={ this.state.pager.isLastPage ? 'disabled c-btn' : 'c-btn' } href={'/strava-dashboard/activities/page/' + this.state.pager.nextPage}>Next</a>
+              </li>
+            </ul>
           </div>
         </div>
       )
     }
   }
 }
-
-// class Paginator extends Component {
-//
-// }
 
 
 export default Activities;

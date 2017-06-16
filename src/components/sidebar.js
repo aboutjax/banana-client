@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class Sidebar extends Component {
 
@@ -8,6 +8,11 @@ class Sidebar extends Component {
     this.state = {
       data: {},
     }
+  }
+
+  logout = () => {
+    localStorage.removeItem('access_token')
+    window.location.reload()
   }
 
   componentWillMount() {
@@ -40,6 +45,9 @@ class Sidebar extends Component {
           </li>
           <li className="c-sidebar__nav-item">
             <NavLink activeClassName="active" to="/activities">Activities</NavLink>
+          </li>
+          <li className="c-sidebar__nav-item c-sidebar__nav-item--logout">
+            <a href="#" onClick={this.logout}>Log Out</a>
           </li>
         </ul>
       </div>

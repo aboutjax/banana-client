@@ -1,10 +1,24 @@
 .c-btn {
- font-size: 1.4rem;
+ font-size: 1.3rem;
  text-transform: uppercase;
  padding: 1.2rem 2rem;
- background: $colour-primary;
  display: inline-block;
  font-weight: 600;
+ letter-spacing: .05rem;
  border-radius: .2rem;
- box-shadow: 0 .2rem 0 0 darken($colour-primary, 10);
+
+ &:hover {
+   background-color: rgba(0,0,0,0.1)
+ }
+}
+
+
+.c-btn--primary {
+  box-shadow: 0 .2rem 0 0 darken($colour-primary, 10);
+  background: $colour-primary;
+
+  &:hover {
+    background-color: darken($colour-primary, 5);
+  }
+
 }

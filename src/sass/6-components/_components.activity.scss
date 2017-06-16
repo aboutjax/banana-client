@@ -37,11 +37,12 @@
 
 .c-activity-map {
   overflow: hidden;
+  display: none;
   flex-shrink: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
 
-  @include smallish {
+  @include medium {
     width: 200px;
     height: 200px;
     display: block;

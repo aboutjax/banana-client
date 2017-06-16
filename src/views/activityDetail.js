@@ -201,7 +201,7 @@ class ActivityDetail extends Component {
   }
 
   componentDidMount(){
-    let userAccessToken = localStorage.getItem('access_token');
+    let userAccessToken = localStorage.getItem('access_token') || '454c1086525feaed3b71c507b939a99920ff792f'; 
     let thisActivityApiUrl = 'https://www.strava.com/api/v3/activities/' + this.props.match.params.id;
 
     let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/heartrate,latlng,cadence'
