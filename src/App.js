@@ -5,8 +5,7 @@ import { Route } from 'react-router-dom';
 // Views
 import Activities from './views/activities';
 import Clubs from './views/clubs';
-import Sidebar from './components/sidebar';
-import Home from './views/home';
+import Nav from './components/nav';
 import HandleRedirect from './views/handleRedirect';
 import Login from './views/login';
 import Streams from './views/stream';
@@ -20,16 +19,14 @@ class App extends Component {
     if(userIsLoggedIn) {
       return(
         <div className="App o-wrapper o-app">
-          <Sidebar />
+          <Nav />
 
           <div className='o-content'>
 
               <Route path="/handle_redirect" exact component={HandleRedirect}/>
-              <Route path="/" exact component={Home} />
-              <Route path="/activities" exact component={Activities}/>
+              <Route path="/" exact component={Activities} />
               <Route path="/activities/page/:page" component={Activities}/>
               <Route path="/clubs" component={Clubs}/>
-              <Route path="/streams" component={Streams}/>
               <Route path="/streams" component={Streams}/>
               <Route path="/activities/:id" exact component={ActivityDetail}/>
 

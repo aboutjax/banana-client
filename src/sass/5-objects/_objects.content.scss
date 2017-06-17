@@ -2,10 +2,4 @@
   padding: $spacing-xl;
   grid-column-start: 1;
   grid-column-end: 5;
-
-  @include medium {
-    grid-column-start: 2;
-    grid-column-end: 5;
-  }
-
 }

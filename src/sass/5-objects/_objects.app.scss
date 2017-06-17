@@ -2,9 +2,4 @@
   max-width: 960px;
   display: grid;
   grid-template-columns: 1fr;
-
-  @include medium {
-    padding-top: 60px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
 }

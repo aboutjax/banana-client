@@ -76,32 +76,20 @@ function ActivityName(props){
   )
 }
 
-let activityDistance;
-let activityAverageSpeed;
-let activityTotalElevationGain;
-let activityMovingTime;
-let activityMovingTimeHour;
-let activityMovingTimeMinutes;
-let activityMovingTimeSeconds;
-let activityMovingTimeHHMMSS;
-
 class Activity extends Component {
 
   componentWillMount(){
-    activityDistance = Math.floor(this.props.data.distance/1000)
-    activityAverageSpeed = _.round((this.props.data.average_speed * 60 * 60) / 1000, 1)
-    activityTotalElevationGain = Math.floor(this.props.data.total_elevation_gain)
-
-    activityMovingTime = MomentJS.duration(this.props.data.moving_time, 'seconds')
-
-    activityMovingTimeHour = activityMovingTime._data.hours
-    activityMovingTimeMinutes = activityMovingTime._data.minutes
-    activityMovingTimeSeconds = activityMovingTime._data.seconds
-
-    activityMovingTimeHHMMSS = activityMovingTimeHour + ':' + activityMovingTimeMinutes + ':' + activityMovingTimeSeconds
   }
 
   render(){
+    let activityDistance = Math.floor(this.props.data.distance/1000)
+    let activityAverageSpeed = _.round((this.props.data.average_speed * 60 * 60) / 1000, 1)
+    let activityTotalElevationGain = Math.floor(this.props.data.total_elevation_gain)
+    let activityMovingTime = MomentJS.duration(this.props.data.moving_time, 'seconds')
+    let activityMovingTimeHour = activityMovingTime._data.hours
+    let activityMovingTimeMinutes = activityMovingTime._data.minutes
+    let activityMovingTimeSeconds = activityMovingTime._data.seconds
+    let activityMovingTimeHHMMSS = activityMovingTimeHour + ':' + activityMovingTimeMinutes + ':' + activityMovingTimeSeconds
 
     return(
       <div className="c-activity">

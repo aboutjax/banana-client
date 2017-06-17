@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import Activity from '../components/activity';
 import { CSSTransitionGroup } from 'react-transition-group';
-import LoadingSpinner from '../components/loader'
+import LoadingSpinner from '../components/loader';
+
+const activitiesPerPage = 30;
 
 class Activities extends Component{
   constructor(props) {
@@ -16,16 +18,15 @@ class Activities extends Component{
   }
 
   componentWillMount(){
-    console.log('mounting');
     this.setState({
       loading: true
     })
   }
 
-  componentDidMount(){
+  fetchData = () => {
     let userAccessToken = localStorage.getItem('access_token')
     let page = this.props.match.params.page || 1
-    let activitiesFetchUrl = 'https://www.strava.com/api/v3/athlete/activities?page=' + page
+    let activitiesFetchUrl = 'https://www.strava.com/api/v3/athlete/activities?page='+ page
 
     console.log(activitiesFetchUrl);
 
@@ -38,7 +39,7 @@ class Activities extends Component{
     }).then(function(response){
       return response.json();
     }).then( json => {
-      if(json.length < 30){
+      if(json.length < activitiesPerPage){
         this.setState({
           data: json,
           loading: false,
@@ -50,7 +51,7 @@ class Activities extends Component{
             previousPage: Number(this.props.match.params.page) - 1
           }
         })
-      } else if(json.length === 30 && this.props.match.params.page){
+      } else if(json.length === activitiesPerPage && this.props.match.params.page){
         this.setState({
           data: json,
           loading: false,
@@ -78,6 +79,14 @@ class Activities extends Component{
     })
   }
 
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  componentWillReceiveProps() {
+    this.fetchData()
+  }
+
   render(){
     const activities = this.state.data.map((activity, index) => (
       <Activity key={index} data={activity} mapDimension='400x400'/>
@@ -85,20 +94,20 @@ class Activities extends Component{
 
     if(this.state.loading){
       return(
-        <div>
-          <h1>Activities</h1>
+
           <div className="o-flex o-flex-align--center o-flex-justify--center">
             <LoadingSpinner />
           </div>
-        </div>
+
       )
     } else {
       return (
         <div>
-          <h1>Activities</h1>
           <div>
             <CSSTransitionGroup
               transitionName="o-transition"
+              transitionAppear={true}
+              transitionAppearTimeout={500}
               transitionEnterTimeout={500}
               transitionLeaveTimeout={300}>
               { activities }

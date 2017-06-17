@@ -21,6 +21,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-chartjs": "^0.8.0",
+    "react-countup": "^2.1.1",
     "react-dom": "^15.5.4",
     "react-map-gl": "^2.0.3",
     "react-moment": "^0.2.2",
