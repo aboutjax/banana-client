@@ -17,16 +17,6 @@
 .c-navigation__nav-item {
   margin-right: $spacing-xl;
   color: $colour-supplementary;
-
-  a {
-    padding: 0.8rem $spacing;
-    border-radius: 0.6rem;
-    &:hover {
-      color: $colour-white;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-  }
-
 }
 
 .c-navigation__nav-item--logout {

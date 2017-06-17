@@ -40,7 +40,7 @@ class HandleRedirect extends Component {
 
   render(){
     return(
-      <Redirect to="/activities" />
+      <Redirect to="/" />
     )
   }
 }

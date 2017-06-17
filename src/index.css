@@ -678,12 +678,6 @@ img {
 .c-navigation__nav-item {
   margin-right: 3rem;
   color: #7e898a; }
-  .c-navigation__nav-item a {
-    padding: 0.8rem 1rem;
-    border-radius: 0.6rem; }
-    .c-navigation__nav-item a:hover {
-      color: #FFFFFF;
-      background-color: rgba(0, 0, 0, 0.2); }
 
 .c-navigation__nav-item--logout {
   position: absolute;
@@ -923,8 +917,6 @@ img {
     background-color: rgba(0, 0, 0, 0.1); }
 
 .c-btn--primary {
-  -webkit-box-shadow: 0 0.2rem 0 0 #0070cc;
-  box-shadow: 0 0.2rem 0 0 #0070cc;
   background: #008cff; }
   .c-btn--primary:hover {
     background-color: #007ee6; }
