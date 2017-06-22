@@ -4,12 +4,11 @@ import MomentJS from 'moment'
 import Moment from 'react-moment';
 import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
-import mapboxgl from 'mapbox-gl';
-import polyline from '@mapbox/polyline'
+import Chart from '../components/chart'
+import MapboxMap from '../components/mapbox'
 
 let activityDistance;
 let activityTotalElevationGain;
-let activitySufferScore;
 let activityTotalCalories;
 let activityMovingTime;
 let activityMovingTimeHour;
@@ -21,158 +20,7 @@ let activityAverageSpeed;
 let activityAverageCadence;
 let activityAverageHeartRate;
 let activityAverageWatts;
-
-class MapboxMap extends Component {
-
-  componentDidMount() {
-
-    let decodedPolyline = polyline.toGeoJSON(this.props.mapPolyline)
-    let decodedPolylineArray = decodedPolyline.coordinates
-    let startLatlng = this.props.startLatlng
-    let endLatlng = this.props.endLatlng
-
-    mapboxgl.accessToken = 'pk.eyJ1IjoicDBwbWFrZXIiLCJhIjoiY2lzOXliOGlrMDA2ODJ5bzJ4YjNnb29qdSJ9.hf19Sca7oYCcR8kRlx07Rw';
-
-    const map = new mapboxgl.Map({
-      container: this.container,
-      style: 'mapbox://styles/mapbox/dark-v9',
-      center: [
-        startLatlng[1], startLatlng[0]
-      ],
-      zoom: 8
-    })
-
-    map.on('load', function() {
-
-      map.addLayer({
-        "id": "route",
-        "type": "line",
-        "source": {
-          "type": "geojson",
-          "data": {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-              "type": "LineString",
-              "coordinates": decodedPolylineArray
-            }
-          }
-        },
-        "layout": {
-          "line-join": "round",
-          "line-cap": "round"
-        },
-        "paint": {
-          "line-color": "#0a67f2",
-          "line-width": 2
-        }
-      });
-
-      map.addLayer({
-        "id": "start",
-        "type": "circle",
-        "source": {
-          "type": "geojson",
-          "data": {
-            "type": "Feature",
-            "properties": {
-              "description": "Activity Start"
-            },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [startLatlng[1], startLatlng[0]]
-            }
-          }
-        },
-        "paint": {
-          "circle-color": "#41c15a",
-          "circle-radius": 7
-        }
-      });
-
-      map.addLayer({
-        "id": "end",
-        "type": "circle",
-        "source": {
-          "type": "geojson",
-          "data": {
-            "type": "Feature",
-            "properties": {
-              "description": "Activitiy End"
-            },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [endLatlng[1], endLatlng[0]]
-            }
-          }
-        },
-        "paint": {
-          "circle-color": "#f03434",
-          "circle-radius": 7
-        }
-      });
-
-      // Geographic coordinates of the LineString
-      var coordinates = decodedPolylineArray;
-
-      // Pass the first coordinates in the LineString to `lngLatBounds` &
-      // wrap each coordinate pair in `extend` to include them in the bounds
-      // result. A variation of this technique could be applied to zooming
-      // to the bounds of multiple Points or Polygon geomteries - it just
-      // requires wrapping all the coordinates with the extend method.
-      var bounds = coordinates.reduce(function(bounds, coord) {
-        return bounds.extend(coord);
-      }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
-
-      map.fitBounds(bounds, {padding: 30});
-
-      map.addControl(new mapboxgl.NavigationControl())
-      map.addControl(new mapboxgl.FullscreenControl());
-
-      // Create a popup, but don't add it to the map yet.
-      let popup = new mapboxgl.Popup({closeButton: false, closeOnClick: false});
-
-      map.on('mouseenter', 'start', function(e) {
-        // Change the cursor style as a UI indicator.
-        map.getCanvas().style.cursor = 'pointer';
-
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(e.features[0].geometry.coordinates).setHTML(e.features[0].properties.description).addTo(map);
-      });
-
-      map.on('mouseleave', 'start', function() {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-      });
-
-      map.on('mouseenter', 'end', function(e) {
-        // Change the cursor style as a UI indicator.
-        map.getCanvas().style.cursor = 'pointer';
-
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(e.features[0].geometry.coordinates).setHTML(e.features[0].properties.description).addTo(map);
-      });
-
-      map.on('mouseleave', 'end', function() {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-      });
-
-    });
-  }
-
-  render() {
-    return (
-      <div className='c-activity-interactive-map-container'>
-        <div className='c-activity-interactive-map' ref={(x) => {
-          this.container = x
-        }}></div>
-      </div>
-    )
-  }
-}
+let publicAccessToken = '454c1086525feaed3b71c507b939a99920ff792f'
 
 class ActivityDetail extends Component {
   constructor(props) {
@@ -182,20 +30,20 @@ class ActivityDetail extends Component {
       gear: [],
       athlete: {},
       map: {},
-      loading: false
+      loading: false,
+      chartData: {}
     }
   }
 
   componentWillMount() {
-    console.log('componentWillMount');
     this.setState({loading: true})
   }
 
   componentDidMount() {
-    let userAccessToken = localStorage.getItem('access_token') || '454c1086525feaed3b71c507b939a99920ff792f';
+    let userAccessToken = localStorage.getItem('access_token') || publicAccessToken
     let thisActivityApiUrl = 'https://www.strava.com/api/v3/activities/' + this.props.match.params.id;
 
-    let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/heartrate,latlng,cadence'
+    let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/altitude,heartrate,latlng,cadence?resolution=medium'
 
     fetch(thisActivityApiUrl, {
       method: 'get',
@@ -206,7 +54,6 @@ class ActivityDetail extends Component {
     }).then(function(response) {
       return response.json();
     }).then(json => {
-      console.log(json);
       this.setState({data: json, gear: json.gear, athlete: json.athlete, map: json.map, loading: false})
 
     })
@@ -220,8 +67,62 @@ class ActivityDetail extends Component {
     }).then(function(response) {
       return response.json();
     }).then(json => {
-      console.log(json);
-      this.setState({activityStream: json})
+      console.log('fetched stream apis');
+      function findDistance(array){
+        return array.type === 'distance'
+      }
+      function findHeartrate(array){
+        return array.type === 'heartrate'
+      }
+      function findAltitude(array){
+        return array.type === 'altitude'
+      }
+      function findLatlng(array){
+        return array.type === 'latlng'
+      }
+      function findCadence(array){
+        return array.type === 'cadence'
+      }
+
+      if(json.find(findDistance)){
+        this.setState(
+          {
+            distanceStream: json.find(findDistance).data
+          }
+        )
+      }
+
+      if(json.find(findAltitude)){
+        this.setState(
+          {
+            altitudeStream: json.find(findAltitude).data
+          }
+        )
+      }
+
+      if(json.find(findHeartrate)){
+        this.setState(
+          {
+            heartrateStream: json.find(findHeartrate).data
+          }
+        )
+      }
+
+      if(json.find(findLatlng)){
+        this.setState(
+          {
+            latLngStream: json.find(findLatlng).data
+          }
+        )
+      }
+
+      if(json.find(findCadence)){
+        this.setState(
+          {
+            cadenceStream: json.find(findCadence).data
+          }
+        )
+      }
     })
   }
 
@@ -233,9 +134,6 @@ class ActivityDetail extends Component {
     activityTotalElevationGain = _.round(this.state.data.total_elevation_gain, 0)
     // Calories
     activityTotalCalories = this.state.data.calories
-
-    // Suffer Score
-    activitySufferScore = this.state.data.suffer_score
 
     // Duration
     activityMovingTime = MomentJS.duration(this.state.data.moving_time, 'seconds')
@@ -260,10 +158,10 @@ class ActivityDetail extends Component {
       return (
         <div className="o-activity-detail">
           <div className="o-activity-detail-header">
-            <h2>{this.state.data.name}</h2>
+            <h3 className="o-activity-detail-name">{this.state.data.name}</h3>
             <span className='c-activity__time'>
               <Moment format="MMM DD, YYYY">{this.state.data.start_date}</Moment>
-              •
+               <span> • </span>
               <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
             </span>
           </div>
@@ -272,7 +170,6 @@ class ActivityDetail extends Component {
             <ActivityStat type="large" label="climb" value={activityTotalElevationGain} unit="m"/>
             <ActivityStat type="large" label="duration" value={activityMovingTimeHHMMSS}/>
             <ActivityStat type="large" label="calories" value={activityTotalCalories}/>
-            { activitySufferScore ? <ActivityStat type="large" label="suffer score" value={activitySufferScore}/> : null}
           </div>
           <MapboxMap mapPolyline={this.state.map.polyline} startLatlng={this.state.data.start_latlng} endLatlng={this.state.data.end_latlng}/>
           <div className="c-activity-summary c-activity-summary--average">
@@ -291,6 +188,11 @@ class ActivityDetail extends Component {
                 ? <ActivityStat label="power" value={activityAverageWatts} unit="w"/>
                 : null}
             </div>
+          </div>
+
+          <div className="c-activity-chart-container t-top-spacing--l">
+
+            <Chart className="c-activity-chart-container" altitudeStream={this.state.altitudeStream} heartrateStream={this.state.heartrateStream} distanceStream={this.state.distanceStream}/>
           </div>
         </div>
       )

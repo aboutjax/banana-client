@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
+import Login from '../views/login';
 
 class Nav extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: {},
     }
@@ -31,16 +32,29 @@ class Nav extends Component {
 
   render() {
 
-    return (
-      <div className="c-navigation">
-        <ul className="c-navigation__nav">
-          <li className="c-navigation__nav-item">
-            <NavLink activeClassName="active" exact to="/">Home</NavLink>
-          </li>
-        </ul>
-        <NavigationProfile data={this.state.data}/>
-      </div>
-    )
+    if(this.props.type === 'private') {
+      return (
+        <div className="c-navigation">
+          <ul className="c-navigation__nav">
+            <li className="c-navigation__nav-item">
+              <NavLink activeClassName="active" exact to="/">Home</NavLink>
+            </li>
+          </ul>
+          <NavigationProfile data={this.state.data}/>
+        </div>
+      )
+    } else {
+      return (
+        <div className="c-navigation">
+          <div>
+            Actimoji
+          </div>
+          <Login/>
+        </div>
+      )
+
+    }
+
   }
 }
 

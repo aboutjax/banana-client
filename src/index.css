@@ -650,8 +650,10 @@ img {
 
 .o-activity-detail-header {
   margin-bottom: 3rem; }
-  .o-activity-detail-header h2 {
-    margin-bottom: 1rem; }
+
+.o-activity-detail-name {
+  font-size: 2.4rem;
+  margin-bottom: 1rem; }
 
 .c-navigation {
   padding: 2rem 3rem;
@@ -731,6 +733,7 @@ img {
 
 .c-navigation__dropdown-location {
   font-size: 1.3rem;
+  margin: 0;
   opacity: 0.5; }
 
 .c-activity {
@@ -880,7 +883,12 @@ img {
     padding: 1rem;
     font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
   .c-activity-interactive-map .mapboxgl-popup-tip {
-    border-top-color: #1F2428; }
+    border-top-color: #1F2428;
+    border-bottom-color: #1F2428; }
+
+.c-activity-chart-container {
+  position: relative;
+  height: 20rem; }
 
 .c-label {
   border-radius: 20px;
@@ -947,6 +955,7 @@ img {
   align-items: center;
   top: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%; }
 

@@ -15,9 +15,11 @@
 }
 
 .o-activity-detail-header {
-  h2 {
-    margin-bottom: $spacing;
-  }
-
   margin-bottom: $spacing-xl;
+}
+
+
+.o-activity-detail-name {
+  font-size: 2.4rem;
+  margin-bottom: $spacing;
 }

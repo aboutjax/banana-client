@@ -141,5 +141,11 @@
 
   .mapboxgl-popup-tip {
     border-top-color: $colour-background;
+    border-bottom-color: $colour-background;
   }
+}
+
+.c-activity-chart-container {
+  position: relative;
+  height: 20rem;
 }

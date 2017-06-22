@@ -28,8 +28,6 @@ class Activities extends Component{
     let page = this.props.match.params.page || 1
     let activitiesFetchUrl = 'https://www.strava.com/api/v3/athlete/activities?page='+ page
 
-    console.log(activitiesFetchUrl);
-
     fetch(activitiesFetchUrl, {
       method: 'get',
       headers: {
