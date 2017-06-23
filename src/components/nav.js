@@ -45,10 +45,7 @@ class Nav extends Component {
       )
     } else {
       return (
-        <div className="c-navigation">
-          <div>
-            Actimoji
-          </div>
+        <div className="c-login">
           <Login/>
         </div>
       )

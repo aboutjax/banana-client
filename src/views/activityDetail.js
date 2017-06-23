@@ -43,7 +43,7 @@ class ActivityDetail extends Component {
     let userAccessToken = localStorage.getItem('access_token') || publicAccessToken
     let thisActivityApiUrl = 'https://www.strava.com/api/v3/activities/' + this.props.match.params.id;
 
-    let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/altitude,heartrate,latlng,cadence?resolution=medium'
+    let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/altitude,heartrate,latlng,cadence,velocity_smooth?resolution=medium'
 
     fetch(thisActivityApiUrl, {
       method: 'get',
@@ -67,7 +67,7 @@ class ActivityDetail extends Component {
     }).then(function(response) {
       return response.json();
     }).then(json => {
-      console.log('fetched stream apis');
+      console.log(json);
       function findDistance(array){
         return array.type === 'distance'
       }
@@ -82,6 +82,9 @@ class ActivityDetail extends Component {
       }
       function findCadence(array){
         return array.type === 'cadence'
+      }
+      function findVelocity(array){
+        return array.type === 'velocity_smooth'
       }
 
       if(json.find(findDistance)){
@@ -120,6 +123,25 @@ class ActivityDetail extends Component {
         this.setState(
           {
             cadenceStream: json.find(findCadence).data
+          }
+        )
+      }
+
+      if(json.find(findVelocity)){
+
+        function toKPH(m) {
+          let toKM = m / 1000
+          let toKPH = toKM * 60 * 60
+
+          return _.round(toKPH, 2);
+        }
+
+        let velocityStreamArray = json.find(findVelocity).data
+        let velocityKPH = _.map(velocityStreamArray, toKPH)
+
+        this.setState(
+          {
+            velocityStream: velocityKPH
           }
         )
       }
@@ -165,39 +187,72 @@ class ActivityDetail extends Component {
               <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
             </span>
           </div>
-          <div className="c-activity-summary o-flex o-flex-justify--start">
-            <ActivityStat type="large" label="distance" value={activityDistance} unit="km"/>
-            <ActivityStat type="large" label="climb" value={activityTotalElevationGain} unit="m"/>
-            <ActivityStat type="large" label="duration" value={activityMovingTimeHHMMSS}/>
-            <ActivityStat type="large" label="calories" value={activityTotalCalories}/>
-          </div>
-          <MapboxMap mapPolyline={this.state.map.polyline} startLatlng={this.state.data.start_latlng} endLatlng={this.state.data.end_latlng}/>
-          <div className="c-activity-summary c-activity-summary--average">
-            <h3 className="c-activity-summary-header">activity average</h3>
-            <div className="o-flex o-flex-justify--start">
-              {activityAverageSpeed
-                ? <ActivityStat label="speed" value={activityAverageSpeed} unit="km"/>
-                : null}
-              {activityAverageCadence
-                ? <ActivityStat label="cadence" value={activityAverageCadence} unit="rpm"/>
-                : null}
-              {activityAverageHeartRate
-                ? <ActivityStat label="heartrate" value={activityAverageHeartRate} unit="bpm"/>
-                : null}
-              {activityAverageWatts
-                ? <ActivityStat label="power" value={activityAverageWatts} unit="w"/>
-                : null}
+          <div className="o-activity-detail__summary">
+            <div className="c-activity-summary o-flex o-flex-justify--start">
+              <ActivityStat type="large" label="distance" value={activityDistance} unit="km"/>
+              <ActivityStat type="large" label="climb" value={activityTotalElevationGain} unit="m"/>
+              <ActivityStat type="large" label="duration" value={activityMovingTimeHHMMSS}/>
+              <ActivityStat type="large" label="calories" value={activityTotalCalories}/>
+            </div>
+            <MapboxMap mapPolyline={this.state.map.polyline} startLatlng={this.state.data.start_latlng} endLatlng={this.state.data.end_latlng}/>
+            <div className="c-activity-summary c-activity-summary--average">
+              <h3 className="c-activity-summary-header">activity average</h3>
+              <div className="o-flex o-flex-justify--start">
+                {activityAverageSpeed
+                  ? <ActivityStat label="speed" value={activityAverageSpeed} unit="km"/>
+                  : null}
+                {activityAverageCadence
+                  ? <ActivityStat label="cadence" value={activityAverageCadence} unit="rpm"/>
+                  : null}
+                {activityAverageHeartRate
+                  ? <ActivityStat label="heartrate" value={activityAverageHeartRate} unit="bpm"/>
+                  : null}
+                {activityAverageWatts
+                  ? <ActivityStat label="power" value={activityAverageWatts} unit="w"/>
+                  : null}
+              </div>
             </div>
           </div>
 
-          <div className="c-activity-chart-container t-top-spacing--l">
-
-            <Chart className="c-activity-chart-container" altitudeStream={this.state.altitudeStream} heartrateStream={this.state.heartrateStream} distanceStream={this.state.distanceStream}/>
+          <div>
+            {this.state.velocityStream
+              ?
+              <div className="c-activity-graph c-activity-graph--velocity t-top-spacing--l">
+                <div className="c-activity-graph-container">
+                  <h3 className="t-bottom-spacing--xl">Speed <span className="c-activity-graph__header--supplementary ">& Elevation</span></h3>
+                  <Chart
+                    altitudeStream={this.state.altitudeStream}
+                    distanceStream={this.state.distanceStream}
+                    mainDataStream={this.state.velocityStream}
+                    dataType="velocity"
+                    dataTypeLegendLabel="Speed"
+                    dataTypeUnit="KM/H"
+                  />
+                </div>
+              </div>
+              : null
+            }
+            {this.state.heartrateStream
+              ?
+              <div className="c-activity-graph c-activity-graph--heartrate t-top-spacing--l">
+                <div className="c-activity-graph-container">
+                  <h3 className="t-bottom-spacing--xl">Heart Rate <span className="c-activity-graph__header--supplementary ">& Elevation</span></h3>
+                  <Chart
+                    altitudeStream={this.state.altitudeStream}
+                    distanceStream={this.state.distanceStream}
+                    mainDataStream={this.state.heartrateStream}
+                    dataType="heartrate"
+                    dataTypeLegendLabel="Heart Rate"
+                    dataTypeUnit="BPM"
+                  />
+                </div>
+              </div>
+              : null
+            }
           </div>
         </div>
       )
     }
-
   }
 }
 

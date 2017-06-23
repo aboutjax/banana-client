@@ -127,6 +127,7 @@
 
 .c-activity-interactive-map {
   position: absolute;
+  background-color: $woodsmoke;
   top: 0;
   bottom: 0;
   width: 100%;
@@ -145,7 +146,23 @@
   }
 }
 
+.c-activity-graph {
+  padding: $spacing-xl;
+  border-radius: 0.5rem;
+}
+
+.c-activity-graph__header--supplementary {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.c-activity-graph--heartrate {
+    background-image: linear-gradient(0deg, $colour-heartrate-base 0%, $colour-heartrate-alt 100%);
+}
+
+.c-activity-graph--velocity {
+    background-image: linear-gradient(0deg, $colour-velocity-base 0%, $colour-velocity-alt 100%);
+}
+
 .c-activity-chart-container {
-  position: relative;
-  height: 20rem;
+  height: 30rem;
 }

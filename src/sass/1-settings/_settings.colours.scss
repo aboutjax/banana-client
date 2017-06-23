@@ -6,6 +6,8 @@ $mystic: #E4E9EE;
 $white: #FFFFFF;
 $gunsmoke: #7e898a;
 $alabaster: #FAFAFA;
+$red-orange: #F7392E;
+$persimmon: #F9674E;
 
 $outer-space: #323940;
 $shark: #1F2428;
@@ -18,6 +20,12 @@ $colour-framing: $mystic;
 $colour-white: $white;
 $colour-supplementary: $gunsmoke;
 $colour-background: $shark;
+
+$colour-heartrate-base: $red-orange;
+$colour-heartrate-alt: $persimmon;
+
+$colour-velocity-base: $outer-space;
+$colour-velocity-alt: lighten($colour-velocity-base, 4);
 
 // Interface Colour (Dark Theme)
 // $colour-text: $cape-cod;

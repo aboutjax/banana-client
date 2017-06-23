@@ -6,9 +6,11 @@ import { defaults } from 'react-chartjs-2';
 defaults.global.elements.point.borderWidth = 0;
 defaults.global.elements.point.radius = 0;
 defaults.global.elements.point.backgroundColor = 'rgba(0,0,0,0)';
-defaults.global.elements.line.tension = 0.2;
-defaults.global.elements.line.borderColor = 'rgba(255, 255, 255, 0.1)';
+defaults.global.elements.line.tension = 0.5;
 defaults.global.elements.line.borderWidth = 0;
+
+const globalTicksFontSize = 10
+
 
 function Chart(props) {
   function mToKm(m) {
@@ -17,82 +19,202 @@ function Chart(props) {
 
   let distanceStreamKm = _.map(props.distanceStream, mToKm)
 
-  const data = {
-    labels: distanceStreamKm,
-    datasets: [
-      {
-        label: 'Altitude',
-        fill: true,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        borderWidth: 0,
-        data: props.altitudeStream
-      }
-    ]
-  }
+  let options;
+  let data;
 
-  const options = {
-    title: {
-      text: 'Climb',
-      display: true
-    },
-    layout: {
-      padding: 0
-    },
-    responsive: true,
-    maintainAspectRatio: false,
-    legend: {
-      display: false,
-      usePointStyle: true,
-      position: 'bottom',
-      labels: {
-        boxWidth: 10,
-        padding: 20
-      }
-    },
-    tooltips: {
-      mode: 'index',
-      intersect: false,
-      displayColors: false,
-      xPadding: 10,
-      yPadding: 10
-    },
-    hover: {
-      mode: 'nearest',
-      intersect: true,
-      animationDuration: 1000
-    },
-    scales: {
-      xAxes: [{
-        type: 'category',
-        display: false,
-        ticks: {
-          autoSkipPadding: 100,
-          maxRotation: 0,
-          callback: function(value) {
-            return _.round(value, 0) + ' km'
-          }
-        },
-        stepSize: 10
-      }],
-      yAxes: [
+  if(props.dataType === 'heartrate'){
+    data = {
+      labels: distanceStreamKm,
+      datasets: [
         {
-          display: false,
-          id: 'altitude-y-axis',
-          position: 'left',
-          borderColor: 'rgba(0, 140, 255, 0.9)',
-          ticks: {stepSize: 50, autoSkipPadding: 100, callback: function(value) {return _.round(value, 0) + ' m'}}
+          label: props.dataTypeLegendLabel,
+          borderColor: 'rgba(255, 255, 255, 1)',
+          borderWidth: 1,
+          yAxisID: 'main-data-y-axis',
+          fill: false,
+          data: props.mainDataStream
         },{
+          label: 'Elevation',
+          fill: true,
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          borderWidth: 0,
+          data: props.altitudeStream
+        }
+      ]
+    };
+    options = {
+      layout: {
+        padding: 0
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+      legend: {
+        display: false,
+        usePointStyle: true,
+        position: 'bottom',
+        labels: {
+          boxWidth: 10,
+          padding: 20
+        }
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        displayColors: false,
+        xPadding: 10,
+        yPadding: 10
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true,
+        animationDuration: 1000
+      },
+      scales: {
+        xAxes: [{
+          type: 'category',
           display: false,
-          id: 'heartrate-y-axis',
-          position: 'right',
-          ticks: {stepSize: 20, autoSkipPadding: 100, callback: function(value) {return _.round(value, 0) + ' bpm'}}
+          ticks: {
+            fontSize: globalTicksFontSize,
+            autoSkipPadding: 100,
+            maxRotation: 0,
+            callback: function(value) {
+              return _.round(value, 0) + ' km'
+            }
+          },
+          stepSize: 10
+        }],
+        yAxes: [
+          {
+            display: false,
+            id: 'altitude-y-axis',
+            position: 'left',
+            borderColor: 'rgba(0, 140, 255, 0.9)',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              stepSize: 50,
+              autoSkipPadding: 100,
+              callback: function(value) {
+                return _.round(value, 0) + ' m'
+              }
+            }
+          },{
+            display: true,
+            id: 'main-data-y-axis',
+            position: 'right',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              fontColor: 'rgba(255,255,255,1)',
+              stepSize: 20,
+              autoSkipPadding: 100,
+              callback: function(value) {
+                return _.round(value, 0) + ' ' + props.dataTypeUnit
+              }
+            }
+          }
+        ]
+      }
+    }
+  } else if(props.dataType === 'velocity') {
+    data = {
+      labels: distanceStreamKm,
+      datasets: [
+        {
+          label: props.dataTypeLegendLabel,
+          borderColor: 'rgba(255, 255, 255, 1)',
+          borderWidth: 0,
+          pointRadius: 1,
+          pointBorderWidth: 1,
+          pointBackgroundColor: 'rgba(255, 255, 255, 1)',
+          showLine: false,
+          yAxisID: 'main-data-y-axis',
+          fill: false,
+          data: props.mainDataStream
+        },{
+          label: 'Elevation',
+          fill: true,
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          borderWidth: 0,
+          data: props.altitudeStream
         }
       ]
     }
+    options = {
+      layout: {
+        padding: 0
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+      legend: {
+        display: false,
+        usePointStyle: true,
+        position: 'bottom',
+        labels: {
+          boxWidth: 10,
+          padding: 20
+        }
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        displayColors: false,
+        xPadding: 10,
+        yPadding: 10
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true,
+        animationDuration: 1000
+      },
+      scales: {
+        xAxes: [{
+          type: 'category',
+          display: false,
+          ticks: {
+            fontSize: globalTicksFontSize,
+            autoSkipPadding: 100,
+            maxRotation: 0,
+            callback: function(value) {
+              return _.round(value, 0) + ' km'
+            }
+          },
+          stepSize: 10
+        }],
+        yAxes: [
+          {
+            display: false,
+            id: 'altitude-y-axis',
+            position: 'left',
+            borderColor: 'rgba(0, 140, 255, 0.9)',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              stepSize: 50,
+              autoSkipPadding: 100,
+              callback: function(value) {
+                return _.round(value, 0) + ' m'
+              }
+            }
+          },{
+            display: true,
+            id: 'main-data-y-axis',
+            position: 'right',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              fontColor: 'rgba(255,255,255,1)',
+              stepSize: 20,
+              autoSkipPadding: 100,
+              callback: function(value) {
+                return _.round(value, 0) + ' ' + props.dataTypeUnit
+              }
+            }
+          }
+        ]
+      }
+    }
   }
 
+
   return(
-    <Line data={data} options={options} height={40} redraw/>
+    <Line data={data} options={options} width={100} height={40}/>
   )
 }
 
