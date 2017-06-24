@@ -8,6 +8,7 @@ $gunsmoke: #7e898a;
 $alabaster: #FAFAFA;
 $red-orange: #F7392E;
 $persimmon: #F9674E;
+$royal-purple: #733d9d;
 
 $outer-space: #323940;
 $shark: #1F2428;
@@ -26,6 +27,9 @@ $colour-heartrate-alt: $persimmon;
 
 $colour-velocity-base: $outer-space;
 $colour-velocity-alt: lighten($colour-velocity-base, 4);
+
+$colour-cadence-base: $royal-purple;
+$colour-cadence-alt: lighten($colour-cadence-base, 4);
 
 // Interface Colour (Dark Theme)
 // $colour-text: $cape-cod;

@@ -59,7 +59,7 @@ class MapboxMap extends Component {
         },
         "paint": {
           "line-color": "#0a67f2",
-          "line-width": 2
+          "line-width": 1
         }
       });
 
@@ -125,6 +125,7 @@ class MapboxMap extends Component {
 
       map.addControl(new mapboxgl.NavigationControl())
       map.addControl(new mapboxgl.FullscreenControl());
+      map.scrollZoom.disable();
 
       // Create a popup, but don't add it to the map yet.
       let popup = new mapboxgl.Popup({closeButton: false, closeOnClick: false});

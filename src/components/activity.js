@@ -90,6 +90,7 @@ class Activity extends Component {
     let activityMovingTimeMinutes = activityMovingTime._data.minutes
     let activityMovingTimeSeconds = activityMovingTime._data.seconds
     let activityMovingTimeHHMMSS = activityMovingTimeHour + ':' + activityMovingTimeMinutes + ':' + activityMovingTimeSeconds
+    let activityHasHeartrate = this.props.data.has_heartrate
 
     return(
       <div className="c-activity">
@@ -102,6 +103,11 @@ class Activity extends Component {
             <ActivityStat label="duration" value={activityMovingTimeHHMMSS}/>
             <ActivityStat label="average speed" value={activityAverageSpeed} unit="km/h"/>
           </div>
+          <div className="o-flex o-flex-justify--end">
+            {this.props.data.has_heartrate && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--heartrate"> <div className="c-tooltip">has heartrate</div></div>}
+            {this.props.data.average_cadence && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--cadence"> <div className="c-tooltip">has cadence</div></div>}
+          </div>
+
         </div>
       </div>
     )

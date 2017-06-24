@@ -62,6 +62,7 @@ class Activities extends Component{
           }
         })
       } else {
+        console.log(json);
         this.setState({
           data: json,
           loading: false,

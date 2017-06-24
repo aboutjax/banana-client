@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import Login from '../views/login';
 
+let userIsLoggedIn = localStorage.getItem("access_token")
+
 class Nav extends Component {
 
   constructor(props) {
@@ -13,21 +15,25 @@ class Nav extends Component {
 
   componentWillMount() {
 
-    let userAccessToken = localStorage.getItem('access_token')
+    if(userIsLoggedIn) {
+      let userAccessToken = localStorage.getItem("access_token")
 
-    fetch('https://www.strava.com/api/v3/athlete', {
-      method: 'get',
-      headers: {
-        "content-type": "application/json",
-        "authorization": "Bearer " + userAccessToken
-      }
-    }).then(function(response){
-      return response.json();
-    }).then( json => {
-      this.setState({
-        data: json,
+      fetch('https://www.strava.com/api/v3/athlete', {
+        method: 'get',
+        headers: {
+          "content-type": "application/json",
+          "authorization": "Bearer " + userAccessToken
+        }
+      }).then(function(response){
+        return response.json();
+      }).then( json => {
+        this.setState({
+          data: json,
+        })
       })
-    })
+    } else {
+      // Do nothing
+    }
   }
 
   render() {
@@ -37,7 +43,7 @@ class Nav extends Component {
         <div className="c-navigation">
           <ul className="c-navigation__nav">
             <li className="c-navigation__nav-item">
-              <NavLink activeClassName="active" exact to="/">Home</NavLink>
+              <NavLink activeClassName="active" exact to="/">Activities</NavLink>
             </li>
           </ul>
           <NavigationProfile data={this.state.data}/>
@@ -45,7 +51,12 @@ class Nav extends Component {
       )
     } else {
       return (
-        <div className="c-login">
+        <div className="c-navigation">
+          <ul className="c-navigation__nav">
+            <li className="c-navigation__nav-item">
+              <NavLink activeClassName="active" exact to="/">Home</NavLink>
+            </li>
+          </ul>
           <Login/>
         </div>
       )

@@ -1,18 +1,21 @@
-import React, {Component} from 'react';
-import {Line} from 'react-chartjs-2'
+import React from 'react';
+import {Chart, Line, defaults} from 'react-chartjs-2'
 import _ from 'lodash';
-import { defaults } from 'react-chartjs-2';
 
 defaults.global.elements.point.borderWidth = 0;
 defaults.global.elements.point.radius = 0;
 defaults.global.elements.point.backgroundColor = 'rgba(0,0,0,0)';
 defaults.global.elements.line.tension = 0.5;
 defaults.global.elements.line.borderWidth = 0;
+defaults.global.defaultFontFamily = "'-apple-system','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
-const globalTicksFontSize = 10
+const globalTicksFontSize = 9
+const globalLineWidth = 0.7
+
+console.log(Chart.types.Line);
 
 
-function Chart(props) {
+function ActivityChart(props) {
   function mToKm(m) {
     return _.round(m / 1000, 2);
   }
@@ -29,7 +32,7 @@ function Chart(props) {
         {
           label: props.dataTypeLegendLabel,
           borderColor: 'rgba(255, 255, 255, 1)',
-          borderWidth: 1,
+          borderWidth: globalLineWidth,
           yAxisID: 'main-data-y-axis',
           fill: false,
           data: props.mainDataStream
@@ -38,6 +41,7 @@ function Chart(props) {
           fill: true,
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
           borderWidth: 0,
+          borderColor: 'rgba(0,0,0,0)',
           data: props.altitudeStream
         }
       ]
@@ -75,7 +79,7 @@ function Chart(props) {
           display: false,
           ticks: {
             fontSize: globalTicksFontSize,
-            autoSkipPadding: 100,
+            autoSkipPadding: 400,
             maxRotation: 0,
             callback: function(value) {
               return _.round(value, 0) + ' km'
@@ -92,7 +96,8 @@ function Chart(props) {
             ticks: {
               fontSize: globalTicksFontSize,
               stepSize: 50,
-              autoSkipPadding: 100,
+              autoSkip: true,
+              autoSkipPadding: 400,
               callback: function(value) {
                 return _.round(value, 0) + ' m'
               }
@@ -103,9 +108,9 @@ function Chart(props) {
             position: 'right',
             ticks: {
               fontSize: globalTicksFontSize,
-              fontColor: 'rgba(255,255,255,1)',
-              stepSize: 20,
-              autoSkipPadding: 100,
+              fontColor: 'rgba(255,255,255,0.5)',
+              autoSkip: true,
+              autoSkipPadding: 400,
               callback: function(value) {
                 return _.round(value, 0) + ' ' + props.dataTypeUnit
               }
@@ -114,18 +119,14 @@ function Chart(props) {
         ]
       }
     }
-  } else if(props.dataType === 'velocity') {
+  } else if (props.dataType === 'velocity') {
     data = {
       labels: distanceStreamKm,
       datasets: [
         {
           label: props.dataTypeLegendLabel,
           borderColor: 'rgba(255, 255, 255, 1)',
-          borderWidth: 0,
-          pointRadius: 1,
-          pointBorderWidth: 1,
-          pointBackgroundColor: 'rgba(255, 255, 255, 1)',
-          showLine: false,
+          borderWidth: globalLineWidth,
           yAxisID: 'main-data-y-axis',
           fill: false,
           data: props.mainDataStream
@@ -138,6 +139,7 @@ function Chart(props) {
         }
       ]
     }
+
     options = {
       layout: {
         padding: 0
@@ -171,7 +173,7 @@ function Chart(props) {
           display: false,
           ticks: {
             fontSize: globalTicksFontSize,
-            autoSkipPadding: 100,
+            autoSkipPadding: 400,
             maxRotation: 0,
             callback: function(value) {
               return _.round(value, 0) + ' km'
@@ -188,7 +190,8 @@ function Chart(props) {
             ticks: {
               fontSize: globalTicksFontSize,
               stepSize: 50,
-              autoSkipPadding: 100,
+              autoSkip: true,
+              autoSkipPadding: 400,
               callback: function(value) {
                 return _.round(value, 0) + ' m'
               }
@@ -199,9 +202,107 @@ function Chart(props) {
             position: 'right',
             ticks: {
               fontSize: globalTicksFontSize,
-              fontColor: 'rgba(255,255,255,1)',
-              stepSize: 20,
-              autoSkipPadding: 100,
+              fontColor: 'rgba(255,255,255,0.5)',
+              autoSkip: true,
+              autoSkipPadding: 400,
+              callback: function(value) {
+                return _.round(value, 0) + ' ' + props.dataTypeUnit
+              }
+            }
+          }
+        ]
+      }
+    }
+  } else if (props.dataType === 'cadence') {
+    data = {
+      labels: distanceStreamKm,
+      datasets: [
+        {
+          label: props.dataTypeLegendLabel,
+          borderColor: 'rgba(255, 255, 255, 1)',
+          borderWidth: 0,
+          pointRadius: 0.5,
+          pointBorderWidth: 1,
+          showLine: false,
+          pointBackgroundColor: 'rgba(255, 255, 255, 1)',
+          yAxisID: 'main-data-y-axis',
+          fill: false,
+          data: props.mainDataStream
+        },{
+          label: 'Elevation',
+          fill: true,
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          borderWidth: 0,
+          data: props.altitudeStream
+        }
+      ]
+    }
+
+    options = {
+      layout: {
+        padding: 0
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+      legend: {
+        display: false,
+        usePointStyle: true,
+        position: 'bottom',
+        labels: {
+          boxWidth: 10,
+          padding: 20
+        }
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        displayColors: false,
+        xPadding: 10,
+        yPadding: 10
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true,
+        animationDuration: 1000
+      },
+      scales: {
+        xAxes: [{
+          type: 'category',
+          display: false,
+          ticks: {
+            fontSize: globalTicksFontSize,
+            autoSkipPadding: 400,
+            maxRotation: 0,
+            callback: function(value) {
+              return _.round(value, 0) + ' km'
+            }
+          },
+          stepSize: 10
+        }],
+        yAxes: [
+          {
+            display: false,
+            id: 'altitude-y-axis',
+            position: 'left',
+            borderColor: 'rgba(0, 140, 255, 0.9)',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              stepSize: 50,
+              autoSkip: true,
+              autoSkipPadding: 400,
+              callback: function(value) {
+                return _.round(value, 0) + ' m'
+              }
+            }
+          },{
+            display: true,
+            id: 'main-data-y-axis',
+            position: 'right',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              fontColor: 'rgba(255,255,255,0.5)',
+              autoSkip: true,
+              autoSkipPadding: 400,
               callback: function(value) {
                 return _.round(value, 0) + ' ' + props.dataTypeUnit
               }
@@ -218,4 +319,4 @@ function Chart(props) {
   )
 }
 
-export default Chart
+export default ActivityChart

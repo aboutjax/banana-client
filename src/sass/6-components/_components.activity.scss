@@ -98,7 +98,7 @@
   text-transform: capitalize;
   font-size: 1.2rem;
   margin-bottom: $spacing-s;
-  color: $colour-supplementary;
+  color: transparentize($colour-text, 0.5);
 }
 
 .c-activity__stat-value {
@@ -163,6 +163,53 @@
     background-image: linear-gradient(0deg, $colour-velocity-base 0%, $colour-velocity-alt 100%);
 }
 
+.c-activity-graph--cadence {
+    background-image: linear-gradient(0deg, $colour-cadence-base 0%, $colour-cadence-alt 100%);
+}
+
 .c-activity-chart-container {
   height: 30rem;
+}
+
+.c-activity__has-chart-icon {
+  position: relative;
+  border-radius: 50%;
+  &:before {
+    display: block;
+    content: ' ';
+    width: 1rem;
+    height: 1rem;
+  }
+
+  & + & {
+    margin-left: $spacing;
+  }
+
+  .c-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    bottom: $spacing-l;
+    background: $colour-background;
+    font-size: 1.1rem;
+    padding: $spacing;
+    white-space: nowrap;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  @include hover {
+    .c-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.c-activity__has-chart-icon--cadence {
+  background-color: $colour-cadence-base
+}
+
+.c-activity__has-chart-icon--heartrate {
+  background-color: $colour-heartrate-base
 }
