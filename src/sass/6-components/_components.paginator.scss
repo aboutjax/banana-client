@@ -1,8 +1,9 @@
 .c-paginator {
   display: flex;
   width: 100%;
-  justify-content: flex-end;
+  justify-content: center;
   padding: $spacing-l 0;
+  margin-top: $spacing-xl;
 }
 
 .c-paginator__link {

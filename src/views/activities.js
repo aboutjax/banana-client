@@ -122,10 +122,10 @@ function Paginator(props) {
   return(
     <ul className="c-paginator">
       <li className="c-paginator__link">
-        <a className={ props.pager.currentPage === 1 ? 'disabled c-btn' : 'c-btn' } href={'/banana/activities/page/' + props.pager.previousPage}>Previous</a>
+        <a className={ props.pager.currentPage === 1 ? 'disabled c-btn c-btn--large' : 'c-btn c-btn--large' } href={'/banana/activities/page/' + props.pager.previousPage}>←</a>
       </li>
       <li className="c-paginator__link">
-        <a className={ props.pager.isLastPage ? 'disabled c-btn' : 'c-btn' } href={'/banana/activities/page/' + props.pager.nextPage}>Next</a>
+        <a className={ props.pager.isLastPage ? 'disabled c-btn c-btn--large' : 'c-btn c-btn--large' } href={'/banana/activities/page/' + props.pager.nextPage}>→</a>
       </li>
     </ul>
   )

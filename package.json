@@ -1,7 +1,7 @@
 {
   "name": "strava-react-client",
   "version": "0.1.0",
-  "homepage": "http://aboutjax.github.io/strava-dashboard/",
+  "homepage": "http://aboutjax.github.io/banana/",
   "private": true,
   "dependencies": {
     "@mapbox/polyline": "^0.2.0",
