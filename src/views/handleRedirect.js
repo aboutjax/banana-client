@@ -7,7 +7,6 @@ class HandleRedirect extends Component {
 
   componentWillMount(){
 
-    console.log('handleRedirect.js');
     // get token from url
     let setTokenFromUrl = () => {
       const search = location.search.substring(1)

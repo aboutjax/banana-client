@@ -12,8 +12,6 @@ defaults.global.defaultFontFamily = "'-apple-system','Helvetica Neue', 'Helvetic
 const globalTicksFontSize = 9
 const globalLineWidth = 0.7
 
-console.log(Chart.types.Line);
-
 
 function ActivityChart(props) {
   function mToKm(m) {

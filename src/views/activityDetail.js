@@ -59,7 +59,6 @@ class ActivityDetail extends Component {
     }).then(function(response) {
       return response.json();
     }).then(json => {
-      console.log(json);
       this.setState({
         data: json,
         gear: json.gear,
@@ -80,7 +79,6 @@ class ActivityDetail extends Component {
       }).then(function(response) {
         return response.json();
       }).then(json => {
-        console.log(json);
         function findDistance(array){
           return array.type === 'distance'
         }

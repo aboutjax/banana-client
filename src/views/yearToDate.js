@@ -28,12 +28,12 @@ class YearToDate extends Component {
     }).then(function(response){
       return response.json();
     }).then( json => {
-      console.log(json);
+
       this.setState({
         data: json
       })
     }).then( json => {
-      console.log(this.state.data.id);
+
       let totalsApiUrl = 'https://www.strava.com/api/v3/athletes/' +  this.state.data.id + '/stats';
       fetch(totalsApiUrl, {
         method: 'get',
@@ -44,7 +44,7 @@ class YearToDate extends Component {
       }).then(function(response){
         return response.json();
       }).then( json => {
-        console.log(json);
+
         this.setState({
           totals: json,
           ytdRideTotals: json.ytd_ride_totals,
