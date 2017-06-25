@@ -9,8 +9,8 @@ let latLngCircleSize = 20
 let latLngCircleOpacity = 0.5
 
 if(userIsLoggedIn) {
-  latLngCircleSize = 7
-  latLngCircleOpacity = 0.5
+  latLngCircleSize = 4
+  latLngCircleOpacity = 1
 } else {
   latLngCircleSize = 50
   latLngCircleOpacity = 0
@@ -124,7 +124,7 @@ class MapboxMap extends Component {
       map.fitBounds(bounds, {padding: 80});
 
       map.addControl(new mapboxgl.NavigationControl())
-      map.addControl(new mapboxgl.FullscreenControl());
+      // map.addControl(new mapboxgl.FullscreenControl());
       map.scrollZoom.disable();
 
       // Create a popup, but don't add it to the map yet.

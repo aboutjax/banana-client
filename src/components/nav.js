@@ -42,9 +42,13 @@ class Nav extends Component {
       return (
         <div className="c-navigation">
           <ul className="c-navigation__nav">
-            <li className="c-navigation__nav-item">
+            <NavLink activeClassName="active" exact to="/">
+              <h4 className="c-navigation__logo">🍌 banana</h4>
+            </NavLink>
+
+            {/* <li className="c-navigation__nav-item">
               <NavLink activeClassName="active" exact to="/">Activities</NavLink>
-            </li>
+            </li> */}
           </ul>
           <NavigationProfile data={this.state.data}/>
         </div>
@@ -52,11 +56,9 @@ class Nav extends Component {
     } else {
       return (
         <div className="c-navigation">
-          <ul className="c-navigation__nav">
-            <li className="c-navigation__nav-item">
-              <NavLink activeClassName="active" exact to="/">Home</NavLink>
-            </li>
-          </ul>
+          <NavLink activeClassName="active" exact to="/">
+            <h4 className="c-navigation__logo">🍌 banana</h4>
+          </NavLink>
           <Login/>
         </div>
       )

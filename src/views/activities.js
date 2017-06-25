@@ -123,10 +123,10 @@ function Paginator(props) {
   return(
     <ul className="c-paginator">
       <li className="c-paginator__link">
-        <a className={ props.pager.currentPage === 1 ? 'disabled c-btn' : 'c-btn' } href={'/strava-dashboard/activities/page/' + props.pager.previousPage}>Previous</a>
+        <a className={ props.pager.currentPage === 1 ? 'disabled c-btn' : 'c-btn' } href={'/banana/activities/page/' + props.pager.previousPage}>Previous</a>
       </li>
       <li className="c-paginator__link">
-        <a className={ props.pager.isLastPage ? 'disabled c-btn' : 'c-btn' } href={'/strava-dashboard/activities/page/' + props.pager.nextPage}>Next</a>
+        <a className={ props.pager.isLastPage ? 'disabled c-btn' : 'c-btn' } href={'/banana/activities/page/' + props.pager.nextPage}>Next</a>
       </li>
     </ul>
   )

@@ -7,6 +7,7 @@ import Activities from './views/activities';
 import Nav from './components/nav';
 import HandleRedirect from './views/handleRedirect';
 import ActivityDetail from './views/activityDetail';
+import Home from './views/home';
 
 let userIsLoggedIn = localStorage.getItem("access_token")
 
@@ -31,9 +32,11 @@ class App extends Component {
     } else {
       return(
         <div className="App o-wrapper o-app">
-          <Nav type="public"/>
+          {/* <Nav type="public"/> */}
 
           <div className='o-content'>
+            <Route path="/" exact component={Home} />
+            <Route path="/activities" exact component={Home}/>
             <Route path="/activities/:id" exact component={ActivityDetail}/>
             <Route path="/handle_redirect" exact component={HandleRedirect}/>
           </div>

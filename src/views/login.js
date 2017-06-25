@@ -11,7 +11,9 @@ class Login extends Component {
   render() {
 
     return(
-      <a className="c-btn c-btn--primary" href={authUrl}>Log In With Strava</a>
+      <a href={authUrl}>
+        <img src="/img/btn_strava_connectwith_orange.svg"/>
+      </a>
     )
   }
 }

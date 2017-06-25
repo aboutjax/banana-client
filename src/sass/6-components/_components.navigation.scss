@@ -1,5 +1,6 @@
 .c-navigation {
   padding: $spacing-l $spacing-xl;
+  height: 5rem;
   grid-column-start: 1;
   grid-column-end: 5;
   display: flex;
@@ -12,6 +13,7 @@
 .c-navigation__nav {
   margin-top: 0;
   display: flex;
+  align-items: baseline;
 }
 
 .c-navigation__nav-item {
@@ -87,4 +89,12 @@
   font-size: 1.3rem;
   margin: 0;
   opacity: 0.5;
+}
+
+.c-navigation__logo {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-right: $spacing-xl;
 }

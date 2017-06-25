@@ -6,6 +6,7 @@ import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
 import MapboxMap from '../components/mapbox'
+import { NavLink } from 'react-router-dom';
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -227,7 +228,9 @@ class ActivityDetail extends Component {
                 <ActivityStat type="large" label="calories" value={activityTotalCalories}/>
                  : null}
             </div>
-            <MapboxMap mapPolyline={this.state.map.polyline || this.state.map.summary_polyline} startLatlng={this.state.data.start_latlng} endLatlng={this.state.data.end_latlng}/>
+            {this.state.map.summary_polyline &&
+              <MapboxMap mapPolyline={this.state.map.polyline || this.state.map.summary_polyline} startLatlng={this.state.data.start_latlng} endLatlng={this.state.data.end_latlng}/>
+            }
             {/* <div className="c-activity-summary c-activity-summary--average">
               <h3 className="c-activity-summary-header">activity average</h3>
               <div className="o-flex o-flex-justify--start">
