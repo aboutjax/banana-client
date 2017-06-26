@@ -15,7 +15,7 @@ class Login extends Component {
 
     return(
       <a href={authUrl}>
-        <img src={ assetSrc + "/img/btn_strava_connectwith_orange.svg"}/>
+        <img alt="" src={ assetSrc + "/img/btn_strava_connectwith_orange.svg"}/>
       </a>
     )
   }

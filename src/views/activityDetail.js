@@ -6,7 +6,6 @@ import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
 import MapboxMap from '../components/mapbox'
-import { NavLink } from 'react-router-dom';
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -22,7 +21,6 @@ let activityMaxSpeed;
 let activityAverageCadence;
 let activityAverageHeartRate;
 let activityMaxHeartRate;
-let activityAverageWatts;
 let publicAccessToken = '454c1086525feaed3b71c507b939a99920ff792f'
 
 let userIsLoggedIn = localStorage.getItem("access_token")
@@ -190,9 +188,6 @@ class ActivityDetail extends Component {
     // Heart Rate
     activityAverageHeartRate = this.state.data.average_heartrate
     activityMaxHeartRate = this.state.data.max_heartrate
-
-    // Power
-    activityAverageWatts = this.state.data.average_watts
 
     if (this.state.loading) {
       return (

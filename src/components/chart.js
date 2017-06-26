@@ -1,5 +1,5 @@
 import React from 'react';
-import {Chart, Line, defaults} from 'react-chartjs-2'
+import {Line, defaults} from 'react-chartjs-2'
 import _ from 'lodash';
 
 defaults.global.elements.point.borderWidth = 0;

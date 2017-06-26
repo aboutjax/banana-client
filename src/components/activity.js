@@ -90,7 +90,6 @@ class Activity extends Component {
     let activityMovingTimeMinutes = activityMovingTime._data.minutes
     let activityMovingTimeSeconds = activityMovingTime._data.seconds
     let activityMovingTimeHHMMSS = activityMovingTimeHour + ':' + activityMovingTimeMinutes + ':' + activityMovingTimeSeconds
-    let activityHasHeartrate = this.props.data.has_heartrate
 
     return(
       <div className="c-activity">

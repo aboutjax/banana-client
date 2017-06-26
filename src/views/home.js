@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import LoadingSpinner from '../components/loader'
 import Login from '../views/login';
 
 let assetSrc = ''
@@ -26,7 +25,7 @@ function Homepage() {
           </div>
         </div>
         <div className="c-homepage__hero-image">
-          <img className="c-homepage__hero-image__image" src={ assetSrc + "/img/hero_image.png"}/>
+          <img className="c-homepage__hero-image__image" alt="" src={ assetSrc + "/img/hero_image-min.png"}/>
         </div>
 
     </div>
