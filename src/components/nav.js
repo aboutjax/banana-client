@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import Login from '../views/login';
+import {getCookie, deleteCookie} from '../components/cookieHelper'
 
-let userIsLoggedIn = localStorage.getItem("access_token")
+let userIsLoggedIn = getCookie('access_token')
 
 class Nav extends Component {
 
@@ -16,7 +17,7 @@ class Nav extends Component {
   componentWillMount() {
 
     if(userIsLoggedIn) {
-      let userAccessToken = localStorage.getItem("access_token")
+      let userAccessToken = getCookie('access_token')
 
       fetch('https://www.strava.com/api/v3/athlete', {
         method: 'get',
@@ -79,8 +80,8 @@ class NavigationProfile extends Component {
 
 
   logout = () => {
-    localStorage.removeItem('access_token')
-    window.location.reload()
+    deleteCookie('access_token');
+    window.location.assign('/banana');
   }
 
   showDropdown = () => {

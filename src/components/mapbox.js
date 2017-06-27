@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import mapboxgl from 'mapbox-gl';
 import polyline from '@mapbox/polyline'
+import {getCookie} from '../components/cookieHelper'
 
-let userIsLoggedIn = localStorage.getItem("access_token")
+let userIsLoggedIn = getCookie('access_token');
 
 
 let latLngCircleSize = 20

@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Activity from '../components/activity';
 import { CSSTransitionGroup } from 'react-transition-group';
 import LoadingSpinner from '../components/loader';
+import {getCookie} from '../components/cookieHelper'
 
 const activitiesPerPage = 30;
 
@@ -24,7 +25,7 @@ class Activities extends Component{
   }
 
   fetchData = () => {
-    let userAccessToken = localStorage.getItem('access_token')
+    let userAccessToken = getCookie('access_token');
     let page = this.props.match.params.page || 1
     let activitiesFetchUrl = 'https://www.strava.com/api/v3/athlete/activities?page='+ page
 

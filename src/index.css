@@ -549,7 +549,8 @@ img {
   max-width: 960px;
   min-height: 90vh;
   display: grid;
-  grid-template-columns: 1fr; }
+  grid-template-columns: 1fr;
+  grid-template-rows: 6rem auto 6rem; }
 
 .o-spacing--bottom {
   margin-bottom: 2rem; }
@@ -651,10 +652,13 @@ img {
   transform: scale(1.2); }
 
 .o-activity-detail-header {
-  margin-bottom: 3rem; }
+  text-align: center;
+  margin-top: 10rem;
+  margin-bottom: 10rem; }
 
 .o-activity-detail-name {
-  font-size: 2.4rem;
+  font-size: 3.6rem;
+  font-weight: 800;
   margin-bottom: 1rem; }
 
 .o-activity-detail__summary {
@@ -1166,7 +1170,7 @@ img {
     .c-homepage__hero-image__image {
       -webkit-transform: rotateZ(-20deg) scale(0.6) translateY(-110%) translateX(-20%);
       transform: rotateZ(-20deg) scale(0.6) translateY(-110%) translateX(-20%);
-      opacity: 0.4; } }
+      opacity: 0.2; } }
 
 .c-homepage__hero-header {
   font-size: 7rem;

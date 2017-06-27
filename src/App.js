@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './index.css';
-import { Route } from 'react-router-dom';
+import {Route} from 'react-router-dom';
+import {getCookie} from './components/cookieHelper'
 
 // Views
 import Activities from './views/activities';
@@ -10,7 +11,13 @@ import ActivityDetail from './views/activityDetail';
 import Home from './views/home';
 import Footer from './components/footer';
 
-let userIsLoggedIn = localStorage.getItem("access_token")
+let userIsLoggedIn;
+let access_token = getCookie('access_token');
+if(access_token) {
+  userIsLoggedIn = true
+} else {
+  userIsLoggedIn = false
+}
 
 class App extends Component {
 
@@ -38,7 +45,7 @@ class App extends Component {
     } else {
       return(
         <div className="App o-wrapper o-app">
-          {/* <Nav type="public"/> */}
+          <div></div>
 
           <div className='o-content'>
             <Route path="/" exact component={Home} />

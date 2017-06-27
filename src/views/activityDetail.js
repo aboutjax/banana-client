@@ -6,6 +6,7 @@ import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
 import MapboxMap from '../components/mapbox'
+import {getCookie} from '../components/cookieHelper'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -23,7 +24,7 @@ let activityAverageHeartRate;
 let activityMaxHeartRate;
 let publicAccessToken = '454c1086525feaed3b71c507b939a99920ff792f'
 
-let userIsLoggedIn = localStorage.getItem("access_token")
+let userIsLoggedIn = getCookie('access_token');
 
 class ActivityDetail extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class ActivityDetail extends Component {
   }
 
   componentDidMount() {
-    let userAccessToken = localStorage.getItem('access_token') || publicAccessToken
+    let userAccessToken = getCookie('access_token') || publicAccessToken
     let thisActivityApiUrl = 'https://www.strava.com/api/v3/activities/' + this.props.match.params.id;
 
     let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/altitude,heartrate,latlng,cadence,velocity_smooth?resolution=medium'
