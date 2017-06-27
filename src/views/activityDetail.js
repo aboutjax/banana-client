@@ -201,7 +201,7 @@ class ActivityDetail extends Component {
         <div className="o-activity-detail">
           <div className="o-activity-detail-header">
             <h3 className="o-activity-detail-name">{this.state.data.name}</h3>
-            <span className='c-activity__time'>
+            <span className='o-activity-detail-time'>
               <Moment format="MMM DD, YYYY">{this.state.data.start_date}</Moment>
                <span> • </span>
               <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
