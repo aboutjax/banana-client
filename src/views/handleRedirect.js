@@ -20,7 +20,7 @@ class HandleRedirect extends Component {
     // get token from url
     setTokenFromUrl();
     window.location.reload()
-    window.location.assign("/")
+    window.location.assign("/banana")
 
   }
 

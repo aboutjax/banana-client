@@ -250,11 +250,13 @@ class ActivityDetail extends Component {
               activityAverageSpeed ?
                 <div className="c-activity-graph c-activity-graph--velocity t-top-spacing--l">
                   <div className="c-activity-graph-container">
-                    <h3 className="t-bottom-spacing--xl">Speed
-                      { this.state.velocityStream ?
-                      <span className="c-activity-graph__header--supplementary "> & Elevation</span>
-                      : null }
-                    </h3>
+                    { this.state.velocityStream && this.state.altitudeStream ?
+                      <h3 className="t-bottom-spacing--xl">Speed
+                        <span className="c-activity-graph__header--supplementary "> & Elevation</span>
+                      </h3>
+                      :
+                      <h3 className="t-bottom-spacing--xl">Speed</h3>
+                    }
                     <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
                       <ActivityStat type="large" label="average" value={activityAverageSpeed} unit="km"/>
                       <ActivityStat type="large" label="max" value={activityMaxSpeed} unit="km"/>
@@ -280,16 +282,18 @@ class ActivityDetail extends Component {
               activityAverageHeartRate ?
                 <div className="c-activity-graph c-activity-graph--heartrate t-top-spacing--l">
                   <div className="c-activity-graph-container">
-                    <h3 className="t-bottom-spacing--xl">Heart Rate
-                      { this.state.velocityStream ?
+                    { this.state.heartrateStream && this.state.altitudeStream ?
+                      <h3 className="t-bottom-spacing--xl">Heart Rate
                         <span className="c-activity-graph__header--supplementary "> & Elevation</span>
-                      : null }
-                    </h3>
+                      </h3>
+                      :
+                      <h3 className="t-bottom-spacing--xl">Heart Rate</h3>
+                    }
                     <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
                       <ActivityStat type="large" label="average" value={activityAverageHeartRate} unit="bpm"/>
                       <ActivityStat type="large" label="max" value={activityMaxHeartRate} unit="bpm"/>
                     </div>
-                    { this.state.velocityStream ?
+                    { this.state.heartrateStream ?
                     <ActivityChart
                       altitudeStream={this.state.altitudeStream}
                       distanceStream={this.state.distanceStream}
@@ -309,11 +313,13 @@ class ActivityDetail extends Component {
               activityAverageCadence ?
                 <div className="c-activity-graph c-activity-graph--cadence t-top-spacing--l">
                   <div className="c-activity-graph-container">
-                    <h3 className="t-bottom-spacing--xl">Cadence
-                      { this.state.cadenceStream ?
+                    { this.state.cadenceStream && this.state.altitudeStream ?
+                      <h3 className="t-bottom-spacing--xl">Cadence
                         <span className="c-activity-graph__header--supplementary "> & Elevation</span>
-                      : null }
-                    </h3>
+                      </h3>
+                      :
+                      <h3 className="t-bottom-spacing--xl">Cadence</h3>
+                    }
                     <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
                       <ActivityStat type="large" label="average" value={activityAverageCadence} unit="rpm"/>
                     </div>

@@ -80,7 +80,7 @@ function ActivityChart(props) {
             autoSkipPadding: 400,
             maxRotation: 0,
             callback: function(value) {
-              return _.round(value, 0) + ' km'
+              return _.round(value, 1) + ' km'
             }
           },
           stepSize: 10
@@ -174,7 +174,7 @@ function ActivityChart(props) {
             autoSkipPadding: 400,
             maxRotation: 0,
             callback: function(value) {
-              return _.round(value, 0) + ' km'
+              return _.round(value, 1) + ' km'
             }
           },
           stepSize: 10
@@ -272,7 +272,7 @@ function ActivityChart(props) {
             autoSkipPadding: 400,
             maxRotation: 0,
             callback: function(value) {
-              return _.round(value, 0) + ' km'
+              return _.round(value, 1) + ' km'
             }
           },
           stepSize: 10
