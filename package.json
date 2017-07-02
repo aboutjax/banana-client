@@ -33,7 +33,7 @@
     "babel-cli": "^6.24.1",
     "babel-plugin-lodash": "^3.2.11",
     "babel-preset-env": "^1.4.0",
-    "react-scripts": "0.9.5"
+    "react-scripts": "1.0.0"
   },
   "scripts": {
     "start": "PORT=5000 react-scripts start",

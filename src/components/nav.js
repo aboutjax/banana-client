@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import Login from '../views/login';
 import {getCookie, deleteCookie} from '../components/cookieHelper'
@@ -107,6 +108,14 @@ class NavigationProfile extends Component {
     )
 
   }
+}
+
+NavigationProfile.propTypes = {
+  data: PropTypes.object
+}
+
+Nav.propTypes = {
+  type: PropTypes.string
 }
 
 export default Nav;
