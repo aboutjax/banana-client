@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './index.css';
 import {Route} from 'react-router-dom';
-import {getCookie} from './components/cookieHelper'
+import fire from './components/firebase'
 
 // Views
 import Activities from './views/activities';
@@ -11,18 +11,27 @@ import ActivityDetail from './views/activityDetail';
 import Home from './views/home';
 import Footer from './components/footer';
 
-let userIsLoggedIn;
-let access_token = getCookie('access_token');
-if(access_token) {
-  userIsLoggedIn = true
-} else {
-  userIsLoggedIn = false
-}
-
 class App extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false
+    }
+  }
+
+  componentDidMount() {
+    fire.auth().onAuthStateChanged(user => {
+      if(user) {
+        this.setState({ loggedIn: true })
+      } else {
+        this.setState({ loggedIn: false })
+      }
+    })
+  }
+
   render(){
-    if(userIsLoggedIn) {
+    if(this.state.loggedIn) {
       return(
 
           <div className="App o-wrapper o-app">

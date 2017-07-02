@@ -7,6 +7,7 @@ import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
 import MapboxMap from '../components/mapbox'
 import {getCookie} from '../components/cookieHelper'
+import {checkAuth} from '../components/firebase'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -22,9 +23,7 @@ let activityMaxSpeed;
 let activityAverageCadence;
 let activityAverageHeartRate;
 let activityMaxHeartRate;
-let publicAccessToken = '454c1086525feaed3b71c507b939a99920ff792f'
-
-let userIsLoggedIn = getCookie('access_token');
+let publicAccessToken = '011c89ee01402ab591de0240d59ee84455fd4d42'
 
 class ActivityDetail extends Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class ActivityDetail extends Component {
       gear: [],
       athlete: {},
       map: {},
-      loading: false,
+      loading: true,
       chartData: {}
     }
   }
@@ -66,9 +65,10 @@ class ActivityDetail extends Component {
         loading: false
       })
 
-    })
+    }).catch(error => {console.log(error);})
 
-    if(userIsLoggedIn){
+    if(checkAuth){
+      console.log('logged in');
       fetch(thisActivityStreamApiUrl, {
         method: 'get',
         headers: {

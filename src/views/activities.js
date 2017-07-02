@@ -86,7 +86,8 @@ class Activities extends Component{
   }
 
   render(){
-    const activities = this.state.data.map((activity, index) => (
+    const actvitiesData = this.state.data
+    const activities = actvitiesData.map((activity, index) => (
       <Activity key={index} data={activity} mapDimension='400x400'/>
     ))
 

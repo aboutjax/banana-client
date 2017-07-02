@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import mapboxgl from 'mapbox-gl';
 import polyline from '@mapbox/polyline'
-import {getCookie} from '../components/cookieHelper'
-
-let userIsLoggedIn = getCookie('access_token');
-
+import {checkAuth} from '../components/firebase'
 
 let latLngCircleSize = 20
 let latLngCircleOpacity = 0.5
 
-if(userIsLoggedIn) {
+if(checkAuth) {
   latLngCircleSize = 4
   latLngCircleOpacity = 1
 } else {
