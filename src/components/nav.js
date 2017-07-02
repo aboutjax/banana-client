@@ -44,7 +44,7 @@ class Nav extends Component {
         <div className="c-navigation">
           <ul className="c-navigation__nav">
             <NavLink activeClassName="active" exact to="/">
-              <h4 className="c-navigation__logo">🍌 banana</h4>
+              <h4 className="c-navigation__logo"><span aria-label="banana"  role="img">🍌</span> banana</h4>
             </NavLink>
 
             {/* <li className="c-navigation__nav-item">
@@ -58,7 +58,7 @@ class Nav extends Component {
       return (
         <div className="c-navigation">
           <NavLink activeClassName="active" exact to="/">
-            <h4 className="c-navigation__logo">🍌 banana</h4>
+            <h4 className="c-navigation__logo"><span aria-label="banana"  role="img">🍌</span> banana</h4>
           </NavLink>
           <Login/>
         </div>
@@ -93,7 +93,7 @@ class NavigationProfile extends Component {
   render() {
     return (
       <div className="c-navigation__profile">
-        <a href="#" onClick={this.showDropdown}>
+        <a onClick={this.showDropdown}>
           <img className="c-navigation__profile-image" src={this.props.data.profile} alt=''/>
         </a>
           <ul className={this.state.showDropdown ? 'show c-navigation__dropdown' : 'c-navigation__dropdown'}>
@@ -101,7 +101,7 @@ class NavigationProfile extends Component {
               <h3 className="c-navigation__dropdown-name">{this.props.data.firstname} {this.props.data.lastname}</h3>
               <h3 className="c-navigation__dropdown-location">{this.props.data.country}, {this.props.data.city}</h3>
             </li>
-            <a href="#" onClick={this.logout}><li className="c-navigation__dropdown-link">Log Out</li></a>
+            <a onClick={this.logout}><li className="c-navigation__dropdown-link">Log Out</li></a>
           </ul>
       </div>
     )

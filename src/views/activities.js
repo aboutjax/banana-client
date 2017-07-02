@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import Activity from '../components/activity';
 import { CSSTransitionGroup } from 'react-transition-group';
 import LoadingSpinner from '../components/loader';

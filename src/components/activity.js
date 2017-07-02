@@ -114,5 +114,4 @@ class Activity extends Component {
 }
 
 export default Activity
-exports.ActivityMap = ActivityMap
-exports.ActivityStat = ActivityStat
+export {ActivityMap, ActivityStat}

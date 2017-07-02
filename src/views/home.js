@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import Login from '../views/login';
 
 let assetSrc = ''
@@ -16,7 +15,7 @@ function Homepage() {
 
         <div className="c-homepage__hero-message">
           <div>
-            <h1 className="c-homepage__hero-header">🍌</h1>
+            <h1 className="c-homepage__hero-header"><span aria-label="banana"  role="img">🍌</span></h1>
             <h1 className="c-homepage__hero-header">
               <span className="c-homepage__logo__emoji">banana</span>
             </h1>

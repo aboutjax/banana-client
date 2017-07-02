@@ -5,7 +5,7 @@ import {setCookie} from '../components/cookieHelper'
 let userAccessToken;
 
 let setTokenFromUrl = () => {
-  const search = location.search.substring(1)
+  const search = window.location.search.substring(1)
   const query = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
 
   userAccessToken = query.access_token
