@@ -11,4 +11,15 @@ const config = {
 
 const fire = firebase.initializeApp(config);
 
+const checkAuth = () => {
+  firebase.auth().onAuthStateChanged(user => {
+    if(user) {
+      return true
+    } else {
+      return false
+    }
+  })
+}
+
 export default fire;
+export {checkAuth}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import Login from '../views/login';
 import {getCookie, deleteCookie} from '../components/cookieHelper'
-import fire from './firebase'
+import fire, {checkAuth} from './firebase'
 
 class Nav extends Component {
 
@@ -17,7 +17,7 @@ class Nav extends Component {
   componentDidMount() {
 
 
-    if(fire.auth().currentUser) {
+    if(checkAuth) {
       let userAccessToken = getCookie('access_token')
 
       fetch('https://www.strava.com/api/v3/athlete', {
