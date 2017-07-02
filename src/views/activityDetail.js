@@ -68,7 +68,6 @@ class ActivityDetail extends Component {
     }).catch(error => {console.log(error);})
 
     if(checkAuth){
-      console.log('logged in');
       fetch(thisActivityStreamApiUrl, {
         method: 'get',
         headers: {
