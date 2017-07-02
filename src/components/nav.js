@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
 import Login from '../views/login';
 import {getCookie, deleteCookie} from '../components/cookieHelper'
-
-let userIsLoggedIn = getCookie('access_token')
+import fire from './firebase'
 
 class Nav extends Component {
 
@@ -15,9 +14,10 @@ class Nav extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
 
-    if(userIsLoggedIn) {
+
+    if(fire.auth().currentUser) {
       let userAccessToken = getCookie('access_token')
 
       fetch('https://www.strava.com/api/v3/athlete', {
@@ -47,10 +47,6 @@ class Nav extends Component {
             <NavLink activeClassName="active" exact to="/">
               <h4 className="c-navigation__logo"><span aria-label="banana"  role="img">🍌</span> banana</h4>
             </NavLink>
-
-            {/* <li className="c-navigation__nav-item">
-              <NavLink activeClassName="active" exact to="/">Activities</NavLink>
-            </li> */}
           </ul>
           <NavigationProfile data={this.state.data}/>
         </div>
@@ -82,7 +78,12 @@ class NavigationProfile extends Component {
 
   logout = () => {
     deleteCookie('access_token');
-    window.location.assign('/banana');
+    fire.auth().signOut().then(function() {
+      // Sign-out successful.
+      window.location.assign('/banana');
+    }).catch(function(error) {
+      // An error happened.
+    });
   }
 
   showDropdown = () => {
