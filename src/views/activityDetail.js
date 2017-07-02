@@ -7,7 +7,7 @@ import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
 import MapboxMap from '../components/mapbox'
 import {getCookie} from '../components/cookieHelper'
-import fire, {checkAuth} from '../components/firebase'
+import {checkAuth} from '../components/firebase'
 
 let activityDistance;
 let activityTotalElevationGain;
