@@ -4,15 +4,6 @@ import Activity from '../components/activity';
 import fire from '../components/firebase'
 import LoadingSpinner from '../components/loader';
 import { CSSTransitionGroup } from 'react-transition-group';
-import {IconBookmarkSolid,IconCheckLine} from '../components/icons/icons'
-
-let assetSrc = ''
-
-if(process.env.NODE_ENV === 'development'){
-  assetSrc = '';
-} else {
-  assetSrc = '/banana';
-}
 
 class FavouriteActivities extends Component {
   constructor(){
@@ -93,37 +84,6 @@ function EmptyFavourites() {
       {/* <img src={ assetSrc + "/img/how_to_favourite.png"} /> */}
     </div>
   )
-}
-
-class EmptyFavouritesAnimation extends Component {
-
-  constructor(){
-    super()
-    this.state = {
-      isFavourite: false,
-    }
-  }
-
-  selfToggleState = () => {
-    setInterval(
-      () => {
-        this.setState({ isFavourite: !this.state.isFavourite})
-      }, 500
-    );
-  }
-
-  componentDidMount() {
-    this.selfToggleState();
-  }
-
-  render() {
-    return(
-      <div className="c-animation-empty-favourites">
-        <button className={this.state.isFavourite ? "c-btn c-btn--favourite" : "c-btn c-btn--favourite is-favourite"}><IconBookmarkSolid className="c-icon"/> <span>{this.state.isFavourite ? "Favourite" : 'Favourited'}</span></button>
-      </div>
-    )
-  }
-
 }
 
 export default FavouriteActivities

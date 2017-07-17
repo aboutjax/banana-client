@@ -282,7 +282,7 @@ class ActivityDetail extends Component {
                <span> • </span>
               <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
               <span> • </span>
-              <a className="c-link" href={"https://strava.com/activities/" + this.state.data.id}>View on Strava</a>
+              <a target="_blank" className="c-link" href={"https://strava.com/activities/" + this.state.data.id}>View on Strava</a>
             </span>
             <div className="t-top-spacing--l">
               {this.state.isFavourite
