@@ -11,15 +11,18 @@ const config = {
 
 const fire = firebase.initializeApp(config);
 
-const checkAuth = () => {
-  firebase.auth().onAuthStateChanged(user => {
-    if(user) {
-      return true
-    } else {
-      return false
-    }
-  })
-}
+const getUserStatus = () => {
+
+  return new Promise( (resolve, reject) => {
+    fire.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        resolve(user.uid);
+      } else {
+        reject(Error('It broke'));
+      }
+    });
+  });
+};
 
 export default fire;
-export {checkAuth}
+export {getUserStatus}

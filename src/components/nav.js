@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import Login from '../views/login';
 import {getCookie, deleteCookie} from '../components/cookieHelper'
-import fire, {checkAuth} from './firebase'
+import fire from './firebase'
+import {IconBookmarkSolid} from '../components/icons/icons'
 
 class Nav extends Component {
 
@@ -16,8 +17,7 @@ class Nav extends Component {
 
   componentDidMount() {
 
-
-    if(checkAuth) {
+    if(this.props.authState) {
       let userAccessToken = getCookie('access_token')
 
       fetch('https://www.strava.com/api/v3/athlete', {
@@ -34,7 +34,7 @@ class Nav extends Component {
         })
       })
     } else {
-      // Do nothing
+      // do nothing
     }
   }
 
@@ -43,10 +43,19 @@ class Nav extends Component {
     if(this.props.type === 'private') {
       return (
         <div className="c-navigation">
-          <ul className="c-navigation__nav">
-            <NavLink activeClassName="active" exact to="/">
+          <ul className="c-navigation__nav o-flex o-flex-justify--space-between">
+            <Link activeClassName="test" to="/">
               <h4 className="c-navigation__logo"><span aria-label="banana"  role="img">🍌</span> banana</h4>
-            </NavLink>
+            </Link>
+            <div className="o-flex">
+              {/* <NavLink className="c-navigation__nav-item" activeClassName="active" exact to="/myyear">
+                <IconProgress/>
+              </NavLink> */}
+              <NavLink className="c-navigation__nav-item" activeClassName="active" exact to="/favourites">
+                <IconBookmarkSolid />
+                <div className="c-tooltip">Favourites</div>
+              </NavLink>
+            </div>
           </ul>
           <NavigationProfile data={this.state.data}/>
         </div>

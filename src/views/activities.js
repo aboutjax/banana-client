@@ -3,6 +3,9 @@ import Activity from '../components/activity';
 import { CSSTransitionGroup } from 'react-transition-group';
 import LoadingSpinner from '../components/loader';
 import {getCookie} from '../components/cookieHelper'
+import fire from '../components/firebase'
+import _ from 'lodash';
+import {IconArrowRight, IconArrowLeft} from '../components/icons/icons'
 
 const activitiesPerPage = 30;
 
@@ -13,7 +16,8 @@ class Activities extends Component{
     this.state = {
       data: [],
       pager: {},
-      loading: false
+      loading: true,
+      userUid: props.userUid
     }
   }
 
@@ -23,7 +27,16 @@ class Activities extends Component{
     })
   }
 
+
+  // Check favourites state from Firebase
+  checkFavouriteStatus = () => {
+
+
+
+  }
+
   fetchData = () => {
+
     let userAccessToken = getCookie('access_token');
     let page = this.props.match.params.page || 1
     let activitiesFetchUrl = 'https://www.strava.com/api/v3/athlete/activities?page='+ page
@@ -77,19 +90,45 @@ class Activities extends Component{
     })
   }
 
-  componentDidMount() {
-    this.fetchData()
+  componentWillReceiveProps() {
+
+
+    let favouritesList = []
+    let favouritesRef = fire.database().ref('users/' + this.state.userUid + '/favourites');
+
+    favouritesRef.once('value', snapshot => {
+      snapshot.forEach(child => {
+        let favouriteActivityId = child.child('activityId').val()
+        favouritesList.push(favouriteActivityId)
+      })
+
+      this.setState({
+        loading: false,
+        favouritesList: favouritesList
+      })
+    })
+
   }
 
-  componentWillReceiveProps() {
+  componentDidMount() {
     this.fetchData()
+
+
   }
 
   render(){
-    const actvitiesData = this.state.data
-    const activities = actvitiesData.map((activity, index) => (
-      <Activity key={index} data={activity} mapDimension='400x400'/>
-    ))
+    const activitiesData = this.state.data;
+    const activities = activitiesData.map((activity, index) => {
+      let isFavourite;
+
+        if(this.state.favouritesList) {
+          isFavourite = _.includes(this.state.favouritesList, String(activity.id))
+        }
+
+        return(
+            <Activity favourite={isFavourite} key={index} data={activity} mapDimension='400x400'/>
+        )
+    })
 
     if(this.state.loading){
       return(
@@ -103,6 +142,9 @@ class Activities extends Component{
       return (
         <div>
           <div>
+            <div className="c-page-header">
+              <h1>All Activities</h1>
+            </div>
             <CSSTransitionGroup
               transitionName="o-transition"
               transitionAppear={true}
@@ -122,11 +164,11 @@ class Activities extends Component{
 function Paginator(props) {
   return(
     <ul className="c-paginator">
-      <li className="c-paginator__link">
-        <a className={ props.pager.currentPage === 1 ? 'disabled c-btn c-btn--large' : 'c-btn c-btn--large' } href={'/banana/activities/page/' + props.pager.previousPage}>←</a>
+      <li className="c-paginator__link t-right-spacing--xs">
+        <a className={ props.pager.currentPage === 1 ? 'disabled c-btn' : 'c-btn' } href={'/banana/activities/page/' + props.pager.previousPage}><IconArrowLeft/></a>
       </li>
-      <li className="c-paginator__link">
-        <a className={ props.pager.isLastPage ? 'disabled c-btn c-btn--large' : 'c-btn c-btn--large' } href={'/banana/activities/page/' + props.pager.nextPage}>→</a>
+      <li className="c-paginator__link t-left-spacing--xs">
+        <a className={ props.pager.isLastPage ? 'disabled c-btn' : 'c-btn' } href={'/banana/activities/page/' + props.pager.nextPage}><IconArrowRight/></a>
       </li>
     </ul>
   )

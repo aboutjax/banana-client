@@ -13,7 +13,7 @@ function Footer() {
     <footer className="c-footer">
 
         <img alt="" className="c-footer__power-by-strava" src={ assetSrc + "/img/api_logo_pwrdBy_strava_horiz_white.svg"}/>
-        <span>
+        <span className="c-footer__credits">
           Made with <span aria-label="coffee"  role="img">☕️</span> by <a className="c-link" href="https://jackylee.co">Jacky Lee</a>
         </span>
 

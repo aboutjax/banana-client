@@ -82,6 +82,9 @@
 .t-right-spacing--xxs {
   margin-right: 0.25rem !important; }
 
+.t-opacity--half {
+  opacity: 0.5; }
+
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -543,6 +546,9 @@ button {
   button:focus {
     outline: 0; }
 
+svg {
+  fill: currentColor; }
+
 .o-content {
   padding: 3rem;
   height: 100%;
@@ -659,11 +665,6 @@ button {
   -webkit-transform: scale(1.2);
   transform: scale(1.2); }
 
-.o-activity-detail-header {
-  text-align: center;
-  margin-top: 10rem;
-  margin-bottom: 10rem; }
-
 .o-activity-detail-name {
   font-size: 3.6rem;
   font-weight: 800;
@@ -700,11 +701,39 @@ button {
   display: flex;
   -webkit-box-align: baseline;
   -ms-flex-align: baseline;
-  align-items: baseline; }
+  align-items: baseline;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding-right: 1rem; }
+  .c-navigation__nav .active {
+    color: #008cff; }
 
 .c-navigation__nav-item {
-  margin-right: 3rem;
-  color: #7e898a; }
+  padding: 1rem;
+  color: #7e898a;
+  position: relative; }
+  .c-navigation__nav-item:hover {
+    background-color: rgba(0, 0, 0, 0.2); }
+  .c-navigation__nav-item .c-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 4rem;
+    background-color: #14171a;
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    padding: 1rem;
+    white-space: nowrap;
+    -webkit-transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out; }
+  .no-touchevents .c-navigation__nav-item:hover .c-tooltip {
+    opacity: 1;
+    visibility: visible; }
+
+.c-navigation__icon {
+  color: #FFFFFF; }
 
 .c-navigation__nav-item--logout {
   position: absolute;
@@ -713,9 +742,6 @@ button {
     .c-navigation__nav-item--logout {
       position: inherit;
       right: inherit; } }
-
-.c-navigation__nav-item a.active {
-  color: #FFFFFF; }
 
 .c-navigation__profile-image,
 .c-navigation__profile {
@@ -833,7 +859,20 @@ button {
     .c-activity-map {
       width: 200px;
       height: 200px;
-      display: block; } }
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center; } }
+
+.c-activity-map__message {
+  font-size: 1.2rem;
+  color: #7e898a;
+  opacity: 0.3; }
 
 .c-activity-map__image {
   -webkit-transform: scale(1.12);
@@ -990,28 +1029,30 @@ button {
   text-decoration: underline; }
 
 .c-year-to-date-stats {
-  font-size: 2.4em;
+  font-size: 1.4em;
   color: #FFFFFF;
   line-height: 1.5;
-  font-weight: 800; }
-  @media only screen and (min-width: 768px) {
-    .c-year-to-date-stats {
-      font-size: 3.6em;
-      line-height: 1.4; } }
+  font-weight: 600;
+  text-align: center;
+  max-width: 50rem;
+  margin: 0 auto; }
   .c-year-to-date-stats strong {
     color: #008cff;
     font-weight: 700; }
 
 .c-btn {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  line-height: 1.2;
   text-transform: uppercase;
-  padding: 1.2rem 2rem;
+  padding: 0.6rem 0.8rem;
   display: inline-block;
   font-weight: 600;
   letter-spacing: .05rem;
-  border-radius: .2rem; }
-  .c-btn:hover {
-    background-color: rgba(0, 0, 0, 0.1); }
+  border-radius: .2rem;
+  background-color: #FFFFFF;
+  color: #1F2428;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2); }
 
 .c-btn--primary {
   background: #008cff; }
@@ -1020,6 +1061,21 @@ button {
 
 .c-btn--large {
   font-size: 4rem; }
+
+.c-btn--favourite {
+  background: transparent;
+  color: #FFFFFF; }
+  .c-btn--favourite .c-icon {
+    -webkit-transition: -webkit-transform 0.1s ease-in;
+    transition: -webkit-transform 0.1s ease-in;
+    transition: transform 0.1s ease-in;
+    transition: transform 0.1s ease-in, -webkit-transform 0.1s ease-in;
+    margin-right: 0.1rem;
+    vertical-align: middle; }
+  .c-btn--favourite span {
+    vertical-align: middle; }
+  .c-btn--favourite.is-favourite {
+    background-color: #008cff; }
 
 .c-login {
   width: 100%;
@@ -1149,7 +1205,8 @@ button {
   -ms-flex-pack: center;
   justify-content: center;
   padding: 2rem 0;
-  margin-top: 3rem; }
+  margin-top: 3rem;
+  color: #1F2428; }
 
 .c-paginator__link .disabled {
   opacity: 0.2;
@@ -1171,11 +1228,12 @@ button {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
   -webkit-filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5)); }
 
 .c-homepage__hero-image__image {
+  z-index: 1;
   position: fixed;
   -webkit-transform: rotateZ(-20deg) scale(0.6) translateY(-70%);
   transform: rotateZ(-20deg) scale(0.6) translateY(-70%);
@@ -1203,13 +1261,13 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -1219,3 +1277,25 @@ button {
 
 .c-footer__power-by-strava {
   width: 15rem; }
+
+.c-footer__credits {
+  font-size: 1.1rem; }
+
+.c-icon {
+  display: inline-block;
+  color: inherit; }
+
+.c-page-header {
+  text-align: left;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }

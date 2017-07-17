@@ -7,7 +7,8 @@ import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
 import MapboxMap from '../components/mapbox'
 import {getCookie} from '../components/cookieHelper'
-import {checkAuth} from '../components/firebase'
+import fire,{getUserStatus} from '../components/firebase'
+import {IconBookmarkSolid,IconCheckLine} from '../components/icons/icons'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -28,18 +29,20 @@ let publicAccessToken = '011c89ee01402ab591de0240d59ee84455fd4d42'
 class ActivityDetail extends Component {
   constructor(props) {
     super(props);
+    getUserStatus().then( uid => {
+      this.setState({
+        userUid: uid
+      })
+    })
     this.state = {
       data: [],
       gear: [],
       athlete: {},
       map: {},
+      chartData: {},
       loading: true,
-      chartData: {}
+      isFavourite: false,
     }
-  }
-
-  componentWillMount() {
-    this.setState({loading: true})
   }
 
   componentDidMount() {
@@ -47,6 +50,8 @@ class ActivityDetail extends Component {
     let thisActivityApiUrl = 'https://www.strava.com/api/v3/activities/' + this.props.match.params.id;
 
     let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/altitude,heartrate,latlng,cadence,velocity_smooth?resolution=medium'
+
+    this.setState({loading: true})
 
     fetch(thisActivityApiUrl, {
       method: 'get',
@@ -61,13 +66,12 @@ class ActivityDetail extends Component {
         data: json,
         gear: json.gear,
         athlete: json.athlete,
-        map: json.map,
-        loading: false
+        map: json.map
       })
 
     }).catch(error => {console.log(error);})
 
-    if(checkAuth){
+    if(userAccessToken){
       fetch(thisActivityStreamApiUrl, {
         method: 'get',
         headers: {
@@ -154,12 +158,85 @@ class ActivityDetail extends Component {
             }
           )
         }
+
+        this.setState({loading: false})
       }).catch(function(error){
         console.log('error fetching stream');
       })
     } else {
       // do nothing
     }
+
+    this.checkFavouriteStatus()
+
+  }
+
+  checkFavouriteStatus = () => {
+    this.setState({ loading: true })
+
+    let favouritesRef = fire.database().ref('users/' + this.props.userUid + '/favourites');
+    let activityId = this.props.match.params.id
+    // console.log('this url param id is ' + activityId);
+    favouritesRef.once('value', snapshot => {
+      snapshot.forEach(child => {
+        let favouriteActivityId = child.child('activityId').val()
+
+        // console.log(favouriteActivityId);
+
+        if(favouriteActivityId === activityId){
+          console.log('matched');
+          this.setState({
+            isFavourite: true,
+          })
+        }
+      })
+      this.setState({ loading: false })
+    })
+  }
+
+  unfavouriteThis = () => {
+
+
+    let favouritesRef = fire.database().ref('users/' + this.state.userUid + '/favourites');
+    let activityId = this.props.match.params.id
+
+    if(this.state.isFavourite) {
+      favouritesRef.once('value', snapshot => {
+        snapshot.forEach(child => {
+          let favouriteActivityId = child.child('activityId').val()
+
+          if(favouriteActivityId === activityId) {
+            console.log('remove from firebase');
+            child.ref.remove()
+          }
+        })
+      })
+
+      this.setState({
+        isFavourite: false
+      })
+    }
+
+  }
+
+  favouriteThis = () => {
+
+    let favouritesRef = fire.database().ref('users/' + this.state.userUid + '/favourites');
+    let activityId = this.props.match.params.id
+    let newFavouriteRef = favouritesRef.push()
+
+    if(!this.state.isFavourite) {
+      console.log('save to firebase');
+      newFavouriteRef.set({
+        activityId: activityId,
+        activityData: this.state.data
+      })
+
+      this.setState({
+        isFavourite: true
+      })
+    }
+
   }
 
   render() {
@@ -198,13 +275,23 @@ class ActivityDetail extends Component {
     } else {
       return (
         <div className="o-activity-detail">
-          <div className="o-activity-detail-header">
+          <div className="c-page-header">
             <h3 className="o-activity-detail-name">{this.state.data.name}</h3>
             <span className='o-activity-detail-time'>
               <Moment format="MMM DD, YYYY">{this.state.data.start_date}</Moment>
                <span> • </span>
               <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
+              <span> • </span>
+              <a className="c-link" href={"https://strava.com/activities/" + this.state.data.id}>View on Strava</a>
             </span>
+            <div className="t-top-spacing--l">
+              {this.state.isFavourite
+                ?
+                <button className="c-btn c-btn--favourite is-favourite" onClick={this.unfavouriteThis}><IconCheckLine className="c-icon"/> <span>Favourited</span></button>
+                :
+                <button className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
+               }
+            </div>
           </div>
           <div className="o-activity-detail__summary">
             <div className="c-activity-summary o-flex o-flex-justify--start">
@@ -224,23 +311,6 @@ class ActivityDetail extends Component {
             {this.state.map.summary_polyline &&
               <MapboxMap mapPolyline={this.state.map.polyline || this.state.map.summary_polyline} startLatlng={this.state.data.start_latlng} endLatlng={this.state.data.end_latlng}/>
             }
-            {/* <div className="c-activity-summary c-activity-summary--average">
-              <h3 className="c-activity-summary-header">activity average</h3>
-              <div className="o-flex o-flex-justify--start">
-                {activityAverageSpeed
-                  ? <ActivityStat label="speed" value={activityAverageSpeed} unit="km"/>
-                  : null}
-                {activityAverageCadence
-                  ? <ActivityStat label="cadence" value={activityAverageCadence} unit="rpm"/>
-                  : null}
-                {activityAverageHeartRate
-                  ? <ActivityStat label="heartrate" value={activityAverageHeartRate} unit="bpm"/>
-                  : null}
-                {activityAverageWatts
-                  ? <ActivityStat label="power" value={activityAverageWatts} unit="w"/>
-                  : null}
-              </div>
-            </div> */}
           </div>
 
           <div>

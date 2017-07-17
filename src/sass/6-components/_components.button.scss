@@ -1,15 +1,15 @@
 .c-btn {
- font-size: 1.3rem;
+ font-size: 1.1rem;
+ line-height: 1.2;
  text-transform: uppercase;
- padding: 1.2rem 2rem;
+ padding: 0.6rem 0.8rem;
  display: inline-block;
  font-weight: 600;
  letter-spacing: .05rem;
  border-radius: .2rem;
-
- &:hover {
-   background-color: rgba(0,0,0,0.1)
- }
+ background-color: $colour-white;
+ color: $colour-background;
+ box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
 }
 
 
@@ -24,4 +24,27 @@
 
 .c-btn--large {
   font-size: 4rem;
+}
+
+.c-btn--favourite {
+  background: transparent;
+  color: $colour-white;
+
+  @include hover {
+    // no hover effects
+  }
+
+  .c-icon {
+    transition: transform 0.1s ease-in;
+    margin-right: 0.1rem;
+    vertical-align: middle;
+  }
+
+  span {
+    vertical-align: middle;
+  }
+
+  &.is-favourite {
+    background-color: $colour-primary;
+  }
 }

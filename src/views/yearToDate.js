@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
+import {getCookie} from '../components/cookieHelper'
 
 class YearToDate extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class YearToDate extends Component {
 
   componentWillMount(){
 
-    let userAccessToken = localStorage.getItem('access_token')
+    let userAccessToken = getCookie('access_token');
 
     fetch('https://www.strava.com/api/v3/athlete', {
       method: 'get',
@@ -82,9 +83,14 @@ class YearToDateStats extends Component {
   render(){
 
     return(
-      <p className="c-year-to-date-stats">
-        This year you rode <YearToDateStat value={this.props.count}/> times, clocked <YearToDateStat value={this.props.distance}/> kilometers, spent <YearToDateStat value={this.props.movingTime}/> hours in the saddle, climbed <YearToDateStat value={this.props.elevationGain}/> meters - That's climbing Mount Everest <YearToDateStat value={this.props.mountEverestUnit}/> times.
-      </p>
+      <div>
+        <div className="c-page-header">
+          <h1>My Year To Date</h1>
+        </div>
+        <p className="c-year-to-date-stats">
+          This year you rode <YearToDateStat value={this.props.count}/> times, clocked <YearToDateStat value={this.props.distance}/> kilometers, spent <YearToDateStat value={this.props.movingTime}/> hours in the saddle, climbed <YearToDateStat value={this.props.elevationGain}/> meters - That's climbing Mount Everest <YearToDateStat value={this.props.mountEverestUnit}/> times.
+        </p>
+      </div>
     )
   }
 }

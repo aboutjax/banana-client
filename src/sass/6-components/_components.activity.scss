@@ -45,8 +45,16 @@
   @include medium {
     width: 200px;
     height: 200px;
-    display: block;
-  };
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.c-activity-map__message {
+  font-size: 1.2rem;
+  color: $colour-supplementary;
+  opacity: 0.3;
 }
 
 .c-activity-map__image {
