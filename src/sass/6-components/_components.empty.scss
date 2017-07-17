@@ -1,0 +1,17 @@
+.c-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.2);
+  min-height: 50rem;
+  border-radius: 1rem;
+}
+
+.c-empty__message {
+  margin: 0;
+}
+
+.c-empty__image {
+
+}
