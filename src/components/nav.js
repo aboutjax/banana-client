@@ -89,7 +89,7 @@ class NavigationProfile extends Component {
     deleteCookie('access_token');
     fire.auth().signOut().then(function() {
       // Sign-out successful.
-      window.location.assign('/banana');
+      window.location.assign('/');
     }).catch(function(error) {
       // An error happened.
     });

@@ -23,7 +23,7 @@ class FavouriteButton extends Component {
         let favouriteActivityId = child.child('activityId').val()
 
         if(favouriteActivityId === activityId){
-          console.log('matched favourites');
+          console.log('activity is favourited');
           this.setState({
             isFavourite: true,
           })
@@ -65,7 +65,7 @@ class FavouriteButton extends Component {
     let newFavouriteRef = favouritesRef.push()
 
     if(!this.state.isFavourite) {
-      console.log('save to firebase');
+      console.log('add to favourites');
       newFavouriteRef.set({
         activityId: activityId,
         activityData: this.props.data
@@ -83,16 +83,22 @@ class FavouriteButton extends Component {
   }
 
   render() {
-    return(
-      <div>
-        {this.state.isFavourite
-          ?
-          <button className="c-btn c-btn--favourite is-favourite" onClick={this.unfavouriteThis}><IconCheckLine className="c-icon"/> <span>Favourited</span></button>
-          :
-          <button className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
-         }
-      </div>
-    )
+    if(this.state.loading){
+      return(
+        false
+      )
+    } else {
+      return(
+        <div>
+          {this.state.isFavourite
+            ?
+            <button className="c-btn c-btn--favourite is-favourite" onClick={this.unfavouriteThis}><IconCheckLine className="c-icon"/> <span>Favourited</span></button>
+            :
+            <button className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
+          }
+        </div>
+      )
+    }
   }
 
 }

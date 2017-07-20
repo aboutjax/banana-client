@@ -5,11 +5,8 @@ import Moment from 'react-moment';
 import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
-import FavouriteButton from '../components/favouriteButton'
-import PublishButton from '../components/publishButton'
 import MapboxMap from '../components/mapbox'
-import {getCookie} from '../components/cookieHelper'
-import {getUserStatus} from '../components/firebase'
+import fire from '../components/firebase'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -27,147 +24,76 @@ let activityAverageHeartRate;
 let activityMaxHeartRate;
 let publicAccessToken = '011c89ee01402ab591de0240d59ee84455fd4d42'
 
-class ActivityDetail extends Component {
-  constructor(props) {
+class PublicActivityDetail extends Component {
+  constructor(props){
     super(props);
-    getUserStatus().then( uid => {
-      this.setState({
-        userUid: uid
-      })
-    })
+
     this.state = {
       data: [],
-      gear: [],
-      athlete: {},
-      map: {},
-      chartData: {},
       loading: true,
-      isFavourite: false,
+      athleteId: props.match.params.athlete,
+      activityId: props.match.params.activity,
+      activityFound: false,
+      athleteData: {}
     }
   }
 
   componentDidMount() {
-    let userAccessToken = getCookie('access_token') || publicAccessToken
-    let thisActivityApiUrl = 'https://www.strava.com/api/v3/activities/' + this.props.match.params.id;
 
-    let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/altitude,heartrate,latlng,cadence,velocity_smooth?resolution=medium'
+    let athleteUID = this.props.match.params.athleteUID
+    let activityId = this.props.match.params.activity
+    let publicActivitiesRef = fire.database().ref('users/' + athleteUID + '/publicActivities');
 
-    this.setState({loading: true})
+    publicActivitiesRef.once('value', snap => {
+      snap.forEach(child => {
+        let publicActivityId = child.child('activityId').val()
+        let publicActivityData = child.child('activityData').val()
+        let publicActivityAltitudeStream = child.child('altitudeStream').val() || null
+        let publicActivityCadenceStream = child.child('cadenceStream').val() || null
+        let publicActivityDistanceStream = child.child('distanceStream').val() || null
+        let publicActivityHeartrateStream = child.child('heartrateStream').val() || null
+        let publicActivityLatLngStream = child.child('latLngStream').val() || null
+        let publicActivityVelocityStream = child.child('velocityStream').val() || null
 
-    fetch(thisActivityApiUrl, {
+        if(publicActivityId === activityId) {
+          this.fetchAthleteData(publicActivityData.athlete.id)
+          this.setState({
+            data: publicActivityData,
+            altitudeStream: publicActivityAltitudeStream,
+            cadenceStream: publicActivityCadenceStream,
+            distanceStream: publicActivityDistanceStream,
+            heartrateStream: publicActivityHeartrateStream,
+            latLngStream: publicActivityLatLngStream,
+            velocityStream: publicActivityVelocityStream,
+            loading: false,
+            activityFound: true
+           })
+        } else {
+          this.setState({
+            activityFound: false,
+            loading: false
+          })
+        }
+      })
+    })
+  }
+
+  fetchAthleteData = (id) => {
+    let athleteApiUrl = 'https://www.strava.com/api/v3/athletes/' + id
+
+    fetch(athleteApiUrl, {
       method: 'get',
       headers: {
         "content-type": "application/json",
-        "authorization": "Bearer " + userAccessToken
+        "authorization": "Bearer " + publicAccessToken
       }
-    }).then(function(response) {
-      return response.json();
+    }).then(res => {
+      return(res.json())
     }).then(json => {
       this.setState({
-        data: json,
-        gear: json.gear,
-        athlete: json.athlete,
-        map: json.map
+        athleteData: json
       })
-
-    }).catch(error => {console.log(error);})
-
-    if(userAccessToken){
-      fetch(thisActivityStreamApiUrl, {
-        method: 'get',
-        headers: {
-          "content-type": "application/json",
-          "authorization": "Bearer " + userAccessToken
-        }
-      }).then(function(response) {
-        return response.json();
-      }).then(json => {
-        function findDistance(array){
-          return array.type === 'distance'
-        }
-        function findHeartrate(array){
-          return array.type === 'heartrate'
-        }
-        function findAltitude(array){
-          return array.type === 'altitude'
-        }
-        function findLatlng(array){
-          return array.type === 'latlng'
-        }
-        function findCadence(array){
-          return array.type === 'cadence'
-        }
-        function findVelocity(array){
-          return array.type === 'velocity_smooth'
-        }
-
-        if(json.find(findDistance)){
-          this.setState(
-            {
-              distanceStream: json.find(findDistance).data
-            }
-          )
-        }
-
-        if(json.find(findAltitude)){
-          this.setState(
-            {
-              altitudeStream: json.find(findAltitude).data
-            }
-          )
-        }
-
-        if(json.find(findHeartrate)){
-          this.setState(
-            {
-              heartrateStream: json.find(findHeartrate).data
-            }
-          )
-        }
-
-        if(json.find(findLatlng)){
-          this.setState(
-            {
-              latLngStream: json.find(findLatlng).data
-            }
-          )
-        }
-
-        if(json.find(findCadence)){
-          this.setState(
-            {
-              cadenceStream: json.find(findCadence).data
-            }
-          )
-        }
-
-        if(json.find(findVelocity)){
-
-          function toKPH(m) {
-            let toKM = m / 1000
-            let toKPH = toKM * 60 * 60
-
-            return _.round(toKPH, 2);
-          }
-
-          let velocityStreamArray = json.find(findVelocity).data
-          let velocityKPH = _.map(velocityStreamArray, toKPH)
-
-          this.setState(
-            {
-              velocityStream: velocityKPH
-            }
-          )
-        }
-
-        this.setState({loading: false})
-      }).catch(function(error){
-        console.log('error fetching stream');
-      })
-    } else {
-      // do nothing
-    }
-
+    })
   }
 
   render() {
@@ -203,24 +129,21 @@ class ActivityDetail extends Component {
           <LoadingSpinner/>
         </div>
       )
-    } else {
+    } else if(!this.state.loading && this.state.activityFound) {
       return (
         <div className="o-activity-detail">
           <div className="c-page-header">
-            <h3 className="o-activity-detail-name">{this.state.data.name}</h3>
-            <span className='o-activity-detail-time'>
-              <Moment format="MMM DD, YYYY">{this.state.data.start_date}</Moment>
-               <span> • </span>
-              <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
-              <span> • </span>
-              <a target="_blank" className="c-link" href={"https://strava.com/activities/" + this.state.data.id}>View on Strava</a>
-            </span>
-            <div className="t-top-spacing--l o-flex">
-              <div className="t-right-spacing">
-                <FavouriteButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data}/>
-              </div>
+            <div className="o-flex">
+              <AthleteProfile athleteData={this.state.athleteData} />
               <div>
-                <PublishButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data} altitudeStream={this.state.altitudeStream} cadenceStream={this.state.cadenceStream} distanceStream={this.state.distanceStream} heartrateStream={this.state.heartrateStream} latLngStream={this.state.latLngStream}  velocityStream={this.state.velocityStream}/>
+                <h3 className="o-activity-detail-name">{this.state.data.name}</h3>
+                <span className='o-activity-detail-time'>
+                  <Moment format="MMM DD, YYYY">{this.state.data.start_date}</Moment>
+                  <span> • </span>
+                  <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
+                  <span> • </span>
+                  <a target="_blank" className="c-link" href={"https://strava.com/activities/" + this.state.data.id}>View on Strava</a>
+                </span>
               </div>
             </div>
           </div>
@@ -239,8 +162,8 @@ class ActivityDetail extends Component {
                 <ActivityStat type="large" label="calories" value={activityTotalCalories}/>
                  : null}
             </div>
-            {this.state.map.summary_polyline &&
-              <MapboxMap mapPolyline={this.state.map.polyline || this.state.map.summary_polyline} startLatlng={this.state.data.start_latlng} endLatlng={this.state.data.end_latlng}/>
+            {this.state.data.map.summary_polyline &&
+              <MapboxMap mapPolyline={this.state.data.map.polyline || this.state.data.map.summary_polyline} startLatlng={this.state.data.start_latlng} endLatlng={this.state.data.end_latlng}/>
             }
           </div>
 
@@ -342,8 +265,20 @@ class ActivityDetail extends Component {
           </div>
         </div>
       )
+    } else {
+      return(
+        <h1>Activity not found</h1>
+      )
     }
   }
 }
 
-export default ActivityDetail
+function AthleteProfile(props) {
+  return(
+    <div className="c-athlete-profile">
+      <img src={props.athleteData.profile} className="c-athlete-profile__image"/>
+    </div>
+  )
+}
+
+export default PublicActivityDetail

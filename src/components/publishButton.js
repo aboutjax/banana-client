@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 import fire from '../components/firebase'
 import {IconBookmarkSolid,IconCheckLine} from '../components/icons/icons'
 
+let domainName = ''
+
+if(process.env.NODE_ENV === 'development'){
+  domainName = 'http://localhost:5000/';
+} else {
+  domainName = 'https://banana.fitness/';
+}
+
 class PublishButton extends Component {
 
   constructor(props) {
@@ -23,17 +31,19 @@ class PublishButton extends Component {
         let publicActivityId = child.child('activityId').val()
 
         if(publicActivityId === activityId){
-          console.log('matched public');
+          console.log('activity is in public stream');
           this.setState({
             isPublic: true,
           })
+        } else {
+          console.log('not matched');
         }
       })
       this.setState({ loading: false })
     })
   }
 
-  addToPublicStream = () => {
+  removeFromPublicStream = () => {
 
 
     let publicActivitiesRef = fire.database().ref('users/' + this.props.userUid + '/publicActivities');
@@ -45,7 +55,7 @@ class PublishButton extends Component {
           let publicActivityId = child.child('activityId').val()
 
           if(publicActivityId === activityId) {
-            console.log('remove from firebase');
+            console.log('remove from public stream');
             child.ref.remove()
           }
         })
@@ -58,17 +68,23 @@ class PublishButton extends Component {
 
   }
 
-  removeFromPublicStream = () => {
+  addToPublicStream = () => {
 
-    let publicActivitiesRef = fire.database().ref('users/' + this.props.userUid + '/favourites');
+    let publicActivitiesRef = fire.database().ref('users/' + this.props.userUid + '/publicActivities');
     let activityId = this.props.activityId
     let newPublicActivity = publicActivitiesRef.push()
 
     if(!this.state.isPublic) {
-      console.log('save to firebase');
+      console.log('add to public stream');
       newPublicActivity.set({
         activityId: activityId,
-        activityData: this.props.data
+        activityData: this.props.data,
+        altitudeStream: this.props.altitudeStream || null,
+        distanceStream: this.props.distanceStream || null,
+        latLngStream: this.props.latLngStream || null,
+        velocityStream: this.props.velocityStream || null,
+        cadenceStream: this.props.cadenceStream || null,
+        heartrateStream: this.props.heartrateStream || null
       })
 
       this.setState({
@@ -82,19 +98,35 @@ class PublishButton extends Component {
     this.checkStatus()
   }
 
-  render() {
-    return(
-      <div>
-        {this.state.isPublic
-          ?
-          <button className="c-btn c-btn--favourite is-favourite" onClick={this.removeFromPublicStream}><IconCheckLine className="c-icon"/> <span>Unpublish</span></button>
-          :
-          <button className="c-btn c-btn--favourite" onClick={this.addToPublicStream}><IconBookmarkSolid className="c-icon"/> <span>Publish</span></button>
-         }
-      </div>
-    )
+  copyPublicUrl = () => {
+    let publicUrl = domainName + "/public" + this.props.userUid + "/" + this.props.activityId
+
   }
 
+  render() {
+    if(this.state.loading) {
+      return(
+        false
+      )
+    } else {
+      return(
+        <div>
+          {this.state.isPublic
+            ?
+            <div className="o-flex o-flex-align--center">
+              <button className="c-btn c-btn--favourite is-favourite" onClick={this.removeFromPublicStream}><IconCheckLine className="c-icon"/> <span>Published</span></button>
+              <a className="c-link t-left-spacing" target="_blank" href={"/public/" + this.props.userUid + "/" +  this.props.activityId}> Open Public Link</a>
+            </div>
+            :
+            <button className="c-btn c-btn--favourite" onClick={this.addToPublicStream}><IconBookmarkSolid className="c-icon"/> <span>Publish</span></button>
+
+
+          }
+
+        </div>
+      )
+    }
+  }
 }
 
 export default PublishButton

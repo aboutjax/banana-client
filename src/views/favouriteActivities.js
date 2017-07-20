@@ -4,6 +4,7 @@ import Activity from '../components/activity';
 import fire from '../components/firebase'
 import LoadingSpinner from '../components/loader';
 import { CSSTransitionGroup } from 'react-transition-group';
+import {IconBookmarkSolid} from '../components/icons/icons'
 
 class FavouriteActivities extends Component {
   constructor(){
@@ -47,7 +48,10 @@ class FavouriteActivities extends Component {
       return (
         <div className="o-favourite-activities">
           <div className="c-page-header">
-            <h1>Favourites</h1>
+            <div className="o-flex o-flex-justify--start o-flex-align--center">
+              <IconBookmarkSolid className="c-icon c-icon--header t-right-spacing"/>
+              <h1>Favourites</h1>
+            </div>
           </div>
 
           {this.state.data.length > 0
