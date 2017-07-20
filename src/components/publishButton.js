@@ -2,14 +2,6 @@ import React, {Component} from 'react';
 import fire from '../components/firebase'
 import {IconBookmarkSolid,IconCheckLine} from '../components/icons/icons'
 
-let domainName = ''
-
-if(process.env.NODE_ENV === 'development'){
-  domainName = 'http://localhost:5000/';
-} else {
-  domainName = 'https://banana.fitness/';
-}
-
 class PublishButton extends Component {
 
   constructor(props) {
@@ -96,11 +88,6 @@ class PublishButton extends Component {
 
   componentDidMount() {
     this.checkStatus()
-  }
-
-  copyPublicUrl = () => {
-    let publicUrl = domainName + "/public" + this.props.userUid + "/" + this.props.activityId
-
   }
 
   render() {

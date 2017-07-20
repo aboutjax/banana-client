@@ -276,7 +276,7 @@ class PublicActivityDetail extends Component {
 function AthleteProfile(props) {
   return(
     <div className="c-athlete-profile">
-      <img src={props.athleteData.profile} className="c-athlete-profile__image"/>
+      <img alt="" src={props.athleteData.profile} className="c-athlete-profile__image"/>
     </div>
   )
 }
