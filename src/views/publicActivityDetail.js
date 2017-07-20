@@ -77,8 +77,8 @@ class PublicActivityDetail extends Component {
             activityFound: true
            })
         } else {
+          // do nothing
           this.setState({
-            activityFound: false,
             loading: false
           })
         }

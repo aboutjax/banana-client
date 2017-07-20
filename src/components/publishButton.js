@@ -28,7 +28,7 @@ class PublishButton extends Component {
             isPublic: true,
           })
         } else {
-          console.log('not matched');
+          // do nothing
         }
       })
       this.setState({ loading: false })
