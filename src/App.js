@@ -14,6 +14,7 @@ import Nav from './components/nav';
 import HandleRedirect from './views/handleRedirect';
 import ActivityDetail from './views/activityDetail';
 import FavouriteActivities from './views/favouriteActivities';
+import PublicActivityDetail from './views/publicActivityDetail';
 import MyYear from './views/yearToDate';
 import Home from './views/home';
 import Footer from './components/footer';
@@ -23,7 +24,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false
+      loggedIn: true
     }
   }
 
@@ -56,6 +57,7 @@ class App extends Component {
                 <Route path='/' exact render={routeProps => <Activities {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/activities/page/:page" component={Activities}/>
                 <Route path='/activities/:id' exact render={routeProps => <ActivityDetail {...routeProps} userUid={this.state.userUid}/>} />
+                <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
                 <Route path='/favourites' render={routeProps => <FavouriteActivities {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path='/myyear' render={routeProps => <MyYear {...routeProps} userUid={this.state.userUid}/>} />
                 <Route component={NoMatch}/>
@@ -71,15 +73,17 @@ class App extends Component {
     } else {
       return(
         <div className="App o-wrapper o-app">
-          <div>
-            {/* <Nav type="public" authState={this.state.loggedIn}/> */}
-          </div>
+
+          <Nav type="public" authState={this.state.loggedIn}/>
 
           <div className='o-content'>
               <Route path="/" exact component={Home} />
               <Route path="/handle_redirect" exact component={HandleRedirect}/>
               <Route path="/favourites" exact component={Home}/>
+              <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
           </div>
+
+          <Footer/>
         </div>
       )
 

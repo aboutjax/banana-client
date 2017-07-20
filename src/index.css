@@ -1325,3 +1325,26 @@ svg {
 
 .c-empty__message {
   margin: 0; }
+
+.c-athlete-profile {
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.c-athlete-profile__image {
+  border-radius: 10rem;
+  width: 7rem;
+  height: 7rem;
+  margin-right: 3rem; }
+
+.c-athlete-profile__name {
+  margin: 0; }
+
+.c-banner {
+  padding: 3rem;
+  background: #101010; }
