@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {NavLink, Link} from 'react-router-dom';
-import Login from '../views/login';
 import {getCookie, deleteCookie} from '../components/cookieHelper'
 import fire from './firebase'
 import {IconBookmarkSolid} from '../components/icons/icons'
@@ -17,7 +16,6 @@ class Nav extends Component {
 
   componentDidMount() {
 
-    if(this.props.authState) {
       let userAccessToken = getCookie('access_token')
 
       fetch('https://www.strava.com/api/v3/athlete', {
@@ -33,14 +31,12 @@ class Nav extends Component {
           data: json,
         })
       })
-    } else {
-      // do nothing
-    }
+
   }
 
   render() {
 
-    if(this.props.type === 'private') {
+    if(this.props.authState) {
       return (
         <div className="c-navigation">
           <ul className="c-navigation__nav o-flex o-flex-justify--space-between">
@@ -66,7 +62,7 @@ class Nav extends Component {
           <NavLink activeClassName="active" exact to="/">
             <h4 className="c-navigation__logo"><span aria-label="banana"  role="img">🍌</span> banana</h4>
           </NavLink>
-          <Login/>
+          {/* <Login/> */}
         </div>
       )
 
@@ -89,7 +85,7 @@ class NavigationProfile extends Component {
     deleteCookie('access_token');
     fire.auth().signOut().then(function() {
       // Sign-out successful.
-      window.location.assign('/banana');
+      window.location.assign('/');
     }).catch(function(error) {
       // An error happened.
     });

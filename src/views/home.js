@@ -6,7 +6,7 @@ let assetSrc = ''
 if(process.env.NODE_ENV === 'development'){
   assetSrc = '';
 } else {
-  assetSrc = '/banana';
+  assetSrc = '';
 }
 
 function Homepage() {

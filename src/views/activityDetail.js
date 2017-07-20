@@ -42,6 +42,7 @@ class ActivityDetail extends Component {
       chartData: {},
       loading: true,
       isFavourite: false,
+      isPublic: false
     }
   }
 
@@ -168,25 +169,47 @@ class ActivityDetail extends Component {
     }
 
     this.checkFavouriteStatus()
+    // this.checkPublicStatus()
 
   }
 
   checkFavouriteStatus = () => {
-    this.setState({ loading: true })
-
+    console.log('checking favourites status');
     let favouritesRef = fire.database().ref('users/' + this.props.userUid + '/favourites');
     let activityId = this.props.match.params.id
-    // console.log('this url param id is ' + activityId);
+
     favouritesRef.once('value', snapshot => {
       snapshot.forEach(child => {
         let favouriteActivityId = child.child('activityId').val()
-
-        // console.log(favouriteActivityId);
 
         if(favouriteActivityId === activityId){
           console.log('matched');
           this.setState({
             isFavourite: true,
+          })
+        }
+      })
+      this.setState({ loading: false })
+    })
+  }
+
+  checkPublicStatus = () => {
+
+    let publicActivitiesRef = fire.database().ref('users/' + this.state.userUid + '/publicActvities');
+
+    let activityId = this.props.match.params.id
+
+    console.log(activityId);
+
+    publicActivitiesRef.once('value', snapshot => {
+      snapshot.forEach(child => {
+        console.log(child.val());
+        let publicActivityId = child.child('activityId').val()
+
+        if(publicActivityId === activityId){
+          console.log('matched with public');
+          this.setState({
+            isPublic: true,
           })
         }
       })
@@ -237,6 +260,52 @@ class ActivityDetail extends Component {
       })
     }
 
+  }
+
+  addToPublicStream = () => {
+
+    let publicActivitiesRef = fire.database().ref('users/' + this.state.userUid + '/publicActivities');
+    let activityId = this.props.match.params.id
+    let newPublicActivityRef = publicActivitiesRef.push()
+
+    if(!this.state.isPublic) {
+      console.log('publish to public activities stream');
+      newPublicActivityRef.set({
+        activityId: activityId,
+        activityData: this.state.data,
+        altitudeStream: this.state.altitudeStream,
+        distanceStream: this.state.distanceStream,
+        latLngStream: this.state.latLngStream || null,
+        velocityStream: this.state.velocityStream || null,
+        cadenceStream: this.state.cadenceStream || null,
+        heartrateStream: this.state.heartrateStream || null
+      })
+
+      this.setState({ isPublic: true })
+    }
+  }
+
+  removeFromPublicStream = () => {
+
+    let publicActivitiesRef = fire.database().ref('users/' + this.state.userUid + '/publicActvities');
+    let activityId = this.props.match.params.id
+
+    if(this.state.isPublic) {
+      publicActivitiesRef.once('value', snapshot => {
+        snapshot.forEach(child => {
+          let publicActivityId = child.chlid('activityId').val()
+
+          if(publicActivityId === activityId) {
+            console.log('remove from firebase public stream');
+            child.ref.remove()
+          }
+        })
+      })
+
+      this.setState({
+        isPublic: false
+      })
+    }
   }
 
   render() {
@@ -290,6 +359,14 @@ class ActivityDetail extends Component {
                 <button className="c-btn c-btn--favourite is-favourite" onClick={this.unfavouriteThis}><IconCheckLine className="c-icon"/> <span>Favourited</span></button>
                 :
                 <button className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
+               }
+            </div>
+            <div className="t-top-spacing--l">
+              {this.state.isPublic
+                ?
+                <button className="c-btn c-btn--favourite is-favourite" onClick={this.removeFromPublicStream}><IconBookmarkSolid className="c-icon"/> <span>Unpublish</span></button>
+                :
+                <button className="c-btn c-btn--favourite" onClick={this.addToPublicStream}><IconBookmarkSolid className="c-icon"/> <span>Publish</span></button>
                }
             </div>
           </div>
