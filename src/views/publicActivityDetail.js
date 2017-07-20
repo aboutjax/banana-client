@@ -22,6 +22,14 @@ let activityMaxSpeed;
 let activityAverageCadence;
 let activityAverageHeartRate;
 let activityMaxHeartRate;
+
+
+let foodBurnedBanana;
+let foodBurnedApples;
+let foodBurnedBeers;
+let foodBurnedCookies;
+let foodBurnedCheeseburgers;
+
 let publicAccessToken = '011c89ee01402ab591de0240d59ee84455fd4d42'
 
 class PublicActivityDetail extends Component {
@@ -123,6 +131,13 @@ class PublicActivityDetail extends Component {
     activityAverageHeartRate = this.state.data.average_heartrate
     activityMaxHeartRate = this.state.data.max_heartrate
 
+    // Food Burned
+    foodBurnedBanana = _.round(activityTotalCalories / 90, 0)
+    foodBurnedApples = _.round(activityTotalCalories / 52, 0)
+    foodBurnedBeers = _.round(activityTotalCalories / 208, 0)
+    foodBurnedCookies = _.round(activityTotalCalories / 50, 0)
+    foodBurnedCheeseburgers = _.round(activityTotalCalories / 303, 0)
+
     if (this.state.loading) {
       return (
         <div className="o-flex o-flex-align--center o-flex-justify--center">
@@ -168,6 +183,27 @@ class PublicActivityDetail extends Component {
           </div>
 
           <div>
+            {/* Calories Card */}
+            {
+              activityTotalCalories
+              ?
+              <div className="c-activity-graph c-activity-graph--calories t-top-spacing--l">
+                <div className="c-activity-graph-container">
+                  <h3 className="t-bottom-spacing--xl">Food Burned</h3>
+                  <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
+                    <ActivityStat type="large" label="🍌 Bananas" value={foodBurnedBanana}/>
+                    <ActivityStat type="large" label="🍎 Apples" value={foodBurnedApples}/>
+                    <ActivityStat type="large" label="🍺 Beers" value={foodBurnedBeers}/>
+                    <ActivityStat type="large" label="🍪 Cookies" value={foodBurnedCookies}/>
+                    <ActivityStat type="large" label="🍔 Cheeseburgers" value={foodBurnedCheeseburgers}/>
+
+                  </div>
+
+                </div>
+              </div>
+              :
+              null
+            }
             {/* Speed Summary Card */}
             {
               activityAverageSpeed ?

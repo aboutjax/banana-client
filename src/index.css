@@ -931,7 +931,7 @@ svg {
 
 .c-activity__stat-label {
   text-transform: capitalize;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   margin-bottom: 0.5rem;
   color: rgba(255, 255, 255, 0.5); }
 
@@ -988,6 +988,10 @@ svg {
 .c-activity-graph--cadence {
   background-image: -webkit-gradient(linear, left bottom, left top, from(#733d9d), to(#7e43ac));
   background-image: linear-gradient(0deg, #733d9d 0%, #7e43ac 100%); }
+
+.c-activity-graph--calories {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#323940), to(#3b434b));
+  background-image: linear-gradient(0deg, #323940 0%, #3b434b 100%); }
 
 .c-activity-chart-container {
   height: 30rem; }
