@@ -5,10 +5,11 @@ import Moment from 'react-moment';
 import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
+import FavouriteButton from '../components/favouriteButton'
+import PublishButton from '../components/publishButton'
 import MapboxMap from '../components/mapbox'
 import {getCookie} from '../components/cookieHelper'
-import fire,{getUserStatus} from '../components/firebase'
-import {IconBookmarkSolid,IconCheckLine} from '../components/icons/icons'
+import {getUserStatus} from '../components/firebase'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -167,76 +168,6 @@ class ActivityDetail extends Component {
       // do nothing
     }
 
-    this.checkFavouriteStatus()
-
-  }
-
-  checkFavouriteStatus = () => {
-    this.setState({ loading: true })
-
-    let favouritesRef = fire.database().ref('users/' + this.props.userUid + '/favourites');
-    let activityId = this.props.match.params.id
-    // console.log('this url param id is ' + activityId);
-    favouritesRef.once('value', snapshot => {
-      snapshot.forEach(child => {
-        let favouriteActivityId = child.child('activityId').val()
-
-        // console.log(favouriteActivityId);
-
-        if(favouriteActivityId === activityId){
-          console.log('matched');
-          this.setState({
-            isFavourite: true,
-          })
-        }
-      })
-      this.setState({ loading: false })
-    })
-  }
-
-  unfavouriteThis = () => {
-
-
-    let favouritesRef = fire.database().ref('users/' + this.state.userUid + '/favourites');
-    let activityId = this.props.match.params.id
-
-    if(this.state.isFavourite) {
-      favouritesRef.once('value', snapshot => {
-        snapshot.forEach(child => {
-          let favouriteActivityId = child.child('activityId').val()
-
-          if(favouriteActivityId === activityId) {
-            console.log('remove from firebase');
-            child.ref.remove()
-          }
-        })
-      })
-
-      this.setState({
-        isFavourite: false
-      })
-    }
-
-  }
-
-  favouriteThis = () => {
-
-    let favouritesRef = fire.database().ref('users/' + this.state.userUid + '/favourites');
-    let activityId = this.props.match.params.id
-    let newFavouriteRef = favouritesRef.push()
-
-    if(!this.state.isFavourite) {
-      console.log('save to firebase');
-      newFavouriteRef.set({
-        activityId: activityId,
-        activityData: this.state.data
-      })
-
-      this.setState({
-        isFavourite: true
-      })
-    }
-
   }
 
   render() {
@@ -285,12 +216,8 @@ class ActivityDetail extends Component {
               <a target="_blank" className="c-link" href={"https://strava.com/activities/" + this.state.data.id}>View on Strava</a>
             </span>
             <div className="t-top-spacing--l">
-              {this.state.isFavourite
-                ?
-                <button className="c-btn c-btn--favourite is-favourite" onClick={this.unfavouriteThis}><IconCheckLine className="c-icon"/> <span>Favourited</span></button>
-                :
-                <button className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
-               }
+               <FavouriteButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data}/>
+               <PublishButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data}/>
             </div>
           </div>
           <div className="o-activity-detail__summary">
