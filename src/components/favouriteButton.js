@@ -85,7 +85,7 @@ class FavouriteButton extends Component {
   render() {
     if(this.state.loading){
       return(
-        false
+        <button disabled className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
       )
     } else {
       return(

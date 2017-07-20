@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import fire from '../components/firebase'
-import {IconBookmarkSolid,IconCheckLine} from '../components/icons/icons'
+import {IconCloud,IconCheckLine} from '../components/icons/icons'
 
 class PublishButton extends Component {
 
@@ -93,7 +93,7 @@ class PublishButton extends Component {
   render() {
     if(this.state.loading) {
       return(
-        false
+        <button disabled className="c-btn c-btn--favourite" onClick={this.addToPublicStream}><IconCloud className="c-icon"/> <span>Publish</span></button>
       )
     } else {
       return(
@@ -105,7 +105,7 @@ class PublishButton extends Component {
               <a className="c-link t-left-spacing" target="_blank" href={"/public/" + this.props.userUid + "/" +  this.props.activityId}> Open Public Link</a>
             </div>
             :
-            <button className="c-btn c-btn--favourite" onClick={this.addToPublicStream}><IconBookmarkSolid className="c-icon"/> <span>Publish</span></button>
+            <button className="c-btn c-btn--favourite" onClick={this.addToPublicStream}><IconCloud className="c-icon"/> <span>Publish</span></button>
 
 
           }

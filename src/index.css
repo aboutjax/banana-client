@@ -931,7 +931,7 @@ svg {
 
 .c-activity__stat-label {
   text-transform: capitalize;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
   color: rgba(255, 255, 255, 0.5); }
 
@@ -945,7 +945,7 @@ svg {
   font-size: 3.2rem; }
 
 .c-activity__stat-unit {
-  font-size: 1.1rem;
+  font-size: 1.6rem;
   opacity: 0.5;
   margin-left: 0.33333rem; }
 
@@ -1063,6 +1063,9 @@ svg {
   color: #1F2428;
   -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5); }
+  .c-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed; }
 
 .c-btn--primary {
   background: #008cff; }
@@ -1359,3 +1362,7 @@ svg {
 
 .c-athlete-profile__name {
   margin: 0; }
+
+.c-public-link {
+  padding: 0.6rem 0.8rem;
+  background: #008cff; }

@@ -27,7 +27,7 @@ const IconArrowLeft = (props) => {
 const IconBookmarkSolid = (props) => {
   return(
     <div className={props.className}>
-      <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><title>bookmark--solid</title><path d="M8 11.25L4.6 13.8c-.66.494-1.6.024-1.6-.8V4c0-1.17.82-2 2-2h6c1.18 0 2 .83 2 2v9c0 .824-.94 1.294-1.6.8L8 11.25z" fill-rule="nonzero" /></svg>
+      <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><title>bookmark--solid</title><path d="M8 10.25L5.6 12.8c-.66.494-1.6.024-1.6-.8V5c0-1.17.82-2 2-2h4c1.18 0 2 .83 2 2v7c0 .824-.94 1.294-1.6.8L8 10.25z" fill-rule="nonzero"/></svg>
     </div>
   )
 }
@@ -48,4 +48,12 @@ const IconProgress = (props) => {
   )
 }
 
-export {IconBookmark, IconArrowLeft, IconArrowRight, IconBookmarkSolid, IconCheckLine,IconProgress}
+const IconCloud = (props) => {
+  return(
+    <div className={props.className}>
+      <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><title>publish</title><path d="M14 8.578c0-1.423-1.205-2.593-2.703-2.54C10.712 4.836 9.457 4 8 4 6.056 4 4.472 5.48 4.36 7.347 3.14 7.1 2 8.003 2 9.214c0 1.938 2.087 1.908 2.087 1.908h7.565S14 10.824 14 8.578z" fill-rule="evenodd" stroke-linejoin="round"/></svg>
+    </div>
+  )
+}
+
+export {IconBookmark, IconArrowLeft, IconArrowRight, IconBookmarkSolid, IconCheckLine,IconProgress, IconCloud}
