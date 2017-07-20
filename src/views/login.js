@@ -8,7 +8,7 @@ if(process.env.NODE_ENV === 'development'){
   assetSrc = '';
 } else {
   authUrl = 'https://strava-auth.herokuapp.com';
-  assetSrc = '/banana';
+  assetSrc = '';
 }
 class Login extends Component {
   render() {
