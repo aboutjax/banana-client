@@ -191,11 +191,11 @@ class PublicActivityDetail extends Component {
                 <div className="c-activity-graph-container">
                   <h3 className="t-bottom-spacing--xl">Calories Burned</h3>
                   <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
-                    <ActivityStat type="large" label="🍌 Bananas" value={foodBurnedBanana}/>
-                    <ActivityStat type="large" label="🍎 Apples" value={foodBurnedApples}/>
-                    <ActivityStat type="large" label="🍺 Beers" value={foodBurnedBeers}/>
-                    <ActivityStat type="large" label="🍪 Cookies" value={foodBurnedCookies}/>
-                    <ActivityStat type="large" label="🍔 Cheeseburgers" value={foodBurnedCheeseburgers}/>
+                    <ActivityStat type="large" label="Bananas" value={foodBurnedBanana} unit="🍌"/>
+                    <ActivityStat type="large" label="Apples" value={foodBurnedApples} unit="🍎"/>
+                    <ActivityStat type="large" label="Beers" value={foodBurnedBeers} unit="🍺"/>
+                    <ActivityStat type="large" label="Cookies" value={foodBurnedCookies} unit="🍪"/>
+                    <ActivityStat type="large" label="Cheeseburgers" value={foodBurnedCheeseburgers} unit="🍔"/>
 
                   </div>
 

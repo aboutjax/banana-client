@@ -994,7 +994,7 @@ svg {
   background-image: linear-gradient(0deg, #323940 0%, #3b434b 100%); }
 
 .c-activity-chart-container {
-  height: 30rem; }
+  height: 40rem; }
 
 .c-activity__has-chart-icon {
   position: relative;
@@ -1061,8 +1061,8 @@ svg {
   border-radius: .2rem;
   background-color: #FFFFFF;
   color: #1F2428;
-  -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5); }
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1); }
   .c-btn:disabled {
     opacity: 0.3;
     cursor: not-allowed; }
@@ -1094,6 +1094,23 @@ svg {
   .c-btn--favourite.is-public,
   .c-btn--favourite.is-favourite {
     background-color: #008cff; }
+
+.c-btn--transparent {
+  background: transparent;
+  color: #FFFFFF;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+  .no-touchevents .c-btn--transparent:hover {
+    background-color: rgba(0, 0, 0, 0.1); }
+  .c-btn--transparent .c-icon {
+    -webkit-transition: -webkit-transform 0.1s ease-in;
+    transition: -webkit-transform 0.1s ease-in;
+    transition: transform 0.1s ease-in;
+    transition: transform 0.1s ease-in, -webkit-transform 0.1s ease-in;
+    margin-right: 0.1rem;
+    vertical-align: middle; }
+  .c-btn--transparent span {
+    vertical-align: middle; }
 
 .c-login {
   width: 100%;

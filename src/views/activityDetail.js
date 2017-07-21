@@ -10,6 +10,9 @@ import PublishButton from '../components/publishButton'
 import MapboxMap from '../components/mapbox'
 import {getCookie} from '../components/cookieHelper'
 import {getUserStatus} from '../components/firebase'
+import domtoimage from 'dom-to-image';
+import fileSaver from 'file-saver';
+import {IconDownload} from '../components/icons/icons'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -177,6 +180,45 @@ class ActivityDetail extends Component {
 
   }
 
+  downloadSpeedChart = () => {
+
+    let copyNode = document.getElementById("activityCard--speed")
+
+    domtoimage.toBlob(copyNode)
+    .then(function (blob) {
+        fileSaver.saveAs(blob, 'speed_chart.png');
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });
+  }
+
+  downloadHeartrateChart = () => {
+
+    let copyNode = document.getElementById("activityCard--heartrate")
+
+    domtoimage.toBlob(copyNode)
+    .then(function (blob) {
+        fileSaver.saveAs(blob, 'heartrate_chart.png');
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });
+  }
+
+  downloadCadenceChart = () => {
+
+    let copyNode = document.getElementById("activityCard--cadence")
+
+    domtoimage.toBlob(copyNode)
+    .then(function (blob) {
+        fileSaver.saveAs(blob, 'cadence_chart.png');
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });
+  }
+
   render() {
 
     // Distance
@@ -238,6 +280,8 @@ class ActivityDetail extends Component {
               </div>
             </div>
           </div>
+
+          <div id="box1"></div>
           <div className="o-activity-detail__summary">
             <div className="c-activity-summary o-flex o-flex-justify--start">
               {activityDistance ?
@@ -263,7 +307,7 @@ class ActivityDetail extends Component {
             {
               activityTotalCalories
               ?
-              <div className="c-activity-graph c-activity-graph--calories t-top-spacing--l">
+              <div id="activityCard--calories" className="c-activity-graph c-activity-graph--calories t-top-spacing--l">
                 <div className="c-activity-graph-container">
                   <h3 className="t-bottom-spacing--xl">Calories Burned</h3>
                   <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
@@ -283,8 +327,9 @@ class ActivityDetail extends Component {
             {/* Speed Summary Card */}
             {
               activityAverageSpeed ?
-                <div className="c-activity-graph c-activity-graph--velocity t-top-spacing--l">
-                  <div className="c-activity-graph-container">
+              <div id="activityCard--speed" className="c-activity-graph c-activity-graph--velocity t-top-spacing--l">
+                <div className="c-activity-graph-container">
+                  <div className="o-flex o-flex-align--start">
                     { this.state.velocityStream && this.state.altitudeStream ?
                       <h3 className="t-bottom-spacing--xl">Speed
                         <span className="c-activity-graph__header--supplementary "> & Elevation</span>
@@ -292,38 +337,44 @@ class ActivityDetail extends Component {
                       :
                       <h3 className="t-bottom-spacing--xl">Speed</h3>
                     }
-                    <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
-                      <ActivityStat type="large" label="average" value={activityAverageSpeed} unit="km"/>
-                      <ActivityStat type="large" label="max" value={activityMaxSpeed} unit="km"/>
-                    </div>
-                    {this.state.velocityStream
-                      ?
-                      <ActivityChart
-                        altitudeStream={this.state.altitudeStream}
-                        distanceStream={this.state.distanceStream}
-                        mainDataStream={this.state.velocityStream}
-                        dataType="velocity"
-                        dataTypeLegendLabel="Speed"
-                        dataTypeUnit="KM/H"
-                      />
-                      : null
-                    }
+                    <button className="c-btn c-btn--transparent" onClick={this.downloadSpeedChart}><IconDownload className="c-icon"/><span>Download</span></button>
                   </div>
+
+                  <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
+                    <ActivityStat type="large" label="average" value={activityAverageSpeed} unit="km"/>
+                    <ActivityStat type="large" label="max" value={activityMaxSpeed} unit="km"/>
+                  </div>
+                  {this.state.velocityStream
+                    ?
+                    <ActivityChart
+                      altitudeStream={this.state.altitudeStream}
+                      distanceStream={this.state.distanceStream}
+                      mainDataStream={this.state.velocityStream}
+                      dataType="velocity"
+                      dataTypeLegendLabel="Speed"
+                      dataTypeUnit="KM/H"
+                    />
+                    : null
+                  }
                 </div>
+              </div>
               : null
             }
             {/* Heart Rate Summary Card */}
             {
               activityAverageHeartRate ?
-                <div className="c-activity-graph c-activity-graph--heartrate t-top-spacing--l">
+                <div id="activityCard--heartrate" className="c-activity-graph c-activity-graph--heartrate t-top-spacing--l">
                   <div className="c-activity-graph-container">
-                    { this.state.heartrateStream && this.state.altitudeStream ?
-                      <h3 className="t-bottom-spacing--xl">Heart Rate
-                        <span className="c-activity-graph__header--supplementary "> & Elevation</span>
-                      </h3>
-                      :
-                      <h3 className="t-bottom-spacing--xl">Heart Rate</h3>
-                    }
+                    <div className="o-flex o-flex-align--start">
+                      { this.state.heartrateStream && this.state.altitudeStream ?
+                        <h3 className="t-bottom-spacing--xl">Heart Rate
+                          <span className="c-activity-graph__header--supplementary "> & Elevation</span>
+                        </h3>
+                        :
+                        <h3 className="t-bottom-spacing--xl">Heart Rate</h3>
+                      }
+                      <button className="c-btn c-btn--transparent" onClick={this.downloadHeartrateChart}><IconDownload className="c-icon"/><span>Download</span></button>
+                    </div>
                     <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
                       <ActivityStat type="large" label="average" value={activityAverageHeartRate} unit="bpm"/>
                       <ActivityStat type="large" label="max" value={activityMaxHeartRate} unit="bpm"/>
@@ -346,15 +397,18 @@ class ActivityDetail extends Component {
             {/* Cadence Summary Card */}
             {
               activityAverageCadence ?
-                <div className="c-activity-graph c-activity-graph--cadence t-top-spacing--l">
+                <div id="activityCard--cadence" className="c-activity-graph c-activity-graph--cadence t-top-spacing--l">
                   <div className="c-activity-graph-container">
-                    { this.state.cadenceStream && this.state.altitudeStream ?
-                      <h3 className="t-bottom-spacing--xl">Cadence
-                        <span className="c-activity-graph__header--supplementary "> & Elevation</span>
-                      </h3>
-                      :
-                      <h3 className="t-bottom-spacing--xl">Cadence</h3>
-                    }
+                    <div className="o-flex o-flex-align--start">
+                      { this.state.cadenceStream && this.state.altitudeStream ?
+                        <h3 className="t-bottom-spacing--xl">Cadence
+                          <span className="c-activity-graph__header--supplementary "> & Elevation</span>
+                        </h3>
+                        :
+                        <h3 className="t-bottom-spacing--xl">Cadence</h3>
+                      }
+                      <button className="c-btn c-btn--transparent" onClick={this.downloadCadenceChart}><IconDownload className="c-icon"/><span>Download</span></button>
+                    </div>
                     <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
                       <ActivityStat type="large" label="average" value={activityAverageCadence} unit="rpm"/>
                     </div>

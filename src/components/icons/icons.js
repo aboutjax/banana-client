@@ -56,4 +56,12 @@ const IconCloud = (props) => {
   )
 }
 
-export {IconBookmark, IconArrowLeft, IconArrowRight, IconBookmarkSolid, IconCheckLine,IconProgress, IconCloud}
+const IconDownload = (props) => {
+  return(
+    <div className={props.className}>
+      <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><title>download</title><path d="M7 9.586V4c0-.552.448-1 1-1s1 .448 1 1v5.586l2.293-2.293c.39-.39 1.024-.39 1.414 0 .39.39.39 1.024 0 1.414l-4 4c-.39.39-1.024.39-1.414 0l-4-4c-.39-.39-.39-1.024 0-1.414.39-.39 1.024-.39 1.414 0L7 9.586z" fill-rule="nonzero"/></svg>
+    </div>
+  )
+}
+
+export {IconBookmark, IconArrowLeft, IconArrowRight, IconBookmarkSolid, IconCheckLine,IconProgress, IconCloud, IconDownload}
