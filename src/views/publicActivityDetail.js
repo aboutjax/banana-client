@@ -132,11 +132,11 @@ class PublicActivityDetail extends Component {
     activityMaxHeartRate = this.state.data.max_heartrate
 
     // Food Burned
-    foodBurnedBanana = _.round(activityTotalCalories / 90, 0)
-    foodBurnedApples = _.round(activityTotalCalories / 52, 0)
-    foodBurnedBeers = _.round(activityTotalCalories / 208, 0)
-    foodBurnedCookies = _.round(activityTotalCalories / 50, 0)
-    foodBurnedCheeseburgers = _.round(activityTotalCalories / 303, 0)
+    foodBurnedBanana = _.round(activityTotalCalories / 90, 1)
+    foodBurnedApples = _.round(activityTotalCalories / 52, 1)
+    foodBurnedBeers = _.round(activityTotalCalories / 208, 1)
+    foodBurnedCookies = _.round(activityTotalCalories / 50, 1)
+    foodBurnedCheeseburgers = _.round(activityTotalCalories / 303, 1)
 
     if (this.state.loading) {
       return (
@@ -189,7 +189,7 @@ class PublicActivityDetail extends Component {
               ?
               <div className="c-activity-graph c-activity-graph--calories t-top-spacing--l">
                 <div className="c-activity-graph-container">
-                  <h3 className="t-bottom-spacing--xl">Food Burned</h3>
+                  <h3 className="t-bottom-spacing--xl">Calories Burned</h3>
                   <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
                     <ActivityStat type="large" label="🍌 Bananas" value={foodBurnedBanana}/>
                     <ActivityStat type="large" label="🍎 Apples" value={foodBurnedApples}/>
