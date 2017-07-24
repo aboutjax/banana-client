@@ -160,7 +160,7 @@
 }
 
 .c-activity-graph__header--supplementary {
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .c-activity-graph--heartrate {
@@ -224,4 +224,66 @@
 
 .c-activity__has-chart-icon--heartrate {
   background-color: $colour-heartrate-base
+}
+
+// Activity Food Cards
+
+.c-activity-food-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: $spacing-l;
+  grid-row-gap: $spacing-l;
+
+  @include smallish {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.c-activity-food-card {
+  border-radius: 0.5rem;
+  background: $shark;
+  height: 35rem;
+  overflow: hidden;
+  position: relative;
+
+  @include smallish {
+      height: 30rem;
+  }
+}
+
+.c-activity-food-card__number {
+  font-weight: 300;
+}
+
+.c-activity-food-card__header {
+  font-weight: 300;
+  margin-bottom: $spacing;
+}
+
+.c-activity-food-card__image {
+  position: absolute;
+  bottom: 0;
+  width: 30rem;
+  height: 30rem;
+  right: -60%;
+  filter: drop-shadow(0 0.2rem 0.4rem rgba(0, 0, 0, 0.3));
+
+  @include medium {
+    right: -20%;
+  }
+}
+
+.c-activity-food-card__image--filter {
+  filter: blur(20rem);
+  right: -20%;
+  width: 50rem;
+  height: 50rem;
+
+  @include smallish {
+    right: -10%;
+  }
+}
+
+.c-activity-food--banana {
+
 }

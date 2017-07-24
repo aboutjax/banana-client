@@ -975,7 +975,7 @@ svg {
   border-radius: 0.5rem; }
 
 .c-activity-graph__header--supplementary {
-  color: rgba(0, 0, 0, 0.3); }
+  color: rgba(0, 0, 0, 0.5); }
 
 .c-activity-graph--heartrate {
   background-image: -webkit-gradient(linear, left bottom, left top, from(#F7392E), to(#F9674E));
@@ -1027,6 +1027,54 @@ svg {
 
 .c-activity__has-chart-icon--heartrate {
   background-color: #F7392E; }
+
+.c-activity-food-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem; }
+  @media only screen and (min-width: 480px) {
+    .c-activity-food-cards {
+      grid-template-columns: 1fr 1fr; } }
+
+.c-activity-food-card {
+  border-radius: 0.5rem;
+  background: #1F2428;
+  height: 35rem;
+  overflow: hidden;
+  position: relative; }
+  @media only screen and (min-width: 480px) {
+    .c-activity-food-card {
+      height: 30rem; } }
+
+.c-activity-food-card__number {
+  font-weight: 300; }
+
+.c-activity-food-card__header {
+  font-weight: 300;
+  margin-bottom: 1rem; }
+
+.c-activity-food-card__image {
+  position: absolute;
+  bottom: 0;
+  width: 30rem;
+  height: 30rem;
+  right: -60%;
+  -webkit-filter: drop-shadow(0 0.2rem 0.4rem rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 0.2rem 0.4rem rgba(0, 0, 0, 0.3)); }
+  @media only screen and (min-width: 768px) {
+    .c-activity-food-card__image {
+      right: -20%; } }
+
+.c-activity-food-card__image--filter {
+  -webkit-filter: blur(20rem);
+  filter: blur(20rem);
+  right: -20%;
+  width: 50rem;
+  height: 50rem; }
+  @media only screen and (min-width: 480px) {
+    .c-activity-food-card__image--filter {
+      right: -10%; } }
 
 .c-label {
   border-radius: 20px;
@@ -1383,3 +1431,6 @@ svg {
 .c-public-link {
   padding: 0.6rem 0.8rem;
   background: #008cff; }
+
+.c-box {
+  padding: 3rem; }

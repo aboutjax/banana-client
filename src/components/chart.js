@@ -5,12 +5,14 @@ import _ from 'lodash';
 defaults.global.elements.point.borderWidth = 0;
 defaults.global.elements.point.radius = 0;
 defaults.global.elements.point.backgroundColor = 'rgba(0,0,0,0)';
-defaults.global.elements.line.tension = 0.5;
+defaults.global.elements.line.tension = 0.3;
 defaults.global.elements.line.borderWidth = 0;
 defaults.global.defaultFontFamily = "'-apple-system','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
 const globalTicksFontSize = 9
-const globalLineWidth = 0.7
+const globalLineWidth = 1
+const globalElevationFillColor = 'rgba(0,0,0,0.5)';
+const globalElevationBorderColor = 'rgba(0,0,0,0)';
 
 
 function ActivityChart(props) {
@@ -37,9 +39,9 @@ function ActivityChart(props) {
         },{
           label: 'Elevation',
           fill: true,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          backgroundColor: globalElevationFillColor,
+          borderColor: globalElevationBorderColor,
           borderWidth: 0,
-          borderColor: 'rgba(0,0,0,0)',
           data: props.altitudeStream
         }
       ]
@@ -131,7 +133,8 @@ function ActivityChart(props) {
         },{
           label: 'Elevation',
           fill: true,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          backgroundColor: globalElevationFillColor,
+          borderColor: globalElevationBorderColor,
           borderWidth: 0,
           data: props.altitudeStream
         }
@@ -229,7 +232,8 @@ function ActivityChart(props) {
         },{
           label: 'Elevation',
           fill: true,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          backgroundColor: globalElevationFillColor,
+          borderColor: globalElevationBorderColor,
           borderWidth: 0,
           data: props.altitudeStream
         }
@@ -313,7 +317,7 @@ function ActivityChart(props) {
 
 
   return(
-    <Line data={data} options={options} width={100} height={40}/>
+    <Line data={data} options={options} width={50} height={10}/>
   )
 }
 
