@@ -1,8 +1,9 @@
 .c-activity-summary {
 
   padding: $spacing-l;
-  background: $woodsmoke;
-  
+  background: $white;
+  color: $shark;
+
   .c-activity__stat {
     flex-basis: auto;
     margin-right: $spacing-xl;
@@ -21,6 +22,11 @@
     @include medium{
       font-size: 3.2rem;
     }
+  }
+
+  .theme--dark & {
+    background: $woodsmoke;
+    color: $white;
   }
 }
 

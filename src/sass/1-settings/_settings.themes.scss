@@ -1,0 +1,27 @@
+// Dark theme
+$theme-dark-colour-text: $white;
+$theme-dark-colour-primary: $dodger-blue;
+$theme-dark-colour-framing: $mystic;
+$theme-dark-colour-white: $white;
+$theme-dark-colour-supplementary: $gunsmoke;
+$theme-dark-colour-background: $shark;
+
+// Dark theme
+$theme-light-colour-text: $shark;
+$theme-light-colour-primary: $dodger-blue;
+$theme-light-colour-framing: $mystic;
+$theme-light-colour-white: $white;
+$theme-light-colour-supplementary: $gunsmoke;
+$theme-light-colour-background: $white;
+
+$colour-heartrate-base: $red-orange;
+$colour-heartrate-alt: $persimmon;
+
+$colour-velocity-base: $outer-space;
+$colour-velocity-alt: lighten($colour-velocity-base, 4);
+
+$colour-cadence-base: $royal-purple;
+$colour-cadence-alt: lighten($colour-cadence-base, 4);
+
+$colour-calories-base: $outer-space;
+$colour-calories-alt: lighten($colour-calories-base, 4);

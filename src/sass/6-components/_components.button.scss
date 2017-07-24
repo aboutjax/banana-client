@@ -34,7 +34,7 @@
 .c-btn--publish,
 .c-btn--favourite {
   background: transparent;
-  color: $colour-text;
+  color: $shark;
 
   .c-icon {
     transition: transform 0.1s ease-in;
@@ -49,6 +49,11 @@
   &.is-public,
   &.is-favourite {
     background-color: $colour-primary;
+    color: $colour-white;
+  }
+
+  .theme--dark & {
+    color: $colour-white;
   }
 }
 

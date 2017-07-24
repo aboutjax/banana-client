@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   border-radius: $border-radius;
-  color: $colour-text;
   overflow: hidden;
-  background: $woodsmoke;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  color: $shark;
+  background: $white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05);
   position: relative;
 
   & + & {
@@ -14,6 +14,12 @@
 
   @include smallish {
     flex-direction: row;
+  }
+
+  .theme--dark & {
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    color: $white;
+    background: $woodsmoke;
   }
 }
 
@@ -96,25 +102,17 @@
   flex-direction: column;
   margin-top: $spacing-l;
   margin-right: $spacing-xl;
-
-  @include small {
-
-  };
 }
 
 .c-activity__stat-label {
   text-transform: capitalize;
   font-size: 1.3rem;
   margin-bottom: $spacing-s;
-  color: transparentize($colour-text, 0.5);
+  opacity: 0.5;
 }
 
 .c-activity__stat-value {
   font-size: 2rem;
-
-  @include medium {
-    font-size: 1.3rem;
-  };
 }
 
 .c-activity__stat-value--large {
@@ -123,7 +121,6 @@
 
 .c-activity__stat-unit {
   font-size: 1.6rem;
-  opacity: 0.5;
   margin-left: $spacing-xs;
 }
 
@@ -157,30 +154,53 @@
 .c-activity-graph {
   padding: $spacing-xl;
   border-radius: 0.5rem;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
 }
 
 .c-activity-graph__header--supplementary {
-  color: rgba(0, 0, 0, 0.3);
+  color: $woodsmoke;
+  opacity: 0.2;
 }
 
 .c-activity-graph--heartrate {
+  background: $colour-white;
+
+  .theme--dark & {
     background-image: linear-gradient(0deg, $colour-heartrate-base 0%, $colour-heartrate-alt 100%);
+  }
 }
 
 .c-activity-graph--velocity {
-    background-image: linear-gradient(0deg, $colour-velocity-base 0%, $colour-velocity-alt 100%);
+    background: $colour-white;
+
+    .theme--dark & {
+      background-image: linear-gradient(0deg, $colour-velocity-base 0%, $colour-velocity-alt 100%);
+    }
 }
 
 .c-activity-graph--cadence {
-    background-image: linear-gradient(0deg, $colour-cadence-base 0%, $colour-cadence-alt 100%);
+  background: $colour-white;
+  color: $shark;
+
+    .theme--dark & {
+      background-image: linear-gradient(0deg, $colour-cadence-base 0%, $colour-cadence-alt 100%);
+    }
 }
 
 .c-activity-graph--calories {
+  background: $colour-white;
+
+  .theme--dark & {
     background-image: linear-gradient(0deg, $colour-calories-base 0%, $colour-calories-alt 100%);
+  }
 }
 
-.c-activity-chart-container {
-  height: 40rem;
+.c-activity-graph-container {
+  color: $shark;
+
+  .theme--dark & {
+    color: $white;
+  }
 }
 
 .c-activity__has-chart-icon {
@@ -224,4 +244,18 @@
 
 .c-activity__has-chart-icon--heartrate {
   background-color: $colour-heartrate-base
+}
+
+#activityCard--heartrate,
+#activityCard--cadence,
+#activityCard--speed {
+  color: #FFF;
+  font-family: 'helvetica neue';
+}
+
+.activityCards {
+  display: none;
+  &.inView {
+    display: block;
+  }
 }

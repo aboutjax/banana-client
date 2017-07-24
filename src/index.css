@@ -506,9 +506,12 @@ body {
   padding: 0;
   font-size: 1.6rem;
   font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  background: #1F2428;
-  color: #FFFFFF;
+  background: #FAFAFA;
+  color: #1F2428;
   -webkit-font-smoothing: antialiased; }
+  body.theme--dark {
+    color: #FFFFFF;
+    background: #1F2428; }
 
 h1 {
   font-weight: 800;
@@ -560,7 +563,6 @@ svg {
   margin: 0 auto; }
 
 .o-app {
-  max-width: 960px;
   min-height: 90vh;
   display: grid;
   grid-template-columns: 1fr;
@@ -671,6 +673,8 @@ svg {
   margin-bottom: 1rem; }
 
 .o-activity-detail__summary {
+  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   border-radius: 0.5rem;
   overflow: hidden; }
 
@@ -815,11 +819,11 @@ svg {
   -ms-flex-direction: column;
   flex-direction: column;
   border-radius: 0.5rem;
-  color: #FFFFFF;
   overflow: hidden;
-  background: #101010;
-  -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  color: #1F2428;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
   position: relative; }
   .c-activity + .c-activity {
     margin-top: 2rem; }
@@ -829,6 +833,11 @@ svg {
       -webkit-box-direction: normal;
       -ms-flex-direction: row;
       flex-direction: row; } }
+  .theme--dark .c-activity {
+    -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    background: #101010; }
 
 .c-activity__time {
   color: #7e898a;
@@ -933,20 +942,16 @@ svg {
   text-transform: capitalize;
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  color: rgba(255, 255, 255, 0.5); }
+  opacity: 0.5; }
 
 .c-activity__stat-value {
   font-size: 2rem; }
-  @media only screen and (min-width: 768px) {
-    .c-activity__stat-value {
-      font-size: 1.3rem; } }
 
 .c-activity__stat-value--large {
   font-size: 3.2rem; }
 
 .c-activity__stat-unit {
   font-size: 1.6rem;
-  opacity: 0.5;
   margin-left: 0.33333rem; }
 
 .c-activity-interactive-map-container {
@@ -972,29 +977,43 @@ svg {
 
 .c-activity-graph {
   padding: 3rem;
-  border-radius: 0.5rem; }
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05); }
 
 .c-activity-graph__header--supplementary {
-  color: rgba(0, 0, 0, 0.3); }
+  color: #101010;
+  opacity: 0.2; }
 
 .c-activity-graph--heartrate {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#F7392E), to(#F9674E));
-  background-image: linear-gradient(0deg, #F7392E 0%, #F9674E 100%); }
+  background: #FFFFFF; }
+  .theme--dark .c-activity-graph--heartrate {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#F7392E), to(#F9674E));
+    background-image: linear-gradient(0deg, #F7392E 0%, #F9674E 100%); }
 
 .c-activity-graph--velocity {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#323940), to(#3b434b));
-  background-image: linear-gradient(0deg, #323940 0%, #3b434b 100%); }
+  background: #FFFFFF; }
+  .theme--dark .c-activity-graph--velocity {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#323940), to(#3b434b));
+    background-image: linear-gradient(0deg, #323940 0%, #3b434b 100%); }
 
 .c-activity-graph--cadence {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#733d9d), to(#7e43ac));
-  background-image: linear-gradient(0deg, #733d9d 0%, #7e43ac 100%); }
+  background: #FFFFFF;
+  color: #1F2428; }
+  .theme--dark .c-activity-graph--cadence {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#733d9d), to(#7e43ac));
+    background-image: linear-gradient(0deg, #733d9d 0%, #7e43ac 100%); }
 
 .c-activity-graph--calories {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#323940), to(#3b434b));
-  background-image: linear-gradient(0deg, #323940 0%, #3b434b 100%); }
+  background: #FFFFFF; }
+  .theme--dark .c-activity-graph--calories {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#323940), to(#3b434b));
+    background-image: linear-gradient(0deg, #323940 0%, #3b434b 100%); }
 
-.c-activity-chart-container {
-  height: 40rem; }
+.c-activity-graph-container {
+  color: #1F2428; }
+  .theme--dark .c-activity-graph-container {
+    color: #FFFFFF; }
 
 .c-activity__has-chart-icon {
   position: relative;
@@ -1027,6 +1046,17 @@ svg {
 
 .c-activity__has-chart-icon--heartrate {
   background-color: #F7392E; }
+
+#activityCard--heartrate,
+#activityCard--cadence,
+#activityCard--speed {
+  color: #FFF;
+  font-family: 'helvetica neue'; }
+
+.activityCards {
+  display: none; }
+  .activityCards.inView {
+    display: block; }
 
 .c-label {
   border-radius: 20px;
@@ -1078,7 +1108,7 @@ svg {
 .c-btn--publish,
 .c-btn--favourite {
   background: transparent;
-  color: #FFFFFF; }
+  color: #1F2428; }
   .c-btn--publish .c-icon,
   .c-btn--favourite .c-icon {
     -webkit-transition: -webkit-transform 0.1s ease-in;
@@ -1093,7 +1123,11 @@ svg {
   .c-btn--publish.is-public, .c-btn--publish.is-favourite,
   .c-btn--favourite.is-public,
   .c-btn--favourite.is-favourite {
-    background-color: #008cff; }
+    background-color: #008cff;
+    color: #FFFFFF; }
+  .theme--dark .c-btn--publish, .theme--dark
+  .c-btn--favourite {
+    color: #FFFFFF; }
 
 .c-btn--transparent {
   background: transparent;
@@ -1144,6 +1178,8 @@ svg {
   left: 0;
   width: 100%;
   height: 100%; }
+  .c-loading_spinner-wrap.dark .c-loading_spinner {
+    fill: #1F2428; }
 
 .c-loading_spinner {
   display: block;
@@ -1203,7 +1239,8 @@ svg {
 
 .c-activity-summary {
   padding: 2rem;
-  background: #101010; }
+  background: #FFFFFF;
+  color: #1F2428; }
   .c-activity-summary .c-activity__stat {
     -ms-flex-preferred-size: auto;
     flex-basis: auto;
@@ -1217,6 +1254,9 @@ svg {
   @media only screen and (min-width: 768px) {
     .c-activity-summary .c-activity__stat-value--large {
       font-size: 3.2rem; } }
+  .theme--dark .c-activity-summary {
+    background: #101010;
+    color: #FFFFFF; }
 
 .c-activity-summary--average .c-activity__stat {
   -ms-flex-preferred-size: auto;
@@ -1311,7 +1351,7 @@ svg {
   opacity: .5; }
 
 .c-footer__power-by-strava {
-  width: 15rem; }
+  width: 10rem; }
 
 .c-footer__credits {
   font-size: 1.1rem; }
@@ -1383,3 +1423,24 @@ svg {
 .c-public-link {
   padding: 0.6rem 0.8rem;
   background: #008cff; }
+
+.c-exporting-loader {
+  position: fixed;
+  z-index: 9;
+  color: #1F2428;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+  .c-exporting-loader h3 {
+    margin-top: 7rem; }
