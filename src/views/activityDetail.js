@@ -415,7 +415,7 @@ class ActivityDetail extends Component {
                   <ActivityFoodCard name="Banana" value={foodBurnedBanana} imageSrc="/img/food/banana.png"/>
                   <ActivityFoodCard name="Cookies" value={foodBurnedCookies} imageSrc="/img/food/cookie.png"/>
                   <ActivityFoodCard name="Cheeseburgers" value={foodBurnedCheeseburgers} imageSrc="/img/food/cheeseburger.png"/>
-                  <ActivityFoodCard name="Beer" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/>
+                  {/* <ActivityFoodCard name="Beer" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/> */}
                 </div>
               </div>
               :

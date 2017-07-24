@@ -1033,9 +1033,9 @@ svg {
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 2rem;
   grid-row-gap: 2rem; }
-  @media only screen and (min-width: 480px) {
+  @media only screen and (min-width: 768px) {
     .c-activity-food-cards {
-      grid-template-columns: 1fr 1fr; } }
+      grid-template-columns: 1fr 1fr 1fr; } }
 
 .c-activity-food-card {
   border-radius: 0.5rem;
@@ -1059,12 +1059,12 @@ svg {
   bottom: 0;
   width: 30rem;
   height: 30rem;
-  right: -60%;
+  right: -40%;
   -webkit-filter: drop-shadow(0 0.2rem 0.4rem rgba(0, 0, 0, 0.3));
   filter: drop-shadow(0 0.2rem 0.4rem rgba(0, 0, 0, 0.3)); }
   @media only screen and (min-width: 768px) {
     .c-activity-food-card__image {
-      right: -20%; } }
+      right: -40%; } }
 
 .c-activity-food-card__image--filter {
   -webkit-filter: blur(20rem);
