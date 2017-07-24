@@ -509,9 +509,6 @@ body {
   background: #FAFAFA;
   color: #1F2428;
   -webkit-font-smoothing: antialiased; }
-  body.theme--dark {
-    color: #FFFFFF;
-    background: #1F2428; }
 
 h1 {
   font-weight: 800;
@@ -673,8 +670,8 @@ svg {
   margin-bottom: 1rem; }
 
 .o-activity-detail__summary {
-  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05);
   border-radius: 0.5rem;
   overflow: hidden; }
 
@@ -720,18 +717,19 @@ svg {
     color: #008cff; }
 
 .c-navigation__nav-item {
-  padding: 1rem;
+  padding: 0.5rem;
   color: #7e898a;
-  position: relative; }
+  position: relative;
+  border-radius: .2rem; }
   .c-navigation__nav-item:hover {
-    background-color: rgba(0, 0, 0, 0.2); }
+    background-color: rgba(0, 0, 0, 0.1); }
   .c-navigation__nav-item .c-tooltip {
     visibility: hidden;
     opacity: 0;
     position: absolute;
     right: 0;
     top: 4rem;
-    background-color: #14171a;
+    background-color: #ededed;
     font-size: 1.1rem;
     color: #FFFFFF;
     padding: 1rem;
@@ -765,12 +763,12 @@ svg {
   font-size: 1.6rem; }
 
 .c-navigation__dropdown {
-  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: .5rem;
   width: 25rem;
   background: #FFFFFF;
-  color: #1F2428;
+  color: #FAFAFA;
   position: absolute;
   right: 0;
   top: 4.5rem;
@@ -966,20 +964,14 @@ svg {
   bottom: 0;
   width: 100%; }
   .c-activity-interactive-map .mapboxgl-popup-content {
-    color: #FFFFFF;
+    color: #1F2428;
     font-size: 1.3rem;
-    background-color: #1F2428;
+    background-color: #FAFAFA;
     padding: 1rem;
     font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
   .c-activity-interactive-map .mapboxgl-popup-tip {
-    border-top-color: #1F2428;
-    border-bottom-color: #1F2428; }
-
-.c-activity-graph {
-  padding: 3rem;
-  border-radius: 0.5rem;
-  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05); }
+    border-top-color: #FAFAFA;
+    border-bottom-color: #FAFAFA; }
 
 .c-activity-graph__header--supplementary {
   color: #101010;
@@ -1031,7 +1023,7 @@ svg {
     position: absolute;
     right: 0;
     bottom: 2rem;
-    background: #1F2428;
+    background: #FAFAFA;
     font-size: 1.1rem;
     padding: 1rem;
     white-space: nowrap;
@@ -1090,7 +1082,7 @@ svg {
   letter-spacing: .05rem;
   border-radius: .2rem;
   background-color: #FFFFFF;
-  color: #1F2428;
+  color: #FAFAFA;
   -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1); }
   .c-btn:disabled {
@@ -1131,7 +1123,7 @@ svg {
 
 .c-btn--transparent {
   background: transparent;
-  color: #FFFFFF;
+  color: #1F2428;
   -webkit-box-shadow: none;
   box-shadow: none; }
   .no-touchevents .c-btn--transparent:hover {
@@ -1145,6 +1137,8 @@ svg {
     vertical-align: middle; }
   .c-btn--transparent span {
     vertical-align: middle; }
+  .theme--dark .c-btn--transparent {
+    color: #FFFFFF; }
 
 .c-login {
   width: 100%;
@@ -1179,7 +1173,7 @@ svg {
   width: 100%;
   height: 100%; }
   .c-loading_spinner-wrap.dark .c-loading_spinner {
-    fill: #1F2428; }
+    fill: #FAFAFA; }
 
 .c-loading_spinner {
   display: block;
@@ -1281,7 +1275,7 @@ svg {
   justify-content: center;
   padding: 2rem 0;
   margin-top: 3rem;
-  color: #1F2428; }
+  color: #FAFAFA; }
 
 .c-paginator__link .disabled {
   opacity: 0.2;
@@ -1303,9 +1297,7 @@ svg {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  z-index: 2;
-  -webkit-filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5)); }
+  z-index: 2; }
 
 .c-homepage__hero-image__image {
   z-index: 1;
@@ -1314,8 +1306,8 @@ svg {
   transform: rotateZ(-20deg) scale(0.6) translateY(-70%);
   -webkit-transform: 0 0;
   transform: 0 0;
-  -webkit-filter: drop-shadow(0 10px 100px black);
-  filter: drop-shadow(0 10px 100px black); }
+  -webkit-filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.1)); }
   @media only screen and (max-width: 479px) {
     .c-homepage__hero-image__image {
       -webkit-transform: rotateZ(-20deg) scale(0.6) translateY(-110%) translateX(-20%);
@@ -1427,7 +1419,7 @@ svg {
 .c-exporting-loader {
   position: fixed;
   z-index: 9;
-  color: #1F2428;
+  color: #FAFAFA;
   top: 0;
   left: 0;
   width: 100%;
@@ -1444,3 +1436,9 @@ svg {
   justify-content: center; }
   .c-exporting-loader h3 {
     margin-top: 7rem; }
+
+.c-box {
+  padding: 3rem;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05); }

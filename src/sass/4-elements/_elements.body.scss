@@ -21,12 +21,7 @@ body {
   padding: 0;
   font-size: 1.6rem;
   font-family: $default-font-family;
-  background: $alabaster;
-  color: $shark;
+  background: $colour-background;
+  color: $colour-text;
   -webkit-font-smoothing: antialiased;
-
-  &.theme--dark {
-    color: $white;
-    background: $shark;
-  }
 }

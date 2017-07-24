@@ -59,7 +59,7 @@
 
 .c-btn--transparent {
   background: transparent;
-  color: $colour-text;
+  color: $shark;
   box-shadow: none;
 
   @include hover {
@@ -74,6 +74,10 @@
 
   span {
     vertical-align: middle;
+  }
+
+  .theme--dark & {
+    color: $white;
   }
 
 }

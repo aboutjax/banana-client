@@ -5,12 +5,18 @@ import _ from 'lodash';
 defaults.global.elements.point.borderWidth = 0;
 defaults.global.elements.point.radius = 0;
 defaults.global.elements.point.backgroundColor = 'rgba(0,0,0,0)';
-defaults.global.elements.line.tension = 0.5;
+defaults.global.elements.line.tension = 0.1;
 defaults.global.elements.line.borderWidth = 0;
 defaults.global.defaultFontFamily = "'-apple-system','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
 const globalTicksFontSize = 9
-const globalLineWidth = 0.7
+const globalLineWidth = 0.4
+const globalHeartrateColor = 'rgba(255, 74, 74, 1)'
+const globalCadenceColor = 'rgba(136, 0, 219, 1)'
+const globalVelocityColor = 'rgba(32, 32, 32, 1)'
+const globalElevationFillColor = 'rgba(0, 0, 0, 0.1)'
+const globalElevationBorderColor = 'rgba(0, 0, 0, 0)'
+const globalTickColor = 'rgba(149, 149, 149, 1)'
 
 
 function ActivityChart(props) {
@@ -29,7 +35,7 @@ function ActivityChart(props) {
       datasets: [
         {
           label: props.dataTypeLegendLabel,
-          borderColor: 'rgba(255, 255, 255, 1)',
+          borderColor: globalHeartrateColor,
           borderWidth: globalLineWidth,
           yAxisID: 'main-data-y-axis',
           fill: false,
@@ -37,9 +43,9 @@ function ActivityChart(props) {
         },{
           label: 'Elevation',
           fill: true,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          borderColor: globalElevationBorderColor,
+          backgroundColor: globalElevationFillColor,
           borderWidth: 0,
-          borderColor: 'rgba(0,0,0,0)',
           data: props.altitudeStream
         }
       ]
@@ -106,9 +112,9 @@ function ActivityChart(props) {
             position: 'right',
             ticks: {
               fontSize: globalTicksFontSize,
-              fontColor: 'rgba(255,255,255,0.5)',
+              fontColor: globalTickColor,
               autoSkip: true,
-              autoSkipPadding: 400,
+              autoSkipPadding: 800,
               callback: function(value) {
                 return _.round(value, 0) + ' ' + props.dataTypeUnit
               }
@@ -123,7 +129,7 @@ function ActivityChart(props) {
       datasets: [
         {
           label: props.dataTypeLegendLabel,
-          borderColor: 'rgba(255, 255, 255, 1)',
+          borderColor: globalVelocityColor,
           borderWidth: globalLineWidth,
           yAxisID: 'main-data-y-axis',
           fill: false,
@@ -131,7 +137,8 @@ function ActivityChart(props) {
         },{
           label: 'Elevation',
           fill: true,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          backgroundColor: globalElevationFillColor,
+          borderColor: globalElevationBorderColor,
           borderWidth: 0,
           data: props.altitudeStream
         }
@@ -200,7 +207,7 @@ function ActivityChart(props) {
             position: 'right',
             ticks: {
               fontSize: globalTicksFontSize,
-              fontColor: 'rgba(255,255,255,0.5)',
+              fontColor: globalTickColor,
               autoSkip: true,
               autoSkipPadding: 400,
               callback: function(value) {
@@ -217,9 +224,9 @@ function ActivityChart(props) {
       datasets: [
         {
           label: props.dataTypeLegendLabel,
-          borderColor: 'rgba(255, 255, 255, 1)',
+          borderColor: globalCadenceColor,
           borderWidth: 0,
-          pointRadius: 0.5,
+          pointRadius: 0.1,
           pointBorderWidth: 1,
           showLine: false,
           pointBackgroundColor: 'rgba(255, 255, 255, 1)',
@@ -229,7 +236,8 @@ function ActivityChart(props) {
         },{
           label: 'Elevation',
           fill: true,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          backgroundColor: globalElevationFillColor,
+          borderColor: globalElevationBorderColor,
           borderWidth: 0,
           data: props.altitudeStream
         }
@@ -298,7 +306,7 @@ function ActivityChart(props) {
             position: 'right',
             ticks: {
               fontSize: globalTicksFontSize,
-              fontColor: 'rgba(255,255,255,0.5)',
+              fontColor: globalTickColor,
               autoSkip: true,
               autoSkipPadding: 400,
               callback: function(value) {
@@ -313,7 +321,7 @@ function ActivityChart(props) {
 
 
   return(
-    <Line data={data} options={options} width={100} height={40}/>
+    <Line data={data} options={options} width={60} height={10}/>
   )
 }
 

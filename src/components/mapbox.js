@@ -30,7 +30,7 @@ class MapboxMap extends Component {
 
     const map = new mapboxgl.Map({
       container: this.container,
-      style: 'mapbox://styles/mapbox/dark-v9',
+      style: 'mapbox://styles/mapbox/light-v9',
       center: [
         startLatlng[1], startLatlng[0]
       ],

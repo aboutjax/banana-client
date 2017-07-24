@@ -11,8 +11,7 @@
 .c-homepage__hero-message {
   display: flex;
   align-items: center;
-  z-index: 2;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+  z-index: 2;;
 }
 
 .c-homepage__hero-image__image {
@@ -20,7 +19,7 @@
   position: fixed;
   transform: rotateZ(-20deg) scale(0.6) translateY(-70%);
   transform: 0 0;
-  filter: drop-shadow(0 10px 100px rgba(0, 0, 0, 1));
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.1));
 
   @include small {
     transform: rotateZ(-20deg) scale(0.6) translateY(-110%) translateX(-20%);
