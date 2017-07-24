@@ -1,4 +1,5 @@
 import React from 'react';
+import {IconStravaApi} from './icons/icons'
 
 let assetSrc = ''
 
@@ -12,9 +13,9 @@ function Footer() {
   return(
     <footer className="c-footer">
 
-        <img alt="" className="c-footer__power-by-strava" src={ assetSrc + "/img/api_logo_pwrdBy_strava_horiz_white.svg"}/>
+        <IconStravaApi className="c-icon c-footer__power-by-strava"/>
         <span className="c-footer__credits">
-          Made with <span aria-label="coffee"  role="img">☕️</span> by <a className="c-link" href="https://jackylee.co">Jacky Lee</a>
+          Made with <span aria-label="coffee" role="img">☕️</span> by <a className="c-link" href="https://jackylee.co">Jacky Lee</a>
         </span>
 
     </footer>
