@@ -1057,13 +1057,15 @@ svg {
 .c-activity-food-card__image {
   position: absolute;
   bottom: 0;
-  width: 30rem;
-  height: 30rem;
-  right: -40%;
+  width: 20rem;
+  height: 20rem;
+  right: -30%;
   -webkit-filter: drop-shadow(0 0.2rem 0.4rem rgba(0, 0, 0, 0.3));
   filter: drop-shadow(0 0.2rem 0.4rem rgba(0, 0, 0, 0.3)); }
   @media only screen and (min-width: 768px) {
     .c-activity-food-card__image {
+      width: 30rem;
+      height: 30rem;
       right: -40%; } }
 
 .c-activity-food-card__image--filter {

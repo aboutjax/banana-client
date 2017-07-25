@@ -7,6 +7,7 @@ import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
 import MapboxMap from '../components/mapbox'
 import fire from '../components/firebase'
+import ActivityFoodCard from '../components/foodCard'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -183,27 +184,6 @@ class PublicActivityDetail extends Component {
           </div>
 
           <div>
-            {/* Calories Card */}
-            {
-              activityTotalCalories
-              ?
-              <div className="c-activity-graph c-activity-graph--calories t-top-spacing--l">
-                <div className="c-activity-graph-container">
-                  <h3 className="t-bottom-spacing--xl">Calories Burned</h3>
-                  <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
-                    <ActivityStat type="large" label="Bananas" value={foodBurnedBanana} unit="🍌"/>
-                    <ActivityStat type="large" label="Apples" value={foodBurnedApples} unit="🍎"/>
-                    <ActivityStat type="large" label="Beers" value={foodBurnedBeers} unit="🍺"/>
-                    <ActivityStat type="large" label="Cookies" value={foodBurnedCookies} unit="🍪"/>
-                    <ActivityStat type="large" label="Cheeseburgers" value={foodBurnedCheeseburgers} unit="🍔"/>
-
-                  </div>
-
-                </div>
-              </div>
-              :
-              null
-            }
             {/* Speed Summary Card */}
             {
               activityAverageSpeed ?
@@ -296,6 +276,22 @@ class PublicActivityDetail extends Component {
                   </div>
                 </div>
               : null
+            }
+            {/* Food Cards */}
+            {
+              activityTotalCalories
+              ?
+              <div>
+                <h3 className="t-top-spacing--xl">Food Burned</h3>
+                <div className="c-activity-food-cards t-top-spacing--l">
+                  <ActivityFoodCard name="Bananas" value={foodBurnedBanana} imageSrc="/img/food/banana.png"/>
+                  <ActivityFoodCard name="Cookies" value={foodBurnedCookies} imageSrc="/img/food/cookie.png"/>
+                  <ActivityFoodCard name="Cheeseburgers" value={foodBurnedCheeseburgers} imageSrc="/img/food/cheeseburger.png"/>
+                  {/* <ActivityFoodCard name="Beer" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/> */}
+                </div>
+              </div>
+              :
+              null
             }
 
           </div>

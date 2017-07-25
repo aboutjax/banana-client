@@ -13,6 +13,7 @@ import {getUserStatus} from '../components/firebase'
 import domtoimage from 'dom-to-image';
 import fileSaver from 'file-saver';
 import {IconDownload} from '../components/icons/icons'
+import ActivityFoodCard from '../components/foodCard'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -406,13 +407,14 @@ class ActivityDetail extends Component {
                 </div>
               : null
             }
+            {/* Food Cards */}
             {
               activityTotalCalories
               ?
               <div>
                 <h3 className="t-top-spacing--xl">Food Burned</h3>
                 <div className="c-activity-food-cards t-top-spacing--l">
-                  <ActivityFoodCard name="Banana" value={foodBurnedBanana} imageSrc="/img/food/banana.png"/>
+                  <ActivityFoodCard name="Bananas" value={foodBurnedBanana} imageSrc="/img/food/banana.png"/>
                   <ActivityFoodCard name="Cookies" value={foodBurnedCookies} imageSrc="/img/food/cookie.png"/>
                   <ActivityFoodCard name="Cheeseburgers" value={foodBurnedCheeseburgers} imageSrc="/img/food/cheeseburger.png"/>
                   {/* <ActivityFoodCard name="Beer" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/> */}
@@ -426,17 +428,6 @@ class ActivityDetail extends Component {
       )
     }
   }
-}
-
-function ActivityFoodCard(props) {
-  return(
-    <div className="c-box c-activity-food-card">
-      <h4 className="c-activity-food-card__header">{props.name}</h4>
-      <h1 className="c-activity-food-card__number">{props.value}</h1>
-      <img className="c-activity-food-card__image c-activity-food-card__image--filter" src={props.imageSrc} alt=""/>
-      <img className="c-activity-food-card__image" src={props.imageSrc} alt=""/>
-    </div>
-  )
 }
 
 export default ActivityDetail
