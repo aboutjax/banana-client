@@ -1323,9 +1323,7 @@ svg {
   -webkit-transform: rotateZ(-20deg) scale(0.6) translateY(-70%);
   transform: rotateZ(-20deg) scale(0.6) translateY(-70%);
   -webkit-transform: 0 0;
-  transform: 0 0;
-  -webkit-filter: drop-shadow(0 10px 100px black);
-  filter: drop-shadow(0 10px 100px black); }
+  transform: 0 0; }
   @media only screen and (max-width: 479px) {
     .c-homepage__hero-image__image {
       -webkit-transform: rotateZ(-20deg) scale(0.6) translateY(-110%) translateX(-20%);

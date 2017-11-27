@@ -30,11 +30,11 @@ class MapboxMap extends Component {
 
     const map = new mapboxgl.Map({
       container: this.container,
-      style: 'mapbox://styles/mapbox/dark-v9',
+      style: 'mapbox://styles/mapbox/streets-v9',
       center: [
         startLatlng[1], startLatlng[0]
       ],
-      zoom: 8
+      zoom: 10
     })
 
     map.on('load', function() {
@@ -59,7 +59,7 @@ class MapboxMap extends Component {
         },
         "paint": {
           "line-color": "#0a67f2",
-          "line-width": 1
+          "line-width": 2
         }
       });
 
