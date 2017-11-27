@@ -11,7 +11,7 @@ defaults.global.defaultFontFamily = "'-apple-system','Helvetica Neue', 'Helvetic
 
 const globalTicksFontSize = 9
 const globalLineWidth = 1
-const globalElevationFillColor = 'rgba(0,0,0,0.5)';
+const globalElevationFillColor = 'rgba(0,0,0,1)';
 const globalElevationBorderColor = 'rgba(0,0,0,0)';
 
 
@@ -313,11 +313,206 @@ function ActivityChart(props) {
         ]
       }
     }
+  } else if(props.dataType === 'altitude'){
+    data = {
+      labels: distanceStreamKm,
+      datasets: [
+        {
+          label: 'Elevation',
+          fill: true,
+          backgroundColor: globalElevationFillColor,
+          borderColor: globalElevationBorderColor,
+          borderWidth: 0,
+          data: props.altitudeStream
+        }
+      ]
+    }
+
+    options = {
+      layout: {
+        padding: 0
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+      legend: {
+        display: false,
+        usePointStyle: true,
+        position: 'bottom',
+        labels: {
+          boxWidth: 10,
+          padding: 20
+        }
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        displayColors: false,
+        xPadding: 10,
+        yPadding: 10
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true,
+        animationDuration: 1000
+      },
+      scales: {
+        xAxes: [{
+          type: 'category',
+          display: false,
+          ticks: {
+            fontSize: globalTicksFontSize,
+            autoSkipPadding: 400,
+            maxRotation: 0,
+            callback: function(value) {
+              return _.round(value, 1) + ' km'
+            }
+          },
+          stepSize: 10
+        }],
+        yAxes: [
+          {
+            display: false,
+            id: 'altitude-y-axis',
+            position: 'right',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              fontColor: 'rgba(255,255,255,0.5)',
+              autoSkip: true,
+              autoSkipPadding: 400,
+              callback: function(value) {
+                return _.round(value, 0) + ' m'
+              }
+            }
+          },{
+            display: false,
+            id: 'main-data-y-axis',
+            position: 'right',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              fontColor: 'rgba(255,255,255,0.5)',
+              autoSkip: true,
+              autoSkipPadding: 400,
+              callback: function(value) {
+                return _.round(value, 0) + ' ' + props.dataTypeUnit
+              }
+            }
+          }
+        ]
+      }
+    }
+
+  } else {
+    data = {
+      labels: distanceStreamKm,
+      datasets: [
+        {
+          label: 'heartrate',
+          borderColor: 'rgba(255, 0, 0, 1)',
+          borderWidth: 0.5,
+          pointRadius: 0,
+          pointBorderWidth: 0,
+          showLine: true,
+          yAxisID: 'main-data-y-axis',
+          fill: false,
+          data: props.heartrateDataStream
+        },{
+          label: 'candence',
+          borderColor: 'rgba(166, 0, 255, 1)',
+          borderWidth: 0,
+          pointRadius: 0.1,
+          pointBorderWidth: 1,
+          showLine: false,
+          yAxisID: 'main-data-y-axis',
+          fill: false,
+          data: props.cadenceDataStream
+        },{
+          label: 'Elevation',
+          fill: true,
+          backgroundColor: globalElevationFillColor,
+          borderColor: globalElevationBorderColor,
+          borderWidth: 0,
+          data: props.altitudeStream
+        }
+      ]
+    }
+
+    options = {
+      layout: {
+        padding: 0
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+      legend: {
+        display: false,
+        usePointStyle: true,
+        position: 'bottom',
+        labels: {
+          boxWidth: 10,
+          padding: 20
+        }
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+        displayColors: false,
+        xPadding: 10,
+        yPadding: 10
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true,
+        animationDuration: 1000
+      },
+      scales: {
+        xAxes: [{
+          type: 'category',
+          display: false,
+          ticks: {
+            fontSize: globalTicksFontSize,
+            autoSkipPadding: 400,
+            maxRotation: 0,
+            callback: function(value) {
+              return _.round(value, 1) + ' km'
+            }
+          },
+          stepSize: 10
+        }],
+        yAxes: [
+          {
+            display: false,
+            id: 'altitude-y-axis',
+            position: 'right',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              fontColor: 'rgba(255,255,255,0.5)',
+              autoSkip: true,
+              autoSkipPadding: 400,
+              callback: function(value) {
+                return _.round(value, 0) + ' m'
+              }
+            }
+          },{
+            display: false,
+            id: 'main-data-y-axis',
+            position: 'right',
+            ticks: {
+              fontSize: globalTicksFontSize,
+              fontColor: 'rgba(255,255,255,0.5)',
+              autoSkip: true,
+              autoSkipPadding: 400,
+              callback: function(value) {
+                return _.round(value, 0) + ' ' + props.dataTypeUnit
+              }
+            }
+          }
+        ]
+      }
+    }
+
   }
 
-
   return(
-    <Line data={data} options={options} width={50} height={10}/>
+    <Line data={data} options={options} width={100} height={20}/>
   )
 }
 

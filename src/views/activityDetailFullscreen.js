@@ -38,7 +38,7 @@ let foodBurnedCheeseburgers;
 
 let publicAccessToken = '011c89ee01402ab591de0240d59ee84455fd4d42'
 
-class ActivityDetail extends Component {
+class ActivityDetailFullscreen extends Component {
   constructor(props) {
     super(props);
     getUserStatus().then( uid => {
@@ -282,9 +282,7 @@ class ActivityDetail extends Component {
               </div>
             </div>
           </div>
-
-          <div id="box1"></div>
-          <div className="o-activity-detail__summary">
+          <div className="o-activity-detail-fullscreen__summary">
             <div className="c-activity-summary o-flex o-flex-justify--start">
               {activityDistance ?
                 <ActivityStat type="large" label="distance" value={activityDistance} unit="km"/>
@@ -305,76 +303,7 @@ class ActivityDetail extends Component {
           </div>
 
           <div>
-            {/* Speed Summary Card */}
-            {
-              activityAverageSpeed ?
-              <div id="activityCard--speed" className="c-activity-graph c-activity-graph--velocity t-top-spacing--l">
-                <div className="c-activity-graph-container">
-                  <div className="o-flex o-flex-align--start">
-                    { this.state.velocityStream && this.state.altitudeStream ?
-                      <h3 className="t-bottom-spacing--xl">Speed
-                        <span className="c-activity-graph__header--supplementary "> & Elevation</span>
-                      </h3>
-                      :
-                      <h3 className="t-bottom-spacing--xl">Speed</h3>
-                    }
 
-                  </div>
-
-                  <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
-                    <ActivityStat type="large" label="average" value={activityAverageSpeed} unit="km"/>
-                    <ActivityStat type="large" label="max" value={activityMaxSpeed} unit="km"/>
-                  </div>
-                  {this.state.velocityStream
-                    ?
-                    <ActivityChart
-                      altitudeStream={this.state.altitudeStream}
-                      distanceStream={this.state.distanceStream}
-                      mainDataStream={this.state.velocityStream}
-                      dataType="velocity"
-                      dataTypeLegendLabel="Speed"
-                      dataTypeUnit="KM/H"
-                    />
-                    : null
-                  }
-                </div>
-              </div>
-              : null
-            }
-            {/* Heart Rate Summary Card */}
-            {
-              activityAverageHeartRate ?
-                <div id="activityCard--heartrate" className="c-activity-graph c-activity-graph--heartrate t-top-spacing--l">
-                  <div className="c-activity-graph-container">
-                    <div className="o-flex o-flex-align--start">
-                      { this.state.heartrateStream && this.state.altitudeStream ?
-                        <h3 className="t-bottom-spacing--xl">Heart Rate
-                          <span className="c-activity-graph__header--supplementary "> & Elevation</span>
-                        </h3>
-                        :
-                        <h3 className="t-bottom-spacing--xl">Heart Rate</h3>
-                      }
-
-                    </div>
-                    <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
-                      <ActivityStat type="large" label="average" value={activityAverageHeartRate} unit="bpm"/>
-                      <ActivityStat type="large" label="max" value={activityMaxHeartRate} unit="bpm"/>
-                    </div>
-                    { this.state.heartrateStream ?
-                    <ActivityChart
-                      altitudeStream={this.state.altitudeStream}
-                      distanceStream={this.state.distanceStream}
-                      mainDataStream={this.state.heartrateStream}
-                      dataType="heartrate"
-                      dataTypeLegendLabel="Heart Rate"
-                      dataTypeUnit="BPM"
-                    />
-                      : null
-                    }
-                  </div>
-                </div>
-              : null
-            }
             {/* Cadence Summary Card */}
             {
               activityAverageCadence ?
@@ -397,8 +326,8 @@ class ActivityDetail extends Component {
                     <ActivityChart
                       altitudeStream={this.state.altitudeStream}
                       distanceStream={this.state.distanceStream}
-                      mainDataStream={this.state.cadenceStream}
-                      dataType="cadence"
+                      cadenceStreamDataStream={this.state.cadenceStream}
+                      heartrateDataStream={this.state.heartrateStream}
                       dataTypeLegendLabel="Cadence"
                       dataTypeUnit="RPM"
                     />
@@ -408,7 +337,7 @@ class ActivityDetail extends Component {
                 </div>
               : null
             }
-          
+
           </div>
         </div>
       )
@@ -416,4 +345,4 @@ class ActivityDetail extends Component {
   }
 }
 
-export default ActivityDetail
+export default ActivityDetailFullscreen

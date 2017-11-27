@@ -28,3 +28,12 @@
 .o-activity-detail-time {
   color: $colour-supplementary;
 }
+
+.o-activity-detail__header {
+  padding: $spacing-xl 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}

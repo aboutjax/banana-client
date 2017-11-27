@@ -556,7 +556,7 @@ svg {
   grid-column-end: 5; }
 
 .o-wrapper {
-  max-width: 960px;
+  max-width: 100%;
   margin: 0 auto; }
 
 .o-app {
@@ -676,6 +676,23 @@ svg {
 
 .o-activity-detail-time {
   color: #7e898a; }
+
+.o-activity-detail__header {
+  padding: 3rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  text-align: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
 
 .o-favourite-activities {
   width: 100%;
@@ -993,6 +1010,10 @@ svg {
   background-image: -webkit-gradient(linear, left bottom, left top, from(#323940), to(#3b434b));
   background-image: linear-gradient(0deg, #323940 0%, #3b434b 100%); }
 
+.c-activity-graph--elevation {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(transparent), color-stop(0%), to(transparent));
+  background-image: linear-gradient(0deg, transparent, 0%, transparent); }
+
 .c-activity-chart-container {
   height: 40rem; }
 
@@ -1040,10 +1061,10 @@ svg {
 .c-activity-food-card {
   border-radius: 0.5rem;
   background: #1F2428;
-  height: 35rem;
+  height: 20rem;
   overflow: hidden;
   position: relative; }
-  @media only screen and (min-width: 480px) {
+  @media only screen and (min-width: 768px) {
     .c-activity-food-card {
       height: 30rem; } }
 
@@ -1323,9 +1344,7 @@ svg {
   -webkit-transform: rotateZ(-20deg) scale(0.6) translateY(-70%);
   transform: rotateZ(-20deg) scale(0.6) translateY(-70%);
   -webkit-transform: 0 0;
-  transform: 0 0;
-  -webkit-filter: drop-shadow(0 10px 100px black);
-  filter: drop-shadow(0 10px 100px black); }
+  transform: 0 0; }
   @media only screen and (max-width: 479px) {
     .c-homepage__hero-image__image {
       -webkit-transform: rotateZ(-20deg) scale(0.6) translateY(-110%) translateX(-20%);

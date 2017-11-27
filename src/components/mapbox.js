@@ -21,6 +21,8 @@ class MapboxMap extends Component {
 
   componentDidMount() {
 
+    let polylinePath = "vsf`Fw}hi`@H{ArNi@]yO{IHUdHiLZgA`CqQ^eOuCsGhEq~@{~@}IyLuAePeJq`@mZqg@yCiMsEoH_Cg[qJwi@kMaOiHmb@mHsLcAqJkCoD{RiE{V}Lat@kz@uC_AmRpK}AjOgGmAyF~\zEbDkB~MlJ|Gy@rChBvDkAxFqF}Ac@fBc@mB"
+
     let decodedPolyline = polyline.toGeoJSON(this.props.mapPolyline)
     let decodedPolylineArray = decodedPolyline.coordinates
     let startLatlng = this.props.startLatlng
@@ -34,8 +36,10 @@ class MapboxMap extends Component {
       center: [
         startLatlng[1], startLatlng[0]
       ],
-      zoom: 8
+      zoom: 12
     })
+
+    console.log(decodedPolylineArray);
 
     map.on('load', function() {
 

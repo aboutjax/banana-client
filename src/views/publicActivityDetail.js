@@ -154,6 +154,7 @@ class PublicActivityDetail extends Component {
               <div>
                 <h3 className="o-activity-detail-name">{this.state.data.name}</h3>
                 <span className='o-activity-detail-time'>
+                  <span>{this.state.data.type} • </span>
                   <Moment format="MMM DD, YYYY">{this.state.data.start_date}</Moment>
                   <span> • </span>
                   <Moment format="hh:mm a">{this.state.data.start_date}</Moment>

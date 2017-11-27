@@ -2,8 +2,20 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
 import {getCookie} from '../components/cookieHelper'
+import {
+  Route
+} from 'react-router-dom';
 
 class YearToDate extends Component {
+
+  render(){
+    return (
+      <Route path={this.props.match.url + '/ride'} component={YearToDateRidingStats} />
+    )
+  }
+}
+
+class YearToDateRidingStats extends Component {
   constructor(props) {
     super(props);
 
@@ -58,6 +70,7 @@ class YearToDate extends Component {
   }
 
   render(){
+
     let ytdRideCount = this.state.ytdRideTotals.count
     let ytdRideDistance = _.round(this.state.ytdRideTotals.distance / 1000 , 1)
     let ytdRideElevationGain = _.round(this.state.ytdRideTotals.elevation_gain, 1)
@@ -70,25 +83,13 @@ class YearToDate extends Component {
 
     let mountEverestUnit = _.round(this.state.ytdRideTotals.elevation_gain / 8848, 2)
 
-
-    return (
-      <div>
-        <YearToDateStats count={ytdRideCount} distance={ytdRideDistance} movingTime={ytdRideMovingTime} elevationGain={ytdRideElevationGain} mountEverestUnit={mountEverestUnit} />
-      </div>
-    )
-  }
-}
-
-class YearToDateStats extends Component {
-  render(){
-
     return(
       <div>
         <div className="c-page-header">
           <h1>My Year To Date</h1>
         </div>
         <p className="c-year-to-date-stats">
-          This year you rode <YearToDateStat value={this.props.count}/> times, clocked <YearToDateStat value={this.props.distance}/> kilometers, spent <YearToDateStat value={this.props.movingTime}/> hours in the saddle, climbed <YearToDateStat value={this.props.elevationGain}/> meters - That's climbing Mount Everest <YearToDateStat value={this.props.mountEverestUnit}/> times.
+          This year you rode <YearToDateStat value={ytdRideCount}/> times, clocked <YearToDateStat value={ytdRideDistance}/> kilometers, spent <YearToDateStat value={ytdRideMovingTime}/> hours in the saddle, climbed <YearToDateStat value={ytdRideElevationGain}/> meters - That's climbing Mount Everest <YearToDateStat value={mountEverestUnit}/> times.
         </p>
       </div>
     )

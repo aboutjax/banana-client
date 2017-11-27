@@ -14,6 +14,7 @@ import Nav from './components/nav';
 import HandleRedirect from './views/handleRedirect';
 import ActivityDetail from './views/activityDetail';
 import PublicActivityDetail from './views/publicActivityDetail';
+import ActivityDetailFullscreen from './views/activityDetailFullscreen';
 import FavouriteActivities from './views/favouriteActivities';
 import MyYear from './views/yearToDate';
 import Home from './views/home';
@@ -56,7 +57,7 @@ class App extends Component {
                 <Route path="/handle_redirect" exact component={HandleRedirect}/>
                 <Route path='/' exact render={routeProps => <Activities {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/activities/page/:page" component={Activities}/>
-                <Route path='/activities/:id' exact render={routeProps => <ActivityDetail {...routeProps} userUid={this.state.userUid}/>} />
+                <Route path='/activities/:id' exact render={routeProps => <ActivityDetailFullscreen {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
                 <Route path='/favourites' render={routeProps => <FavouriteActivities {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path='/myyear' render={routeProps => <MyYear {...routeProps} userUid={this.state.userUid}/>} />
