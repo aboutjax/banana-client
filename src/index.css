@@ -481,9 +481,8 @@ template {
 
 a {
   color: inherit;
-  text-decoration: none;
-  cursor: default; }
-  a:hover {
+  text-decoration: none; }
+  .no-touchevents a:hover {
     opacity: 0.8; }
 
 #root {
@@ -820,9 +819,10 @@ svg {
   background: #101010;
   -webkit-box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-  position: relative; }
-  .c-activity + .c-activity {
-    margin-top: 2rem; }
+  position: relative;
+  margin-top: 2rem; }
+  .no-touchevents .c-activity:hover {
+    opacity: 0.9; }
   @media only screen and (min-width: 480px) {
     .c-activity {
       -webkit-box-orient: horizontal;
@@ -891,11 +891,9 @@ svg {
 
 .c-activity__title {
   font-size: 1.6rem;
-  font-weight: normal;
+  font-weight: bold;
   margin-top: 0;
   margin-bottom: 6px; }
-  .c-activity__title a {
-    border-bottom: 1px solid #ced2d3; }
 
 .c-activity__header {
   margin-bottom: 3rem;

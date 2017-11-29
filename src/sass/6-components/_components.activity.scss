@@ -7,9 +7,10 @@
   background: $woodsmoke;
   box-shadow: 0 2px 20px rgba(0,0,0,0.3);
   position: relative;
+  margin-top: 2rem;
 
-  & + & {
-    margin-top: 2rem;
+  @include hover {
+    opacity: 0.9;
   }
 
   @include smallish {
@@ -69,13 +70,9 @@
 
 .c-activity__title {
   font-size: 1.6rem;
-  font-weight: normal;
+  font-weight: bold;
   margin-top: 0;
   margin-bottom: 6px;
-
-  a {
-    border-bottom: 1px solid lighten($colour-supplementary, 30);
-  }
 }
 
 .c-activity__header {

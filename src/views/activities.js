@@ -112,8 +112,6 @@ class Activities extends Component{
 
   componentDidMount() {
     this.fetchData()
-
-
   }
 
   render(){

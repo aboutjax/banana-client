@@ -93,23 +93,25 @@ class Activity extends Component {
     let activityMovingTimeHHMMSS = activityMovingTimeHour + ':' + activityMovingTimeMinutes + ':' + activityMovingTimeSeconds
 
     return(
-      <div className="c-activity">
-        <ActivityMap className="c-activity__map" mapPolyline={this.props.data.map.summary_polyline}/>
-        <div className="c-activity__meta">
-          <ActivityName favourite={this.props.favourite} data={this.props.data}/>
-          <div className="c-activity__stats">
-            <ActivityStat label="distance" value={activityDistance} unit="km"/>
-            <ActivityStat label="climb" value={activityTotalElevationGain} unit="m"/>
-            <ActivityStat label="duration" value={activityMovingTimeHHMMSS}/>
-            <ActivityStat label="average speed" value={activityAverageSpeed} unit="km/h"/>
-          </div>
-          <div className="o-flex o-flex-justify--end">
-            {this.props.data.has_heartrate && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--heartrate"> <div className="c-tooltip">has heartrate</div></div>}
-            {this.props.data.average_cadence && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--cadence"> <div className="c-tooltip">has cadence</div></div>}
-          </div>
+      <Link to={'/activities/'+ this.props.data.id}>
+        <div className="c-activity">
+          <ActivityMap className="c-activity__map" mapPolyline={this.props.data.map.summary_polyline}/>
+          <div className="c-activity__meta">
+            <ActivityName favourite={this.props.favourite} data={this.props.data}/>
+            <div className="c-activity__stats">
+              <ActivityStat label="distance" value={activityDistance} unit="km"/>
+              <ActivityStat label="climb" value={activityTotalElevationGain} unit="m"/>
+              <ActivityStat label="duration" value={activityMovingTimeHHMMSS}/>
+              <ActivityStat label="average speed" value={activityAverageSpeed} unit="km/h"/>
+            </div>
+            <div className="o-flex o-flex-justify--end">
+              {this.props.data.has_heartrate && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--heartrate"> <div className="c-tooltip">has heartrate</div></div>}
+              {this.props.data.average_cadence && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--cadence"> <div className="c-tooltip">has cadence</div></div>}
+            </div>
 
+          </div>
         </div>
-      </div>
+      </Link>
     )
   }
 }
