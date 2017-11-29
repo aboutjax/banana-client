@@ -10,7 +10,7 @@ defaults.global.elements.line.borderWidth = 0;
 defaults.global.defaultFontFamily = "'-apple-system','Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
 const globalTicksFontSize = 9
-const globalLineWidth = 1
+const globalLineWidth = 0.5
 const globalElevationFillColor = 'rgba(0,0,0,0.5)';
 const globalElevationBorderColor = 'rgba(0,0,0,0)';
 
@@ -317,7 +317,7 @@ function ActivityChart(props) {
 
 
   return(
-    <Line data={data} options={options} width={50} height={10}/>
+    <Line data={data} options={options} width={50} height={15}/>
   )
 }
 

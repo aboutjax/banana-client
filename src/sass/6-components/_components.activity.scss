@@ -230,7 +230,7 @@
 
 .c-activity-food-cards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-column-gap: $spacing-l;
   grid-row-gap: $spacing-l;
 
@@ -242,13 +242,26 @@
 .c-activity-food-card {
   border-radius: 0.5rem;
   background: $shark;
-  height: 35rem;
+  height: 10rem;
   overflow: hidden;
   position: relative;
 
-  @include smallish {
+  @include medium {
       height: 30rem;
   }
+
+  @include hover {
+
+    .c-activity-food-card__image {
+
+      @include medium {
+        right: -35%;
+      }
+
+      right: -5%;
+    }
+  }
+
 }
 
 .c-activity-food-card__number {
@@ -258,34 +271,35 @@
 .c-activity-food-card__header {
   font-weight: 300;
   margin-bottom: $spacing;
+  margin-top: 0;
 }
 
 .c-activity-food-card__image {
   position: absolute;
-  bottom: 0;
   width: 20rem;
   height: 20rem;
-  right: -30%;
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.25s ease-in-out;
   filter: drop-shadow(0 0.2rem 0.4rem rgba(0, 0, 0, 0.3));
 
   @include medium {
     width: 30rem;
     height: 30rem;
     right: -40%;
-  };
+    transform: translateY(-30%);
+  }
+
 }
 
 .c-activity-food-card__image--filter {
   filter: blur(20rem);
-  right: -20%;
+  left: -20%;
   width: 50rem;
   height: 50rem;
 
   @include smallish {
     right: -10%;
   }
-}
-
-.c-activity-food--banana {
-
 }
