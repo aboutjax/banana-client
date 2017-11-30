@@ -253,6 +253,7 @@ class ActivityDetail extends Component {
     foodBurnedBeers = _.round(activityTotalCalories / 208, 1)
     foodBurnedCookies = _.round(activityTotalCalories / 50, 1)
     foodBurnedCheeseburgers = _.round(activityTotalCalories / 303, 1)
+    foodBurnedCheeseburgers = _.round(activityTotalCalories / 180, 1)
 
     if (this.state.loading) {
       return (
@@ -417,7 +418,7 @@ class ActivityDetail extends Component {
                   <ActivityFoodCard name="Bananas" value={foodBurnedBanana} imageSrc="/img/food/banana.png"/>
                   <ActivityFoodCard name="Cookies" value={foodBurnedCookies} imageSrc="/img/food/cookie.png"/>
                   <ActivityFoodCard name="Cheeseburgers" value={foodBurnedCheeseburgers} imageSrc="/img/food/cheeseburger.png"/>
-                  {/* <ActivityFoodCard name="Beer" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/> */}
+                  <ActivityFoodCard name="Beers" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/>
                 </div>
               </div>
               :
