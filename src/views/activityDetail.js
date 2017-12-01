@@ -28,7 +28,10 @@ let activityAverageSpeed;
 let activityMaxSpeed;
 let activityAverageCadence;
 let activityAverageHeartRate;
+let activityAverageWatts;
+let activityMaxWatts;
 let activityMaxHeartRate;
+let activityDeviceWatts;
 
 let foodBurnedBanana;
 let foodBurnedApples;
@@ -61,7 +64,7 @@ class ActivityDetail extends Component {
     let userAccessToken = getCookie('access_token') || publicAccessToken
     let thisActivityApiUrl = 'https://www.strava.com/api/v3/activities/' + this.props.match.params.id;
 
-    let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/altitude,heartrate,latlng,cadence,velocity_smooth?resolution=medium'
+    let thisActivityStreamApiUrl = thisActivityApiUrl + '/streams/watts,altitude,heartrate,latlng,cadence,velocity_smooth?resolution=medium'
 
     this.setState({loading: true})
 
@@ -111,6 +114,9 @@ class ActivityDetail extends Component {
         function findVelocity(array){
           return array.type === 'velocity_smooth'
         }
+        function findWatts(array){
+          return array.type === 'watts'
+        }
 
         if(json.find(findDistance)){
           this.setState(
@@ -148,6 +154,14 @@ class ActivityDetail extends Component {
           this.setState(
             {
               cadenceStream: json.find(findCadence).data
+            }
+          )
+        }
+
+        if(json.find(findWatts)){
+          this.setState(
+            {
+              wattsStream: json.find(findWatts).data
             }
           )
         }
@@ -242,6 +256,11 @@ class ActivityDetail extends Component {
 
     // Cadence
     activityAverageCadence = _.round(this.state.data.average_cadence, 1)
+
+    // Watts
+    activityAverageWatts = _.round(this.state.data.average_watts, 1)
+    activityMaxWatts = this.state.data.max_watts
+    activityDeviceWatts = this.state.data.device_watts
 
     // Heart Rate
     activityAverageHeartRate = this.state.data.average_heartrate
@@ -401,6 +420,40 @@ class ActivityDetail extends Component {
                       dataType="cadence"
                       dataTypeLegendLabel="Cadence"
                       dataTypeUnit="RPM"
+                    />
+                      : null
+                    }
+                  </div>
+                </div>
+              : null
+            }
+            {/* Watts Summary Card */}
+            {
+              activityAverageWatts && activityDeviceWatts ?
+                <div id="activityCard--power" className="c-activity-graph c-activity-graph--power t-top-spacing--l">
+                  <div className="c-activity-graph-container">
+                    <div className="o-flex o-flex-align--start">
+                      { this.state.wattsStream && this.state.altitudeStream ?
+                        <h3 className="t-bottom-spacing--xl">Power
+                          <span className="c-activity-graph__header--supplementary"> & Elevation</span>
+                        </h3>
+                        :
+                        <h3 className="t-bottom-spacing--xl">Power</h3>
+                      }
+
+                    </div>
+                    <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
+                      <ActivityStat type="large" label="average" value={activityAverageWatts} unit="watts"/>
+                      <ActivityStat type="large" label="max" value={activityMaxWatts} unit="w"/>
+                    </div>
+                    { this.state.wattsStream ?
+                    <ActivityChart
+                      altitudeStream={this.state.altitudeStream}
+                      distanceStream={this.state.distanceStream}
+                      mainDataStream={this.state.wattsStream}
+                      dataType="power"
+                      dataTypeLegendLabel="Power"
+                      dataTypeUnit="W"
                     />
                       : null
                     }

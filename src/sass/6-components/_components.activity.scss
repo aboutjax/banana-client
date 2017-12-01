@@ -172,6 +172,10 @@
     background-image: linear-gradient(0deg, $colour-cadence-base 0%, $colour-cadence-alt 100%);
 }
 
+.c-activity-graph--power {
+    background-image: linear-gradient(0deg, $colour-power-base 0%, $colour-power-alt 100%);
+}
+
 .c-activity-graph--calories {
     background-image: linear-gradient(0deg, $colour-calories-base 0%, $colour-calories-alt 100%);
 }
