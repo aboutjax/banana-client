@@ -324,8 +324,7 @@ function ActivityChart(props) {
           borderColor: 'rgba(255, 255, 255, 1)',
           borderWidth: globalLineWidth,
           yAxisID: 'main-data-y-axis',
-          fill: true,
-          backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          fill: false,
           data: props.mainDataStream,
           cubicInterpolationMode: 'monotone'
         },{
@@ -416,7 +415,7 @@ function ActivityChart(props) {
 
 
   return(
-    <Line data={data} options={options} width={50} height={15}/>
+    <Line data={data} options={options} width={40} height={10}/>
   )
 }
 

@@ -22,8 +22,10 @@ let activityAverageSpeed;
 let activityMaxSpeed;
 let activityAverageCadence;
 let activityAverageHeartRate;
+let activityAverageWatts;
+let activityMaxWatts;
 let activityMaxHeartRate;
-
+let activityDeviceWatts;
 
 let foodBurnedBanana;
 let foodBurnedApples;
@@ -63,6 +65,7 @@ class PublicActivityDetail extends Component {
         let publicActivityHeartrateStream = child.child('heartrateStream').val() || null
         let publicActivityLatLngStream = child.child('latLngStream').val() || null
         let publicActivityVelocityStream = child.child('velocityStream').val() || null
+        let publicActivityWattsStream = child.child('wattsStream').val() || null
 
         if(publicActivityId === activityId) {
           this.fetchAthleteData(publicActivityData.athlete.id)
@@ -74,6 +77,7 @@ class PublicActivityDetail extends Component {
             heartrateStream: publicActivityHeartrateStream,
             latLngStream: publicActivityLatLngStream,
             velocityStream: publicActivityVelocityStream,
+            wattsStream: publicActivityWattsStream,
             loading: false,
             activityFound: true
            })
@@ -127,6 +131,11 @@ class PublicActivityDetail extends Component {
 
     // Cadence
     activityAverageCadence = _.round(this.state.data.average_cadence, 1)
+
+    // Watts
+    activityAverageWatts = _.round(this.state.data.average_watts, 1)
+    activityMaxWatts = this.state.data.max_watts
+    activityDeviceWatts = this.state.data.device_watts
 
     // Heart Rate
     activityAverageHeartRate = this.state.data.average_heartrate
@@ -277,6 +286,40 @@ class PublicActivityDetail extends Component {
                 </div>
               : null
             }
+            {/* Power Summary Card */}
+            {
+              activityAverageWatts && activityDeviceWatts ?
+                <div id="activityCard--power" className="c-activity-graph c-activity-graph--power t-top-spacing--l">
+                  <div className="c-activity-graph-container">
+                    <div className="o-flex o-flex-align--start">
+                      { this.state.wattsStream && this.state.altitudeStream ?
+                        <h3 className="t-bottom-spacing--xl">Power
+                          <span className="c-activity-graph__header--supplementary"> & Elevation</span>
+                        </h3>
+                        :
+                        <h3 className="t-bottom-spacing--xl">Power</h3>
+                      }
+
+                    </div>
+                    <div className="t-bottom-spacing--xl o-flex o-flex-justify--start">
+                      <ActivityStat type="large" label="average" value={activityAverageWatts} unit="watts"/>
+                      <ActivityStat type="large" label="max" value={activityMaxWatts} unit="w"/>
+                    </div>
+                    { this.state.wattsStream ?
+                    <ActivityChart
+                      altitudeStream={this.state.altitudeStream}
+                      distanceStream={this.state.distanceStream}
+                      mainDataStream={this.state.wattsStream}
+                      dataType="power"
+                      dataTypeLegendLabel="Power"
+                      dataTypeUnit="W"
+                    />
+                      : null
+                    }
+                  </div>
+                </div>
+              : null
+            }
             {/* Food Cards */}
             {
               activityTotalCalories
@@ -287,7 +330,7 @@ class PublicActivityDetail extends Component {
                   <ActivityFoodCard name="Bananas" value={foodBurnedBanana} imageSrc="/img/food/banana.png"/>
                   <ActivityFoodCard name="Cookies" value={foodBurnedCookies} imageSrc="/img/food/cookie.png"/>
                   <ActivityFoodCard name="Cheeseburgers" value={foodBurnedCheeseburgers} imageSrc="/img/food/cheeseburger.png"/>
-                  {/* <ActivityFoodCard name="Beer" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/> */}
+                  <ActivityFoodCard name="Beers" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/>
                 </div>
               </div>
               :

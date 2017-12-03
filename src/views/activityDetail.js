@@ -297,7 +297,7 @@ class ActivityDetail extends Component {
                 <FavouriteButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data}/>
               </div>
               <div>
-                <PublishButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data} altitudeStream={this.state.altitudeStream} cadenceStream={this.state.cadenceStream} distanceStream={this.state.distanceStream} heartrateStream={this.state.heartrateStream} latLngStream={this.state.latLngStream}  velocityStream={this.state.velocityStream}/>
+                <PublishButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data} altitudeStream={this.state.altitudeStream} cadenceStream={this.state.cadenceStream} distanceStream={this.state.distanceStream} heartrateStream={this.state.heartrateStream} wattsStream={this.state.wattsStream} latLngStream={this.state.latLngStream}  velocityStream={this.state.velocityStream}/>
               </div>
             </div>
           </div>
@@ -427,7 +427,7 @@ class ActivityDetail extends Component {
                 </div>
               : null
             }
-            {/* Watts Summary Card */}
+            {/* Power Summary Card */}
             {
               activityAverageWatts && activityDeviceWatts ?
                 <div id="activityCard--power" className="c-activity-graph c-activity-graph--power t-top-spacing--l">

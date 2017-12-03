@@ -76,7 +76,8 @@ class PublishButton extends Component {
         latLngStream: this.props.latLngStream || null,
         velocityStream: this.props.velocityStream || null,
         cadenceStream: this.props.cadenceStream || null,
-        heartrateStream: this.props.heartrateStream || null
+        heartrateStream: this.props.heartrateStream || null,
+        wattsStream: this.props.wattsStream || null
       })
 
       this.setState({
