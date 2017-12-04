@@ -9,7 +9,9 @@ import {IconArrowRight, IconArrowLeft} from '../components/icons/icons'
 
 const activitiesPerPage = 30;
 
-class Activities extends Component{
+let userPreferenceMapStyle = "&format=png&maptype=roadmap&style=feature:water%7Celement:geometry.fill%7Ccolor:0x75cff0&size="
+
+class Activities extends Component {
   constructor(props) {
     super(props);
 
@@ -26,7 +28,6 @@ class Activities extends Component{
       loading: true
     })
   }
-
 
   // Check favourites state from Firebase
   checkFavouriteStatus = () => {
@@ -92,7 +93,6 @@ class Activities extends Component{
 
   componentWillReceiveProps() {
 
-
     let favouritesList = []
     let favouritesRef = fire.database().ref('users/' + this.state.userUid + '/favourites');
 
@@ -124,7 +124,7 @@ class Activities extends Component{
         }
 
         return(
-            <Activity favourite={isFavourite} key={index} data={activity} mapDimension='400x400'/>
+            <Activity favourite={isFavourite} key={index} data={activity} mapDimension='400x400' mapStyle={userPreferenceMapStyle}/>
         )
     })
 

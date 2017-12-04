@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import './index.css';
 import {
@@ -28,14 +29,30 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let userAccessToken = getCookie('access_token')
 
     fire.auth().onAuthStateChanged(user => {
       if(user && userAccessToken) {
+
+        let userPrefRef = fire.database().ref('users/' + user.uid);
+
+        userPrefRef.once('value', snapshot => {
+
+          let userPrefMapStyle = snapshot.child('userPref').child('mapStyle').val();
+
+          if(userPrefMapStyle) {
+            console.log('found map style');
+          } else {
+            console.log('no map style');
+          }
+
+        })
+
         this.setState({
            loggedIn: true,
-           userUid: user.uid
+           userUid: user.uid,
+           userPrefMap: user.prefMap || 'light',
          })
       } else {
         this.setState({ loggedIn: false })
@@ -54,7 +71,7 @@ class App extends Component {
 
               <Switch>
                 <Route path="/handle_redirect" exact component={HandleRedirect}/>
-                <Route path='/' exact render={routeProps => <Activities {...routeProps} userUid={this.state.userUid}/>} />
+                <Route path='/' exact render={routeProps => <Activities {...routeProps} userUid={this.state.userUid} userPrefMap={this.state.userPrefMap}/>} />
                 <Route path="/activities/page/:page" component={Activities}/>
                 <Route path='/activities/:id' exact render={routeProps => <ActivityDetail {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
@@ -74,7 +91,6 @@ class App extends Component {
       return(
         <div className="App o-wrapper o-app">
           <div>
-            {/* <Nav type="public" authState={this.state.loggedIn}/> */}
           </div>
 
           <div className='o-content'>

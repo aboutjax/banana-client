@@ -13,7 +13,7 @@ function ActivityMap(props) {
   let pathWeight = 4;
   let pathColor = '0x3B8BFFff';
   let mapDimension = props.mapDimension || '400x400';
-  let mapStyle = "&format=png&maptype=roadmap&style=feature:water%7Celement:geometry.fill%7Ccolor:0x75cff0&size=";
+  let mapStyle = props.mapStyle;
 
   let imageUrl = "https://maps.googleapis.com/maps/api/staticmap?key="+ googleApiKey + "&path=weight:"+ pathWeight +"%7Ccolor:"+ pathColor + "%7Cenc:" + props.mapPolyline +  mapStyle + mapDimension;
 
@@ -66,9 +66,7 @@ function ActivityName(props){
       <div className="c-activity__header">
         <div>
           <h3 className="c-activity__title">
-            <Link to={'/activities/'+ props.data.id}>
               {props.data.name}
-            </Link>
           </h3>
           <span className='c-activity__time'>
             <Moment format="MMM DD, YYYY">{props.data.start_date}</Moment> • <Moment format="hh:mm a">{props.data.start_date}</Moment>
@@ -95,7 +93,7 @@ class Activity extends Component {
     return(
       <Link to={'/activities/'+ this.props.data.id}>
         <div className="c-activity">
-          <ActivityMap className="c-activity__map" mapPolyline={this.props.data.map.summary_polyline}/>
+          <ActivityMap className="c-activity__map" mapPolyline={this.props.data.map.summary_polyline} mapStyle={this.props.mapStyle}/>
           <div className="c-activity__meta">
             <ActivityName favourite={this.props.favourite} data={this.props.data}/>
             <div className="c-activity__stats">
