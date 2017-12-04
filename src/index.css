@@ -1047,11 +1047,6 @@ svg {
   @media only screen and (min-width: 768px) {
     .c-activity-food-card {
       height: 30rem; } }
-  .no-touchevents .c-activity-food-card:hover .c-activity-food-card__image {
-    right: -5%; }
-    @media only screen and (min-width: 768px) {
-      .no-touchevents .c-activity-food-card:hover .c-activity-food-card__image {
-        right: -35%; } }
 
 .c-activity-food-card__number {
   font-weight: 300; }
