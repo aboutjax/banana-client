@@ -251,18 +251,6 @@
       height: 30rem;
   }
 
-  @include hover {
-
-    .c-activity-food-card__image {
-
-      @include medium {
-        right: -35%;
-      }
-
-      right: -5%;
-    }
-  }
-
 }
 
 .c-activity-food-card__number {
