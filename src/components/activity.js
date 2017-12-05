@@ -105,9 +105,9 @@ class Activity extends Component {
               <ActivityStat label="average speed" value={activityAverageSpeed} unit="km/h"/>
             </div>
             <div className="o-flex o-flex-justify--end">
-              {this.props.data.has_heartrate && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--heartrate"> <div className="c-tooltip">has heartrate</div></div>}
-              {this.props.data.average_cadence && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--cadence"> <div className="c-tooltip">has cadence</div></div>}
-              {this.props.data.device_watts && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--power"> <div className="c-tooltip">has cadence</div></div>}
+              {this.props.data.has_heartrate && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--heartrate"> <div className="c-tooltip">Heartrate</div></div>}
+              {this.props.data.average_cadence && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--cadence"> <div className="c-tooltip">Cadence</div></div>}
+              {this.props.data.device_watts && <div className="c-activity__has-chart-icon c-activity__has-chart-icon--power"> <div className="c-tooltip">Power</div></div>}
             </div>
 
           </div>
