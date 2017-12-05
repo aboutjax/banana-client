@@ -1029,6 +1029,9 @@ svg {
 .c-activity__has-chart-icon--heartrate {
   background-color: #F7392E; }
 
+.c-activity__has-chart-icon--power {
+  background-color: #008cff; }
+
 .c-activity-food-cards {
   display: grid;
   grid-template-columns: 1fr;
