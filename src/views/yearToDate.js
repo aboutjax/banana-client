@@ -85,7 +85,7 @@ class YearToDateStats extends Component {
     return(
       <div>
         <div className="c-page-header">
-          <h1>My Year To Date</h1>
+          <h1>My Year in Review</h1>
         </div>
         <p className="c-year-to-date-stats">
           This year you rode <YearToDateStat value={this.props.count}/> times, clocked <YearToDateStat value={this.props.distance}/> kilometers, spent <YearToDateStat value={this.props.movingTime}/> hours in the saddle, climbed <YearToDateStat value={this.props.elevationGain}/> meters - That's climbing Mount Everest <YearToDateStat value={this.props.mountEverestUnit}/> times.

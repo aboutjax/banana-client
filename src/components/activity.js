@@ -71,7 +71,7 @@ function ActivityName(props){
             </Link>
           </h3>
           <span className='c-activity__time'>
-            <Moment format="MMM DD, YYYY">{props.data.start_date}</Moment> • <Moment format="hh:mm a">{props.data.start_date}</Moment>
+            <Moment format="MMM DD, YYYY">{props.data.start_date}</Moment> at <Moment format="hh:mm a">{props.data.start_date}</Moment>
           </span>
         </div>
         <ActivityIsCommute commute={props.data.commute} />

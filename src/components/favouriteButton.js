@@ -92,7 +92,7 @@ class FavouriteButton extends Component {
         <div>
           {this.state.isFavourite
             ?
-            <button className="c-btn c-btn--favourite is-favourite" onClick={this.unfavouriteThis}><IconCheckLine className="c-icon"/> <span>Favourited</span></button>
+            <button className="c-btn c-btn--favourite is-favourite" onClick={this.unfavouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourited</span></button>
             :
             <button className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
           }

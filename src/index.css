@@ -544,6 +544,8 @@ button {
   padding: 0; }
   button:focus {
     outline: 0; }
+  .no-touchevents button:hover {
+    cursor: pointer; }
 
 svg {
   fill: currentColor; }
@@ -1096,7 +1098,9 @@ svg {
   letter-spacing: 0.6px; }
 
 .c-link {
-  text-decoration: underline; }
+  text-decoration: underline;
+  -webkit-text-decoration-color: inherit;
+  text-decoration-color: inherit; }
 
 .c-year-to-date-stats {
   font-size: 1.4em;
@@ -1126,34 +1130,43 @@ svg {
   .c-btn:disabled {
     opacity: 0.3;
     cursor: not-allowed; }
+  .no-touchevents .c-btn:hover {
+    background-color: #e6e6e6; }
 
 .c-btn--primary {
   background: #008cff; }
-  .c-btn--primary:hover {
+  .no-touchevents .c-btn--primary:hover {
     background-color: #007ee6; }
 
 .c-btn--large {
   font-size: 4rem; }
 
-.c-btn--publish,
-.c-btn--favourite {
-  background: transparent;
+.c-btn--publish .c-icon,
+.c-btn--favourite .c-icon {
+  -webkit-transition: -webkit-transform 0.1s ease-in;
+  transition: -webkit-transform 0.1s ease-in;
+  transition: transform 0.1s ease-in;
+  transition: transform 0.1s ease-in, -webkit-transform 0.1s ease-in;
+  margin-right: 0.1rem;
+  vertical-align: middle; }
+
+.c-btn--publish span,
+.c-btn--favourite span {
+  vertical-align: middle; }
+
+.no-touchevents .c-btn--publish:hover, .no-touchevents
+.c-btn--favourite:hover {
+  background-color: #e6e6e6; }
+
+.c-btn--publish.is-public, .c-btn--publish.is-favourite,
+.c-btn--favourite.is-public,
+.c-btn--favourite.is-favourite {
+  background-color: #008cff;
   color: #FFFFFF; }
-  .c-btn--publish .c-icon,
-  .c-btn--favourite .c-icon {
-    -webkit-transition: -webkit-transform 0.1s ease-in;
-    transition: -webkit-transform 0.1s ease-in;
-    transition: transform 0.1s ease-in;
-    transition: transform 0.1s ease-in, -webkit-transform 0.1s ease-in;
-    margin-right: 0.1rem;
-    vertical-align: middle; }
-  .c-btn--publish span,
-  .c-btn--favourite span {
-    vertical-align: middle; }
-  .c-btn--publish.is-public, .c-btn--publish.is-favourite,
-  .c-btn--favourite.is-public,
-  .c-btn--favourite.is-favourite {
-    background-color: #008cff; }
+  .no-touchevents .c-btn--publish.is-public:hover, .no-touchevents .c-btn--publish.is-favourite:hover, .no-touchevents
+  .c-btn--favourite.is-public:hover, .no-touchevents
+  .c-btn--favourite.is-favourite:hover {
+    background-color: #007ee6; }
 
 .c-btn--transparent {
   background: transparent;
@@ -1397,15 +1410,11 @@ svg {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  text-transform: uppercase;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   opacity: .5; }
 
 .c-footer__power-by-strava {
   width: 15rem; }
-
-.c-footer__credits {
-  font-size: 1.1rem; }
 
 .c-icon {
   display: inline-block;
@@ -1431,6 +1440,12 @@ svg {
   .c-page-header h1 {
     margin: 0; }
 
+.c-page-header--center-aligned {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center; }
+
 .c-empty {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1454,19 +1469,22 @@ svg {
 
 .c-athlete-profile {
   border-radius: 0.5rem;
-  margin-bottom: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center; }
 
 .c-athlete-profile__image {
   border-radius: 10rem;
-  width: 7rem;
-  height: 7rem;
-  margin-right: 3rem; }
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 1rem; }
 
 .c-athlete-profile__name {
   margin: 0; }

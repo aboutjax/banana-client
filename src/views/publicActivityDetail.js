@@ -8,6 +8,7 @@ import ActivityChart from '../components/chart'
 import MapboxMap from '../components/mapbox'
 import fire from '../components/firebase'
 import ActivityFoodCard from '../components/foodCard'
+import ActivityHeaderPublic from '../components/activityHeaderPublic'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -157,21 +158,10 @@ class PublicActivityDetail extends Component {
     } else if(!this.state.loading && this.state.activityFound) {
       return (
         <div className="o-activity-detail">
-          <div className="c-page-header">
-            <div className="o-flex">
-              <AthleteProfile athleteData={this.state.athleteData} />
-              <div>
-                <h3 className="o-activity-detail-name">{this.state.data.name}</h3>
-                <span className='o-activity-detail-time'>
-                  <Moment format="MMM DD, YYYY">{this.state.data.start_date}</Moment>
-                  <span> • </span>
-                  <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
-                  <span> • </span>
-                  <a target="_blank" className="c-link" href={"https://strava.com/activities/" + this.state.data.id}>View on Strava</a>
-                </span>
-              </div>
-            </div>
-          </div>
+          <ActivityHeaderPublic
+            data={this.state.data}
+            athleteData={this.state.athleteData}
+          />
           <div className="o-activity-detail__summary">
             <div className="c-activity-summary o-flex o-flex-justify--start">
               {activityDistance ?
@@ -346,14 +336,6 @@ class PublicActivityDetail extends Component {
       )
     }
   }
-}
-
-function AthleteProfile(props) {
-  return(
-    <div className="c-athlete-profile">
-      <img alt="" src={props.athleteData.profile} className="c-athlete-profile__image"/>
-    </div>
-  )
 }
 
 export default PublicActivityDetail

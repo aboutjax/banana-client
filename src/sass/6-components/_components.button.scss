@@ -15,13 +15,17 @@
    opacity: 0.3;
    cursor: not-allowed;
  }
+
+ @include hover {
+    background-color: darken($colour-white, 10);
+ }
 }
 
 
 .c-btn--primary {
   background: $colour-primary;
 
-  &:hover {
+  @include hover {
     background-color: darken($colour-primary, 5);
   }
 
@@ -33,8 +37,6 @@
 
 .c-btn--publish,
 .c-btn--favourite {
-  background: transparent;
-  color: $colour-text;
 
   .c-icon {
     transition: transform 0.1s ease-in;
@@ -46,10 +48,19 @@
     vertical-align: middle;
   }
 
+  @include hover {
+    background-color: darken($colour-white, 10);
+  }
+
   &.is-public,
   &.is-favourite {
     background-color: $colour-primary;
+    color: $colour-text;
+    @include hover {
+      background-color: darken($colour-primary, 5);
+    }
   }
+
 }
 
 .c-btn--transparent {

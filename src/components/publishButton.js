@@ -102,7 +102,7 @@ class PublishButton extends Component {
           {this.state.isPublic
             ?
             <div className="o-flex o-flex-align--center">
-              <button className="c-btn c-btn--publish is-public" onClick={this.removeFromPublicStream}><IconCheckLine className="c-icon"/> <span>Published</span></button>
+              <button className="c-btn c-btn--publish is-public" onClick={this.removeFromPublicStream}><IconCloud className="c-icon"/> <span>Published</span></button>
               <a className="c-link t-left-spacing" target="_blank" href={"/public/" + this.props.userUid + "/" +  this.props.activityId}> Open Public Link</a>
             </div>
             :

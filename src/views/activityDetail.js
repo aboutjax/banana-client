@@ -14,6 +14,7 @@ import domtoimage from 'dom-to-image';
 import fileSaver from 'file-saver';
 import {IconDownload} from '../components/icons/icons'
 import ActivityFoodCard from '../components/foodCard'
+import ActivityHeader from '../components/activityHeader'
 
 let activityDistance;
 let activityTotalElevationGain;
@@ -38,6 +39,8 @@ let foodBurnedApples;
 let foodBurnedBeers;
 let foodBurnedCookies;
 let foodBurnedCheeseburgers;
+let foodBurnedCadburyChocolate;
+let foodBurnedPizzaSlice;
 
 let publicAccessToken = '011c89ee01402ab591de0240d59ee84455fd4d42'
 
@@ -61,6 +64,7 @@ class ActivityDetail extends Component {
   }
 
   componentDidMount() {
+    console.log('didmount');
     let userAccessToken = getCookie('access_token') || publicAccessToken
     let thisActivityApiUrl = 'https://www.strava.com/api/v3/activities/' + this.props.match.params.id;
 
@@ -273,6 +277,8 @@ class ActivityDetail extends Component {
     foodBurnedCookies = _.round(activityTotalCalories / 50, 1)
     foodBurnedCheeseburgers = _.round(activityTotalCalories / 303, 1)
     foodBurnedCheeseburgers = _.round(activityTotalCalories / 180, 1)
+    foodBurnedCadburyChocolate = _.round(activityTotalCalories / 240, 1)
+    foodBurnedPizzaSlice = _.round(activityTotalCalories / 272, 1)
 
     if (this.state.loading) {
       return (
@@ -283,26 +289,12 @@ class ActivityDetail extends Component {
     } else {
       return (
         <div className="o-activity-detail">
-          <div className="c-page-header">
-            <h3 className="o-activity-detail-name">{this.state.data.name}</h3>
-            <span className='o-activity-detail-time'>
-              <Moment format="MMM DD, YYYY">{this.state.data.start_date}</Moment>
-               <span> • </span>
-              <Moment format="hh:mm a">{this.state.data.start_date}</Moment>
-              <span> • </span>
-              <a target="_blank" className="c-link" href={"https://strava.com/activities/" + this.state.data.id}>View on Strava</a>
-            </span>
-            <div className="t-top-spacing--l o-flex">
-              <div className="t-right-spacing">
-                <FavouriteButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data}/>
-              </div>
-              <div>
-                <PublishButton userUid={this.props.userUid} activityId={this.props.match.params.id} data={this.state.data} altitudeStream={this.state.altitudeStream} cadenceStream={this.state.cadenceStream} distanceStream={this.state.distanceStream} heartrateStream={this.state.heartrateStream} wattsStream={this.state.wattsStream} latLngStream={this.state.latLngStream}  velocityStream={this.state.velocityStream}/>
-              </div>
-            </div>
-          </div>
-
-          <div id="box1"></div>
+          <ActivityHeader
+            data={this.state.data}
+            userUid={this.state.userUid}
+            activityId={this.props.match.params.id}
+            altitudeStream={this.state.altitudeStream} cadenceStream={this.state.cadenceStream} distanceStream={this.state.distanceStream} heartrateStream={this.state.heartrateStream} wattsStream={this.state.wattsStream} latLngStream={this.state.latLngStream}  velocityStream={this.state.velocityStream}
+          />
           <div className="o-activity-detail__summary">
             <div className="c-activity-summary o-flex o-flex-justify--start">
               {activityDistance ?
@@ -472,6 +464,8 @@ class ActivityDetail extends Component {
                   <ActivityFoodCard name="Cookies" value={foodBurnedCookies} imageSrc="/img/food/cookie.png"/>
                   <ActivityFoodCard name="Cheeseburgers" value={foodBurnedCheeseburgers} imageSrc="/img/food/cheeseburger.png"/>
                   <ActivityFoodCard name="Beers" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/>
+                  <ActivityFoodCard name="Pizza Slice" value={foodBurnedPizzaSlice} imageSrc="/img/food/pizza_slice.png"/>
+                  <ActivityFoodCard name="Chocolate" value={foodBurnedCadburyChocolate} imageSrc="/img/food/cadbury_chocolate.png"/>
                 </div>
               </div>
               :
