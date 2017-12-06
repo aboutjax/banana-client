@@ -25,7 +25,7 @@ class ActivityHeaderPublic extends Component {
 function AthleteProfile(props) {
   return(
     <div className="c-athlete-profile">
-      <img alt="profile picture" src={props.athleteData.profile} className="c-athlete-profile__image"/>
+      <img alt="profile" src={props.athleteData.profile} className="c-athlete-profile__image"/>
     </div>
   )
 }

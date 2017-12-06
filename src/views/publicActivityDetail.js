@@ -33,6 +33,9 @@ let foodBurnedApples;
 let foodBurnedBeers;
 let foodBurnedCookies;
 let foodBurnedCheeseburgers;
+let foodBurnedCadburyChocolate;
+let foodBurnedPizzaSlice;
+
 
 let publicAccessToken = '011c89ee01402ab591de0240d59ee84455fd4d42'
 
@@ -148,6 +151,8 @@ class PublicActivityDetail extends Component {
     foodBurnedBeers = _.round(activityTotalCalories / 208, 1)
     foodBurnedCookies = _.round(activityTotalCalories / 50, 1)
     foodBurnedCheeseburgers = _.round(activityTotalCalories / 303, 1)
+    foodBurnedCadburyChocolate = _.round(activityTotalCalories / 240, 1)
+    foodBurnedPizzaSlice = _.round(activityTotalCalories / 272, 1)
 
     if (this.state.loading) {
       return (
@@ -321,6 +326,8 @@ class PublicActivityDetail extends Component {
                   <ActivityFoodCard name="Cookies" value={foodBurnedCookies} imageSrc="/img/food/cookie.png"/>
                   <ActivityFoodCard name="Cheeseburgers" value={foodBurnedCheeseburgers} imageSrc="/img/food/cheeseburger.png"/>
                   <ActivityFoodCard name="Beers" value={foodBurnedBeers} imageSrc="/img/food/beer.png"/>
+                  <ActivityFoodCard name="Pizza Slice" value={foodBurnedPizzaSlice} imageSrc="/img/food/pizza_slice.png"/>
+                  <ActivityFoodCard name="Chocolate" value={foodBurnedCadburyChocolate} imageSrc="/img/food/cadbury_chocolate.png"/>
                 </div>
               </div>
               :
