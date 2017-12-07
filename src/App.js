@@ -54,12 +54,12 @@ class App extends Component {
 
               <Switch>
                 <Route path="/handle_redirect" exact component={HandleRedirect}/>
-                <Route path='/' exact render={routeProps => <Activities {...routeProps} userUid={this.state.userUid}/>} />
+                <Route path='/2017review' render={routeProps => <MyYear {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/activities/page/:page" component={Activities}/>
                 <Route path='/activities/:id' exact render={routeProps => <ActivityDetail {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
                 <Route path='/favourites' render={routeProps => <FavouriteActivities {...routeProps} userUid={this.state.userUid}/>} />
-                <Route path='/2017review' render={routeProps => <MyYear {...routeProps} userUid={this.state.userUid}/>} />
+                <Route path='/' exact render={routeProps => <Activities {...routeProps} userUid={this.state.userUid}/>} />
                 <Route component={NoMatch}/>
               </Switch>
 
@@ -83,7 +83,6 @@ class App extends Component {
               <Route path="/handle_redirect" exact component={HandleRedirect}/>
               <Route path="/favourites" exact component={Home}/>
               <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
-              <Route component={NoMatch}/>
             </Switch>
           </div>
         </div>
