@@ -288,7 +288,7 @@ class ActivityDetail extends Component {
       )
     } else {
       return (
-        <div className="o-activity-detail">
+        <div className="o-wrapper o-activity-detail">
           <ActivityHeader
             data={this.state.data}
             userUid={this.state.userUid}

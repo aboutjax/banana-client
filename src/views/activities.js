@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Activity from '../components/activity';
+import { Link } from 'react-router-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
 import LoadingSpinner from '../components/loader';
 import {getCookie} from '../components/cookieHelper'
 import fire from '../components/firebase'
 import _ from 'lodash';
-import {IconArrowRight, IconArrowLeft} from '../components/icons/icons'
+import {IconArrowRight, IconArrowLeft, IconChart} from '../components/icons/icons'
 
 const activitiesPerPage = 30;
 
@@ -138,8 +139,17 @@ class Activities extends Component{
       )
     } else {
       return (
-        <div>
+        <div className="o-wrapper">
           <div>
+            <Link to="/2017review">
+              <div className="c-yrt-card t-top-spacing--xl">
+                <IconArrowRight className="c-yrt-card__right-arrow"/>
+                <h2 className="c-yrt-card__header">
+                  Your Year in Review
+                </h2>
+                <p className="c-yrt-card__description">Check your progress for 2017!</p>
+              </div>
+            </Link>
             <div className="c-page-header">
               <h1>All Activities</h1>
             </div>

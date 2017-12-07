@@ -1,4 +1,10 @@
 .o-wrapper {
-  // max-width: 960px;
+  max-width: 960px;
   margin: 0 auto;
+  padding-left: $spacing-xl;
+  padding-right: $spacing-xl;
+}
+
+.o-wrapper--full-width {
+  max-width: none;
 }

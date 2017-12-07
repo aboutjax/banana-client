@@ -46,11 +46,10 @@ class FavouriteActivities extends Component {
     if(!this.state.loading) {
 
       return (
-        <div className="o-favourite-activities">
+        <div className="o-wrapper o-favourite-activities">
           <div className="c-page-header">
             <div className="o-flex o-flex-justify--start o-flex-align--center">
-              <IconBookmarkSolid className="c-icon c-icon--header t-right-spacing"/>
-              <h1>Favourites</h1>
+              <h1>Favourite Activities</h1>
             </div>
           </div>
 

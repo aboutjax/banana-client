@@ -1,6 +1,6 @@
 .c-footer {
-  height: 6rem;
-  padding: $spacing-xl;
+  padding: 0 $spacing-xl;
+  background-color: darken($colour-background, 10);
   display: flex;
   align-items: center;
   flex-direction: row-reverse;

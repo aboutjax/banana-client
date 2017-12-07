@@ -47,7 +47,7 @@ class App extends Component {
     if(this.state.loggedIn) {
       return(
 
-          <div className="App o-wrapper o-app">
+          <div className="App o-app">
             <Nav type="private" authState={this.state.loggedIn}/>
 
             <div className='o-content'>
@@ -59,7 +59,7 @@ class App extends Component {
                 <Route path='/activities/:id' exact render={routeProps => <ActivityDetail {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
                 <Route path='/favourites' render={routeProps => <FavouriteActivities {...routeProps} userUid={this.state.userUid}/>} />
-                <Route path='/myyear' render={routeProps => <MyYear {...routeProps} userUid={this.state.userUid}/>} />
+                <Route path='/2017review' render={routeProps => <MyYear {...routeProps} userUid={this.state.userUid}/>} />
                 <Route component={NoMatch}/>
               </Switch>
 

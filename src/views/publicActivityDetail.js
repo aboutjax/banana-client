@@ -162,7 +162,7 @@ class PublicActivityDetail extends Component {
       )
     } else if(!this.state.loading && this.state.activityFound) {
       return (
-        <div className="o-activity-detail">
+        <div className="o-wrapper o-activity-detail">
           <ActivityHeaderPublic
             data={this.state.data}
             athleteData={this.state.athleteData}

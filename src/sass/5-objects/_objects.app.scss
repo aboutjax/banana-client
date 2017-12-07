@@ -1,7 +1,6 @@
 .o-app {
-  max-width: 960px;
-  min-height: 90vh;
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 6rem auto 6rem;
+  grid-template-rows: 8rem 1fr 8rem;
 }

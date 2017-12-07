@@ -48,9 +48,6 @@ class Nav extends Component {
               <h4 className="c-navigation__logo"><span aria-label="banana"  role="img">🍌</span> banana</h4>
             </Link>
             <div className="o-flex">
-              {/* <NavLink className="c-navigation__nav-item" activeClassName="active" exact to="/myyear">
-                <IconProgress/>
-              </NavLink> */}
               <NavLink className="c-navigation__nav-item" activeClassName="active" exact to="/favourites">
                 <IconBookmarkSolid />
                 <div className="c-tooltip">Favourites</div>

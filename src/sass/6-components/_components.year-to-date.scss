@@ -1,14 +1,226 @@
-.c-year-to-date-stats {
-  font-size: 1.4em;
-  color: $colour-white;
-  line-height: 1.5;
-  font-weight: 600;
-  text-align: center;
-  max-width: 50rem;
-  margin: 0 auto;
+.c-ytd {
 
-  strong {
-    color: $colour-primary;
-    font-weight: 700;
+}
+
+.c-ytd__intro {
+  position: relative;
+  left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-ytd__intro__year {
+  font-size: 11rem;
+  line-height: 9rem;
+  font-weight: 900;
+  margin: 0;
+  z-index: 1;
+  color: $colour-ytd-base;
+  text-align: center;
+  transform: translateX(2rem) translateY(1rem);
+  opacity: 0;
+  animation: fadeInFromLeft 1s ease-in-out forwards;
+  animation-delay: 1s;
+
+  @include smallish {
+    font-size: 13rem;
+    line-height: 11rem;
+  };
+}
+
+.c-ytd__intro__title {
+  font-size: 3rem;
+  line-height: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .5rem;
+  margin: 0;
+  position: relative;
+  left: -3rem;
+  z-index: 2;
+  filter: drop-shadow(0 0 0 rgba(0,0,0,0.5));
+  transform: translateX(-1rem) translateY(-1rem);
+  opacity: 0;
+  animation: fadeInFromLeft 1s ease-in-out forwards, dropShadow 1s ease-in forwards;
+  animation-delay: 1.4s;
+
+  @include smallish {
+    font-size: 4.9rem;
+    line-height: 5rem;
+  };
+}
+
+@keyframes dropShadow {
+  to {
+    filter: drop-shadow(0 0 .6rem rgba(0,0,0,0.5));
+  }
+}
+
+@keyframes fadeInFromLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.c-ytd__section {
+  overflow: hidden;
+  height: 75vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+}
+
+.c-ytd__section--intro {
+  height: calc(100vh - 8rem);
+}
+
+.c-ytd__section--ride {
+  color: $colour-background;
+  background-color: $colour-ytd-base;
+}
+
+.c-ytd__stat {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.c-ytd__stat__title {
+  position: relative;
+  top: 3rem;
+}
+
+.c-ytd__stat__value {
+  font-size: 11rem;
+  font-weight: 900;
+  margin: 0;
+
+  @include smallish {
+    font-size: 14.4rem;
+  }
+
+  @include medium {
+    font-size: 18.4rem;
+  }
+
+
+}
+
+.c-ytd__stat__unit {
+  font-size: 5rem;
+  font-weight: 600;
+  color: $colour-text;
+  top: 10rem;
+  left: 0;
+  width: 100%;
+  margin-bottom: 0;
+  position: absolute;
+  filter: drop-shadow(0 0 .6rem rgba(0,0,0,0.5));
+
+  @include smallish {
+    font-size: 6.4rem;
+    top: 12rem;
+  }
+
+  @include medium {
+    font-size: 6.4rem;
+    top: 16.5rem;
+  }
+}
+
+.c-ytd__stat__description {
+  position: relative;
+  top: 3rem;
+}
+
+.c-ytd__circle {
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.c-ytd__pattern {
+  position: fixed;
+  top: 40%;
+  left: 0rem;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  animation: fadeInFromBottomSvg 10s ease-in forwards;
+}
+
+.c-ytd__scroll-hint {
+  position: absolute;
+  opacity: 0;
+  bottom: -5.5rem;
+  animation: fadeInFromBottom 0.6s ease-in-out forwards;
+  animation-delay: 2s;
+
+  svg {
+    width: 100%;
+    height: 50px;
+  }
+}
+
+@keyframes fadeInFromBottom {
+  to {
+    opacity: 1;
+    bottom: -1rem;
+  }
+}
+
+@keyframes fadeInFromBottomSvg {
+  to {
+    opacity: 0.1;
+    top: 30%;
+  }
+}
+
+.c-yrt-card {
+  position: relative;
+  background-image: linear-gradient(0deg, $colour-ytd-base 0%, $colour-ytd-base 50%, $colour-ytd-alt 100%);
+  padding: $spacing-l;
+  border-radius: $border-radius;
+  text-align: left;
+  color: darken($colour-ytd-base, 50);
+
+  @include hover {
+    .c-yrt-card__right-arrow {
+      right: $spacing-l;
+    }
+  }
+}
+
+.c-yrt-card__header {
+  font-size: 2.4rem;
+  margin-bottom: 0;
+  font-weight: 700;
+}
+
+.c-yrt-card__description {
+  margin-bottom: 0;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.c-yrt-card__right-arrow {
+  color: darken($colour-ytd-base, 40);
+  position: absolute;
+  right: $spacing-xl;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: right 0.2s ease-in-out;
+
+  svg {
+    width: 3.2rem;
+    height: 3.2rem;
   }
 }

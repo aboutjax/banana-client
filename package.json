@@ -25,12 +25,13 @@
     "react": "^15.6.1",
     "react-chartjs": "^0.8.0",
     "react-chartjs-2": "^2.1.0",
-    "react-countup": "^2.1.1",
+    "react-countup": "^3.0.2",
     "react-dom": "^15.6.1",
     "react-map-gl": "^2.0.3",
     "react-moment": "^0.2.2",
     "react-router-dom": "^4.1.1",
-    "react-transition-group": "^1.1.3"
+    "react-transition-group": "^1.1.3",
+    "react-waypoint": "^7.3.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
