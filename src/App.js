@@ -78,10 +78,13 @@ class App extends Component {
           </div>
 
           <div className='o-content'>
+            <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/handle_redirect" exact component={HandleRedirect}/>
               <Route path="/favourites" exact component={Home}/>
               <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
+              <Route component={NoMatch}/>
+            </Switch>
           </div>
         </div>
       )
