@@ -71,7 +71,7 @@ class App extends Component {
 
       )
     } else {
-      return(
+      return (
         <div className="App o-wrapper o-app">
           <div>
             {/* <Nav type="public" authState={this.state.loggedIn}/> */}
@@ -79,10 +79,12 @@ class App extends Component {
 
           <div className='o-content'>
             <Switch>
-              <Route path="/" exact component={Home} />
+              <Route path='/2017review' component={NoMatch} />
               <Route path="/handle_redirect" exact component={HandleRedirect}/>
               <Route path="/favourites" exact component={Home}/>
               <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
+              <Route path="/" exact component={Home} />
+              <Route component={NoMatch}/>
             </Switch>
           </div>
         </div>
