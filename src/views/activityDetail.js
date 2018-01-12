@@ -81,6 +81,7 @@ class ActivityDetail extends Component {
     }).then(function(response) {
       return response.json();
     }).then(json => {
+      console.log(json);
       this.setState({
         data: json,
         gear: json.gear,

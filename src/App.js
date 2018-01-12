@@ -24,7 +24,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      userMeasurementPreference: null,
     }
   }
 
@@ -41,6 +42,20 @@ class App extends Component {
         this.setState({ loggedIn: false })
       }
     })
+
+    fetch('https://www.strava.com/api/v3/athlete', {
+      method: 'get',
+      headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer " + userAccessToken
+      }
+    }).then(function(response){
+      return response.json();
+    }).then( json => {
+      this.setState({
+        userMeasurementPreference: json.measurement_preference
+      })
+    })
   }
 
   render(){
@@ -54,7 +69,7 @@ class App extends Component {
 
               <Switch>
                 <Route path="/handle_redirect" exact component={HandleRedirect}/>
-                <Route path='/2017review' render={routeProps => <MyYear {...routeProps} userUid={this.state.userUid}/>} />
+                <Route path='/year-review' render={routeProps => <MyYear {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/activities/page/:page" component={Activities}/>
                 <Route path='/activities/:id' exact render={routeProps => <ActivityDetail {...routeProps} userUid={this.state.userUid}/>} />
                 <Route path="/public/:athleteUID/:activity" exact component={PublicActivityDetail} />
@@ -79,6 +94,7 @@ class App extends Component {
 
           <div className='o-content'>
             <Switch>
+              <Route path="/activities/page/:page" component={Activities}/>
               <Route path='/2017review' component={NoMatch} />
               <Route path="/handle_redirect" exact component={HandleRedirect}/>
               <Route path="/favourites" exact component={Home}/>

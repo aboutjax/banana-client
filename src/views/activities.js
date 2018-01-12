@@ -141,13 +141,13 @@ class Activities extends Component{
       return (
         <div className="o-wrapper">
           <div>
-            <Link to="/2017review">
+            <Link to="/year-review">
               <div className="c-yrt-card t-top-spacing--xl">
                 <IconArrowRight className="c-yrt-card__right-arrow"/>
                 <h2 className="c-yrt-card__header">
                   Your Year in Review
                 </h2>
-                <p className="c-yrt-card__description">Check your progress for 2017!</p>
+                <p className="c-yrt-card__description">Check your progress for 2018.</p>
               </div>
             </Link>
             <div className="c-page-header">

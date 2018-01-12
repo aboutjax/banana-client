@@ -75,7 +75,7 @@ class YearToDate extends Component {
             <div className="c-ytd__section c-ytd__section--intro">
 
               <div className="c-ytd__intro">
-                <h1 className="c-ytd__intro__year">20<br/>17</h1>
+                <h1 className="c-ytd__intro__year">20<br/>18</h1>
                 <h1 className="c-ytd__intro__title">Year<br/>in<br/>Review</h1>
               </div>
 
