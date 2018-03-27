@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import fire from '../components/firebase'
-import {IconBookmarkSolid,IconCheckLine} from '../components/icons/icons'
+import {IconBookmarkSolid} from '../components/icons/icons'
 
 class FavouriteButton extends Component {
 

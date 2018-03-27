@@ -61,7 +61,6 @@ class YearToDate extends Component {
   }
 
   render(){
-    let ytdRideCount = this.state.ytdRideTotals.count
     let ytdRideDistance = _.round(this.state.ytdRideTotals.distance / 1000 , 1)
     let ytdRideElevationGain = _.round(this.state.ytdRideTotals.elevation_gain, 1)
     let ytdRideMovingTime = _.round(this.state.ytdRideTotals.moving_time / 60 / 60, 1)
@@ -147,21 +146,6 @@ class YearToDateStat extends Component {
   }
 }
 
-function YearToDateStat(props){
-  return(
-    <strong>{props.value ? props.value : null}</strong>
-  )
-}
-
-function CircleSvg(){
-  return(
-    <svg className="c-ytd__circle" width="724px" height="724px" viewBox="0 0 724 724" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <g id="product" strokeWidth="1" fill="none">
-            <circle id="Oval" fill="none" stroke="#FFFFFF" strokeWidth="41" cx="362" cy="362" r="341"></circle>
-        </g>
-    </svg>
-  )
-}
 
 function ScrollHint(){
   return(
@@ -173,40 +157,5 @@ function ScrollHint(){
   )
 }
 
-function PatternSVG(){
-  return(
-
-    <svg className="c-ytd__pattern" viewBox="0 0 375 117" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <g id="Page-2" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
-            <g transform="translate(0.000000, -71.000000)" stroke="#FFFFFF" strokeWidth="2">
-                <path d="M9,491.5 C9,336 241.5,-67 555.5,-67" id="Path-2" transform="translate(282.250000, 212.250000) rotate(37.000000) translate(-282.250000, -212.250000) "></path>
-            </g>
-        </g>
-    </svg>
-  )
-}
-
-function TypeIcon(){
-  return(
-
-    <svg width="84px" height="53px" viewBox="0 0 84 53" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <g id="product" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">
-            <g id="Artboard-Copy-8" transform="translate(-678.000000, -95.000000)" strokeWidth="3">
-                <g id="Group-2" transform="translate(657.000000, 97.000000)">
-                    <g id="bicycle-mountain" transform="translate(23.000000, 0.000000)">
-                        <g id="Group">
-                            <path d="M23.6930984,25.6026678 C29.1132339,31.0560849 29.1132339,39.8978052 23.6930984,45.3511874 C18.2729629,50.8046045 9.48520249,50.8046045 4.06510165,45.3511874 C-1.35503388,39.8977703 -1.35503388,31.05605 4.06510165,25.6026678 C9.48523719,20.1492508 18.2729976,20.1492508 23.6930984,25.6026678" id="Shape" stroke="#202428"></path>
-                            <path d="M75.5012632,25.473019 C80.9213988,30.9264361 80.9213988,39.7681564 75.5012632,45.2215386 C70.0811277,50.6749556 61.2933673,50.6749556 55.8732665,45.2215386 C50.4531309,39.7681215 50.4531309,30.9264012 55.8732665,25.473019 C61.293402,20.0196019 70.0811624,20.0196019 75.5012632,25.473019" id="Shape" stroke="#202428"></path>
-                            <polyline id="Shape" stroke="#FFFFFF" points="36.1940905 35.3506826 55.9128219 8.65787999 29.2545405 17.8917883 13.640553 35.3471915 36.1940905 35.3471915 24.9173218 7.41854637"></polyline>
-                            <polyline id="Shape" stroke="#FFFFFF" points="65.6871781 35.3471915 53.5429656 2.1819254 60.4825156 0.43638508"></polyline>
-                            <path d="M20.580103,5.67300604 L30.989428,5.67300604" id="Shape" stroke="#FFFFFF"></path>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </svg>
-  )
-}
 
 export default YearToDate;

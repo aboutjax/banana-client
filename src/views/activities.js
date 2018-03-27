@@ -6,7 +6,7 @@ import LoadingSpinner from '../components/loader';
 import {getCookie} from '../components/cookieHelper'
 import fire from '../components/firebase'
 import _ from 'lodash';
-import {IconArrowRight, IconArrowLeft, IconChart} from '../components/icons/icons'
+import {IconArrowRight, IconArrowLeft} from '../components/icons/icons'
 
 const activitiesPerPage = 30;
 

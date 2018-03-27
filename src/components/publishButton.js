@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import fire from '../components/firebase'
-import {IconCloud,IconCheckLine} from '../components/icons/icons'
+import {IconCloud} from '../components/icons/icons'
 
 class PublishButton extends Component {
 

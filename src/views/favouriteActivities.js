@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import Activity from '../components/activity';
 import fire from '../components/firebase'
 import LoadingSpinner from '../components/loader';
 import { CSSTransitionGroup } from 'react-transition-group';
-import {IconBookmarkSolid} from '../components/icons/icons'
 
 class FavouriteActivities extends Component {
   constructor(){

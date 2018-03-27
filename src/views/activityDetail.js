@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
 import {ActivityStat} from '../components/activity';
 import MomentJS from 'moment'
-import Moment from 'react-moment';
 import _ from 'lodash';
 import LoadingSpinner from '../components/loader'
 import ActivityChart from '../components/chart'
-import FavouriteButton from '../components/favouriteButton'
-import PublishButton from '../components/publishButton'
 import MapboxMap from '../components/mapbox'
 import {getCookie} from '../components/cookieHelper'
 import {getUserStatus} from '../components/firebase'
 import domtoimage from 'dom-to-image';
 import fileSaver from 'file-saver';
-import {IconDownload} from '../components/icons/icons'
 import ActivityFoodCard from '../components/foodCard'
 import ActivityHeader from '../components/activityHeader'
 
@@ -35,7 +31,6 @@ let activityMaxHeartRate;
 let activityDeviceWatts;
 
 let foodBurnedBanana;
-let foodBurnedApples;
 let foodBurnedBeers;
 let foodBurnedCookies;
 let foodBurnedCheeseburgers;
@@ -273,7 +268,6 @@ class ActivityDetail extends Component {
 
     // Food Burned
     foodBurnedBanana = _.round(activityTotalCalories / 90, 1)
-    foodBurnedApples = _.round(activityTotalCalories / 52, 1)
     foodBurnedBeers = _.round(activityTotalCalories / 208, 1)
     foodBurnedCookies = _.round(activityTotalCalories / 50, 1)
     foodBurnedCheeseburgers = _.round(activityTotalCalories / 303, 1)
