@@ -151,7 +151,7 @@ class Activities extends Component {
                 <IconArrowRight className="c-yrt-card__right-arrow" />
                 <h2 className="c-yrt-card__header">Your Year in Review</h2>
                 <p className="c-yrt-card__description">
-                  Check your progress for 2019.
+                  Check your progress for 2020.
                 </p>
               </div>
             </Link>
