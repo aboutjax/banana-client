@@ -1,4 +1,4 @@
-import * as firebase from 'firebase'
+import * as firebase from "firebase";
 
 const config = {
   apiKey: "AIzaSyAT-v8o3B_cYtmaQOcOAaZypeXQC4W1lH8",
@@ -12,17 +12,15 @@ const config = {
 const fire = firebase.initializeApp(config);
 
 const getUserStatus = () => {
-
-  return new Promise( (resolve, reject) => {
-    fire.auth().onAuthStateChanged(function (user) {
+  return new Promise((resolve, reject) => {
+    fire.auth().onAuthStateChanged(function(user) {
       if (user) {
         resolve(user.uid);
       } else {
-        reject(Error('It broke'));
+        reject(Error("It broke"));
       }
     });
   });
 };
 
-export default fire;
-export {getUserStatus}
+export { getUserStatus, fire };

@@ -85,6 +85,9 @@
 .t-opacity--half {
   opacity: 0.5; }
 
+.t-full-height {
+  height: 100%; }
+
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -190,6 +193,7 @@ abbr[title] {
   /* 1 */
   text-decoration: underline;
   /* 2 */
+  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
   /* 2 */ }
 

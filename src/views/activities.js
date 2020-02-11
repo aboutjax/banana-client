@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CSSTransitionGroup } from "react-transition-group";
 import LoadingSpinner from "../components/loader";
 import { getCookie } from "../components/cookieHelper";
-import fire from "../components/firebase";
+import { fire } from "../components/firebase";
 import _ from "lodash";
 import { IconArrowRight, IconArrowLeft } from "../components/icons/icons";
 
@@ -138,7 +138,7 @@ class Activities extends Component {
 
     if (this.state.loading) {
       return (
-        <div className="o-flex o-flex-align--center o-flex-justify--center">
+        <div className="o-flex o-flex-align--center o-flex-justify--center t-full-height">
           <LoadingSpinner />
         </div>
       );

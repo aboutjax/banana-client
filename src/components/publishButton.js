@@ -1,73 +1,73 @@
-import React, {Component} from 'react';
-import fire from '../components/firebase'
-import {IconCloud} from '../components/icons/icons'
+import React, { Component } from "react";
+import { fire } from "../components/firebase";
+import { IconCloud } from "../components/icons/icons";
 
 class PublishButton extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       isPublic: false,
-      loading: true,
-    }
+      loading: true
+    };
   }
 
   checkStatus = () => {
+    let publicActivitiesRef = fire
+      .database()
+      .ref("users/" + this.props.userUid + "/publicActivities");
+    let activityId = this.props.activityId;
 
-    let publicActivitiesRef = fire.database().ref('users/' + this.props.userUid + '/publicActivities');
-    let activityId = this.props.activityId
-
-    publicActivitiesRef.once('value', snapshot => {
+    publicActivitiesRef.once("value", snapshot => {
       snapshot.forEach(child => {
-        let publicActivityId = child.child('activityId').val()
+        let publicActivityId = child.child("activityId").val();
 
-        if(publicActivityId === activityId){
-          console.log('activity is in public stream');
+        if (publicActivityId === activityId) {
+          console.log("activity is in public stream");
           this.setState({
-            isPublic: true,
-          })
+            isPublic: true
+          });
         } else {
           // do nothing
         }
-      })
-      this.setState({ loading: false })
-    })
-  }
+      });
+      this.setState({ loading: false });
+    });
+  };
 
   removeFromPublicStream = () => {
+    let publicActivitiesRef = fire
+      .database()
+      .ref("users/" + this.props.userUid + "/publicActivities");
+    let activityId = this.props.activityId;
 
-
-    let publicActivitiesRef = fire.database().ref('users/' + this.props.userUid + '/publicActivities');
-    let activityId = this.props.activityId
-
-    if(this.state.isPublic) {
-      publicActivitiesRef.once('value', snapshot => {
+    if (this.state.isPublic) {
+      publicActivitiesRef.once("value", snapshot => {
         snapshot.forEach(child => {
-          let publicActivityId = child.child('activityId').val()
+          let publicActivityId = child.child("activityId").val();
 
-          if(publicActivityId === activityId) {
-            console.log('remove from public stream');
-            child.ref.remove()
+          if (publicActivityId === activityId) {
+            console.log("remove from public stream");
+            child.ref.remove();
           }
-        })
-      })
+        });
+      });
 
       this.setState({
         isPublic: false
-      })
+      });
     }
-
-  }
+  };
 
   addToPublicStream = () => {
+    let publicActivitiesRef = fire
+      .database()
+      .ref("users/" + this.props.userUid + "/publicActivities");
+    let activityId = this.props.activityId;
+    let newPublicActivity = publicActivitiesRef.push();
 
-    let publicActivitiesRef = fire.database().ref('users/' + this.props.userUid + '/publicActivities');
-    let activityId = this.props.activityId
-    let newPublicActivity = publicActivitiesRef.push()
-
-    if(!this.state.isPublic) {
-      console.log('add to public stream');
+    if (!this.state.isPublic) {
+      console.log("add to public stream");
       newPublicActivity.set({
         activityId: activityId,
         activityData: this.props.data,
@@ -78,43 +78,64 @@ class PublishButton extends Component {
         cadenceStream: this.props.cadenceStream || null,
         heartrateStream: this.props.heartrateStream || null,
         wattsStream: this.props.wattsStream || null
-      })
+      });
 
       this.setState({
         isPublic: true
-      })
+      });
     }
-
-  }
+  };
 
   componentDidMount() {
-    this.checkStatus()
+    this.checkStatus();
   }
 
   render() {
-    if(this.state.loading) {
-      return(
-        <button disabled className="c-btn c-btn--publish" onClick={this.addToPublicStream}><IconCloud className="c-icon"/> <span>Publish</span></button>
-      )
+    if (this.state.loading) {
+      return (
+        <button
+          disabled
+          className="c-btn c-btn--publish"
+          onClick={this.addToPublicStream}
+        >
+          <IconCloud className="c-icon" /> <span>Publish</span>
+        </button>
+      );
     } else {
-      return(
+      return (
         <div>
-          {this.state.isPublic
-            ?
+          {this.state.isPublic ? (
             <div className="o-flex o-flex-align--center">
-              <button className="c-btn c-btn--publish is-public" onClick={this.removeFromPublicStream}><IconCloud className="c-icon"/> <span>Published</span></button>
-              <a className="c-link t-left-spacing" target="_blank" href={"/public/" + this.props.userUid + "/" +  this.props.activityId}> Open Public Link</a>
+              <button
+                className="c-btn c-btn--publish is-public"
+                onClick={this.removeFromPublicStream}
+              >
+                <IconCloud className="c-icon" /> <span>Published</span>
+              </button>
+              <a
+                className="c-link t-left-spacing"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={
+                  "/public/" + this.props.userUid + "/" + this.props.activityId
+                }
+              >
+                {" "}
+                Open Public Link
+              </a>
             </div>
-            :
-            <button className="c-btn c-btn--publish" onClick={this.addToPublicStream}><IconCloud className="c-icon"/> <span>Publish</span></button>
-
-
-          }
-
+          ) : (
+            <button
+              className="c-btn c-btn--publish"
+              onClick={this.addToPublicStream}
+            >
+              <IconCloud className="c-icon" /> <span>Publish</span>
+            </button>
+          )}
         </div>
-      )
+      );
     }
   }
 }
 
-export default PublishButton
+export default PublishButton;

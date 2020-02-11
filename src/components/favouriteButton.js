@@ -1,106 +1,119 @@
-import React, {Component} from 'react';
-import fire from '../components/firebase'
-import {IconBookmarkSolid} from '../components/icons/icons'
+import React, { Component } from "react";
+import { fire } from "../components/firebase";
+import { IconBookmarkSolid } from "../components/icons/icons";
 
 class FavouriteButton extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       isFavourite: false,
-      loading: true,
-    }
+      loading: true
+    };
   }
 
   checkStatus = () => {
+    let favouritesRef = fire
+      .database()
+      .ref("users/" + this.props.userUid + "/favourites");
+    let activityId = this.props.activityId;
 
-    let favouritesRef = fire.database().ref('users/' + this.props.userUid + '/favourites');
-    let activityId = this.props.activityId
-
-    favouritesRef.once('value', snapshot => {
+    favouritesRef.once("value", snapshot => {
       snapshot.forEach(child => {
-        let favouriteActivityId = child.child('activityId').val()
+        let favouriteActivityId = child.child("activityId").val();
 
-        if(favouriteActivityId === activityId){
-          console.log('activity is favourited');
+        if (favouriteActivityId === activityId) {
+          console.log("activity is favourited");
           this.setState({
-            isFavourite: true,
-          })
+            isFavourite: true
+          });
         }
-      })
-      this.setState({ loading: false })
-    })
-  }
+      });
+      this.setState({ loading: false });
+    });
+  };
 
   unfavouriteThis = () => {
+    let favouritesRef = fire
+      .database()
+      .ref("users/" + this.props.userUid + "/favourites");
+    let activityId = this.props.activityId;
 
-
-    let favouritesRef = fire.database().ref('users/' + this.props.userUid + '/favourites');
-    let activityId = this.props.activityId
-
-    if(this.state.isFavourite) {
-      favouritesRef.once('value', snapshot => {
+    if (this.state.isFavourite) {
+      favouritesRef.once("value", snapshot => {
         snapshot.forEach(child => {
-          let favouriteActivityId = child.child('activityId').val()
+          let favouriteActivityId = child.child("activityId").val();
 
-          if(favouriteActivityId === activityId) {
-            console.log('remove from firebase');
-            child.ref.remove()
+          if (favouriteActivityId === activityId) {
+            console.log("remove from firebase");
+            child.ref.remove();
           }
-        })
-      })
+        });
+      });
 
       this.setState({
         isFavourite: false
-      })
+      });
     }
-
-  }
+  };
 
   favouriteThis = () => {
+    let favouritesRef = fire
+      .database()
+      .ref("users/" + this.props.userUid + "/favourites");
+    let activityId = this.props.activityId;
+    let newFavouriteRef = favouritesRef.push();
 
-    let favouritesRef = fire.database().ref('users/' + this.props.userUid + '/favourites');
-    let activityId = this.props.activityId
-    let newFavouriteRef = favouritesRef.push()
-
-    if(!this.state.isFavourite) {
-      console.log('add to favourites');
+    if (!this.state.isFavourite) {
+      console.log("add to favourites");
       newFavouriteRef.set({
         activityId: activityId,
         activityData: this.props.data
-      })
+      });
 
       this.setState({
         isFavourite: true
-      })
+      });
     }
-
-  }
+  };
 
   componentDidMount() {
-    this.checkStatus()
+    this.checkStatus();
   }
 
   render() {
-    if(this.state.loading){
-      return(
-        <button disabled className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
-      )
+    if (this.state.loading) {
+      return (
+        <button
+          disabled
+          className="c-btn c-btn--favourite"
+          onClick={this.favouriteThis}
+        >
+          <IconBookmarkSolid className="c-icon" /> <span>Favourite</span>
+        </button>
+      );
     } else {
-      return(
+      return (
         <div>
-          {this.state.isFavourite
-            ?
-            <button className="c-btn c-btn--favourite is-favourite" onClick={this.unfavouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourited</span></button>
-            :
-            <button className="c-btn c-btn--favourite" onClick={this.favouriteThis}><IconBookmarkSolid className="c-icon"/> <span>Favourite</span></button>
-          }
+          {this.state.isFavourite ? (
+            <button
+              className="c-btn c-btn--favourite is-favourite"
+              onClick={this.unfavouriteThis}
+            >
+              <IconBookmarkSolid className="c-icon" /> <span>Favourited</span>
+            </button>
+          ) : (
+            <button
+              className="c-btn c-btn--favourite"
+              onClick={this.favouriteThis}
+            >
+              <IconBookmarkSolid className="c-icon" /> <span>Favourite</span>
+            </button>
+          )}
         </div>
-      )
+      );
     }
   }
-
 }
 
-export default FavouriteButton
+export default FavouriteButton;

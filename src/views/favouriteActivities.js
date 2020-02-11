@@ -1,48 +1,45 @@
-import React, { Component } from 'react';
-import Activity from '../components/activity';
-import fire from '../components/firebase'
-import LoadingSpinner from '../components/loader';
-import { CSSTransitionGroup } from 'react-transition-group';
+import React, { Component } from "react";
+import Activity from "../components/activity";
+import { fire } from "../components/firebase";
+import LoadingSpinner from "../components/loader";
+import { CSSTransitionGroup } from "react-transition-group";
 
 class FavouriteActivities extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       data: [],
       loading: true
-    }
+    };
   }
-  componentDidMount(){
+  componentDidMount() {
+    let allFavourites = [];
 
-      let allFavourites = []
-
-      let favouritesRef = fire.database().ref('users/' + this.props.userUid + '/favourites');
-      favouritesRef.once('value', snapshot => {
-
-        snapshot.forEach(child => {
-          allFavourites.push(child.val())
-
-        })
-        this.setState({ data: allFavourites, loading: false })
-      })
-
+    let favouritesRef = fire
+      .database()
+      .ref("users/" + this.props.userUid + "/favourites");
+    favouritesRef.once("value", snapshot => {
+      snapshot.forEach(child => {
+        allFavourites.push(child.val());
+      });
+      this.setState({ data: allFavourites, loading: false });
+    });
   }
 
   render() {
+    const activitiesData = this.state.data;
+    const activitiesDataReversed = activitiesData.reverse();
+    const activities = activitiesDataReversed.map((activity, index) => {
+      return (
+        <Activity
+          key={index}
+          data={activity.activityData}
+          mapDimension="400x400"
+        />
+      );
+    });
 
-    const activitiesData = this.state.data
-    const activitiesDataReversed = activitiesData.reverse()
-    const activities = activitiesDataReversed.map( (activity, index) => {
-
-        return(
-
-            <Activity key={index} data={activity.activityData} mapDimension='400x400'/>
-
-        )
-    })
-
-    if(!this.state.loading) {
-
+    if (!this.state.loading) {
       return (
         <div className="o-wrapper o-favourite-activities">
           <div className="c-page-header">
@@ -51,40 +48,38 @@ class FavouriteActivities extends Component {
             </div>
           </div>
 
-          {this.state.data.length > 0
-            ?
+          {this.state.data.length > 0 ? (
             <CSSTransitionGroup
               transitionName="o-transition"
               transitionAppear={true}
               transitionAppearTimeout={500}
               transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}>
-              { activities }
+              transitionLeaveTimeout={300}
+            >
+              {activities}
             </CSSTransitionGroup>
-            :
+          ) : (
             <EmptyFavourites />
-          }
+          )}
         </div>
-
-      )
+      );
     } else {
-      return(
+      return (
         <div className="o-flex o-flex-align--center o-flex-justify--center">
           <LoadingSpinner />
         </div>
-      )
+      );
     }
-
   }
 }
 
 function EmptyFavourites() {
-  return(
+  return (
     <div className="c-empty">
       <p className="c-empty__message">No favourite activities</p>
       {/* <img src={ assetSrc + "/img/how_to_favourite.png"} /> */}
     </div>
-  )
+  );
 }
 
-export default FavouriteActivities
+export default FavouriteActivities;

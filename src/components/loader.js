@@ -1,26 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class LoadingSpinner extends Component {
-  componentDidMount(){
+  componentDidMount() {
     let path = document.querySelector(".c-loader__svg-stroke");
 
-    let pathLength = path.getTotalLength()
+    let pathLength = path.getTotalLength();
 
-    path.style.strokeDasharray = pathLength
-    path.style.strokeDashoffset = pathLength * 2
+    path.style.strokeDasharray = pathLength;
+    path.style.strokeDashoffset = pathLength * 2;
   }
 
-  render(){
-    return(
-      <div className='c-loading_spinner-wrap'>
-        <svg width="34px" height="30px" viewBox="0 0 34 30" version="2.0">
-            <g stroke="#FFC236" fill="none" fillRule="evenodd" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path className="c-loader__svg-stroke" d="M2 15 8 15 12.5 1.5 21.5 28.5 26 15 32 15"></path>
-            </g>
+  render() {
+    return (
+      <div className="c-loading_spinner-wrap">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 28 28"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            className="c-loader__svg-stroke"
+            d="M14 2C7.37258 2 2 7.37258 2 14C2 20.6274 7.37258 26 14 26C20.6274 26 26 20.6274 26 14C26 10.6249 24.6066 7.57515 22.3636 5.39478"
+            stroke="#FFC236"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+          />
         </svg>
       </div>
-    )
+    );
   }
 }
 
-export default LoadingSpinner
+export default LoadingSpinner;
